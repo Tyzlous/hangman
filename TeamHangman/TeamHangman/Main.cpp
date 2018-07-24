@@ -1,13 +1,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Gamestate.h"
 
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	typedef Gamestate::State state;
+	Gamestate* gameState = Gamestate::Get();
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Titlebar | sf::Style::Close);
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
-
 	while (window.isOpen())
 	{
 		sf::Event event;
