@@ -4,8 +4,10 @@ class Gamestate
 {
 public:
 	~Gamestate();
-	void PraiseErri(int iterations);
 	static Gamestate* Get();
+	static void Clean();
+
+	void PraiseErri(int iterations);
 	enum State
 	{
 		Game,
@@ -13,6 +15,7 @@ public:
 		Quit
 	};
 	State currentState;
+
 private:
 	Gamestate();
 	static Gamestate* Instance;

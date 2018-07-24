@@ -28,3 +28,11 @@ Gamestate * Gamestate::Get()
 	}
 	return Instance;
 }
+
+void Gamestate::Clean()
+{
+	if (Instance != nullptr)
+	{
+		delete Instance;
+	}
+}
