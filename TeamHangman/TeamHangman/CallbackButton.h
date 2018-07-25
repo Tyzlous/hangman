@@ -2,10 +2,11 @@
 #include <iostream>
 #include <functional>
 #include "HWindow.h"
+#include "Label.h"
 class CallbackButton
 {
 public:
-	CallbackButton(std::function<void(std::string)> callback, std::string string);
+	CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position);
 	CallbackButton();
 	~CallbackButton();
 	void update();

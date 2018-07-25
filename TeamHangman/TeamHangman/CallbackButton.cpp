@@ -2,12 +2,13 @@
 
 
 
-CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::string string)
+CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position)
 {
 	window = HWindow::GetWindow();
-	callbackParameter = string;
+	callbackParameter = callbackString;
 	this->callback = callback;
-	/*label = new Label()*/
+	label = new Label(position, buttonText, 30, sf::Color::White);
+	label->EnableDebugDraw(true);
 }
 
 CallbackButton::CallbackButton()
@@ -21,10 +22,8 @@ CallbackButton::~CallbackButton()
 
 void CallbackButton::update()
 {
-
-	if (label->Contains((sf::Vector2f)sf::Mouse::getPosition()))
+	if (label->Contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
 	{
-		
 		label->Highlight();
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
@@ -44,7 +43,7 @@ void CallbackButton::update()
 
 void CallbackButton::draw()
 {
-	/*label->draw();*/
+	label->Draw();
 }
 
 void CallbackButton::activate()

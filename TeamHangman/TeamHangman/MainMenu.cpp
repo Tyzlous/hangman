@@ -4,24 +4,35 @@
 
 MainMenu::MainMenu()
 {
+	using namespace std::placeholders;
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
-
+	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "I are button, prea press", sf::Vector2f(300,300));
 }
 
 
 MainMenu::~MainMenu()
 {
+	if (middleButton != nullptr)
+	{
+		delete middleButton;
+	}
 }
 
 void MainMenu::update()
 {
-	// check mousepos for buttons etc
+	middleButton->update();
 }
 
 void MainMenu::draw()
 {
+	middleButton->draw();
 	// window->draw(me);
+}
+
+void MainMenu::fuckOff(std::string parameter)
+{
+	std::cout << "Prea fuck off, also " << parameter << std::endl;
 }
 
 /*

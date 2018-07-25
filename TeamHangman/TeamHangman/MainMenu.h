@@ -11,8 +11,10 @@ public:
 	~MainMenu();
 	void update();
 	void draw();
+	void fuckOff(std::string parameter);
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
+	CallbackButton* middleButton;
 };
 
