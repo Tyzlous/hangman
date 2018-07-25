@@ -5,6 +5,7 @@
 Label::Label()
 {
 	window = HWindow::GetWindow();
+	baseColor = sf::Color::Red;
 
 	font = new sf::Font();
 	font->loadFromFile(FONT_NAME);
@@ -12,12 +13,13 @@ Label::Label()
 	text = new sf::Text("NAN", *font);
 	text->setCharacterSize(30);
 	text->setStyle(sf::Text::Bold);
-	text->setFillColor(sf::Color::Red);
+	text->setFillColor(baseColor);
 }
 
 Label::Label(sf::Vector2f position, std::string text, int textSize, sf::Color textColor)
 {
 	window = HWindow::GetWindow();
+	baseColor = textColor;
 
 	font = new sf::Font();
 	font->loadFromFile(FONT_NAME);
@@ -25,7 +27,7 @@ Label::Label(sf::Vector2f position, std::string text, int textSize, sf::Color te
 	this->text = new sf::Text(text, *font);
 	this->text->setCharacterSize(30);
 	this->text->setStyle(sf::Text::Bold);
-	this->text->setFillColor(textColor);
+	this->text->setFillColor(baseColor);
 	this->text->setPosition(position);
 }
 
@@ -45,7 +47,17 @@ void Label::Draw()
 {
 	if (window != nullptr)
 	{
+		if (isHighlighted)
+		{
+			text->setFillColor(highlightColor);
+		}
+		else
+		{
+			text->setFillColor(baseColor);
+		}
+
 		window->draw(*text);
+
 		if (debugDrawEnabled)
 		{
 			DrawDebug();
@@ -78,7 +90,7 @@ void Label::SetPosition(sf::Vector2f position)
 	text->setPosition(position);
 }
 
-void Label::AddPosition(sf::Vector2f addPosition)
+void Label::Move(sf::Vector2f addPosition)
 {
 	text->setPosition(text->getPosition() + addPosition);
 }

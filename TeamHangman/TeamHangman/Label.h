@@ -11,7 +11,7 @@ public:
 	void Draw();
 	sf::Vector2f GetPosition();
 	void SetPosition(sf::Vector2f position);
-	void AddPosition(sf::Vector2f addPosition);
+	void Move(sf::Vector2f addPosition);
 	sf::FloatRect GetGlobalBounds();
 	bool Contains(sf::Vector2f point);
 	void EnableDebugDraw(bool enable);
