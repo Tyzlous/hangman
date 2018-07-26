@@ -1,11 +1,11 @@
 #include "LocalizedLabel.h"
 
-LocalizedLabel::LocalizedLabel()
+LocalizedLabel::LocalizedLabel() : Label()
 {
 	Initialize();
 }
 
-LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor)
+LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor) : Label(position, key, textSize, textColor)
 {
 	Initialize();
 	this->text->setString(GetLocalizedString(key));

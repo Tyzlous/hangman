@@ -14,11 +14,14 @@ public:
 	void draw();
 	void activate();
 	void UpdateChosenLanguage();
+	void OriginMiddle();
+	void SetOrigin(sf::Vector2f modifier);
 private:
 	std::string callbackParameter;
 	std::function<void(std::string)> callback;
 	sf::RenderWindow* window;
 	bool isPressed = false;
 	LocalizedLabel* label;
+	bool pressedOutside = false;
 };
 

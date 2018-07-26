@@ -17,26 +17,40 @@ CallbackButton::CallbackButton()
 
 CallbackButton::~CallbackButton()
 {
+	if (label != nullptr)
+	{
+		delete label;
+	}
 }
 
 void CallbackButton::update()
 {
+
 	if (label->Contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
 	{
 		label->Highlight();
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && pressedOutside)
 		{
-			isPressed = true;
+			pressedOutside = false;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !pressedOutside)
+		{
+				isPressed = true;
 		}
 		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && isPressed == true)
 		{
-			activate();
-			isPressed = false;
+				activate();
+				isPressed = false;
 		}
 	}
 	else
 	{
+		isPressed = false;
 		label->DeHighlight();
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !label->Contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
+		{
+			pressedOutside = true;
+		}
 	}
 }
 
@@ -49,8 +63,16 @@ void CallbackButton::activate()
 {
 	callback(callbackParameter);
 }
-
 void CallbackButton::UpdateChosenLanguage()
 {
-	label->UpdateChosenLanguage();
+	//label->UpdateChosenLanguage();
+}
+void CallbackButton::OriginMiddle()
+{
+	label->OriginMiddle();
+}
+
+void CallbackButton::SetOrigin(sf::Vector2f modifier)
+{
+	label->SetOrigin(modifier);
 }

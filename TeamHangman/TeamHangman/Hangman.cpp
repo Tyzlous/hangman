@@ -16,6 +16,7 @@ Hangman::Hangman()
 
 Hangman::~Hangman()
 {
+	delete mainMenu;
 }
 
 void Hangman::Start()

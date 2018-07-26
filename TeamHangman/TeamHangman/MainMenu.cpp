@@ -4,35 +4,84 @@
 
 MainMenu::MainMenu()
 {
-	using namespace std::placeholders;
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
-	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "KEY_YOU_WIN", sf::Vector2f(300,300));
+	InitializeButtons();
 }
 
 
 MainMenu::~MainMenu()
 {
+	if (topButton != nullptr)
+	{
+		delete topButton;
+	}
 	if (middleButton != nullptr)
 	{
 		delete middleButton;
+	}
+	if (bottomButton != nullptr)
+	{
+		delete bottomButton;
 	}
 }
 
 void MainMenu::update()
 {
+	topButton->update();
 	middleButton->update();
+	bottomButton->update();
 }
 
 void MainMenu::draw()
 {
+	topButton->draw();
 	middleButton->draw();
+	bottomButton->draw();
 	// window->draw(me);
 }
 
 void MainMenu::fuckOff(std::string parameter)
 {
 	std::cout << "Prea fuck off, also " << parameter << std::endl;
+}
+
+void MainMenu::InitializeButtons()
+{
+	using namespace std::placeholders;
+	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
+	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
+
+	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "KEY_PLAY", topPosition);
+	topButton->OriginMiddle();
+	
+	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "KEY_OPTIONS", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f));
+	middleButton->OriginMiddle();
+
+	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "KEY_QUIT", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f));
+	bottomButton->OriginMiddle();
+}
+
+void MainMenu::ChangeGamestate(std::string parameter)
+{
+	typedef Gamestate::State state;
+
+	std::string play = "PLAY";
+	std::string options = "OPTIONS";
+	std::string quit = "QUIT";
+
+	if (play.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::Game;
+	}
+	else if (options.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::MainMenu;
+	}
+	else if (quit.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::Quit;
+	}
 }
 
 /*
