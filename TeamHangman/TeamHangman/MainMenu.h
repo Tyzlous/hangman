@@ -12,9 +12,12 @@ public:
 	void update();
 	void draw();
 	void fuckOff(std::string parameter);
+	void InitializeButtons();
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
+	CallbackButton* topButton;
 	CallbackButton* middleButton;
+
 };
 
