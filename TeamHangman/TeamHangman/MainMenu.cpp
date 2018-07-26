@@ -14,9 +14,17 @@ MainMenu::MainMenu()
 
 MainMenu::~MainMenu()
 {
+	if (topButton != nullptr)
+	{
+		delete topButton;
+	}
 	if (middleButton != nullptr)
 	{
 		delete middleButton;
+	}
+	if (bottomButton != nullptr)
+	{
+		delete bottomButton;
 	}
 }
 

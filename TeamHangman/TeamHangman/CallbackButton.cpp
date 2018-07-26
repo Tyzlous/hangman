@@ -18,6 +18,10 @@ CallbackButton::CallbackButton()
 
 CallbackButton::~CallbackButton()
 {
+	if (label != nullptr)
+	{
+		delete label;
+	}
 }
 
 void CallbackButton::update()
