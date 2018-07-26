@@ -31,6 +31,5 @@ protected:
 	bool isHighlighted = false;
 
 	void DrawDebug();
-
 };
 

@@ -14,7 +14,6 @@ Hangman::Hangman()
 	mainMenu = new MainMenu();
 }
 
-
 Hangman::~Hangman()
 {
 }

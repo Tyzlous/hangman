@@ -15,7 +15,6 @@ CallbackButton::CallbackButton()
 {
 }
 
-
 CallbackButton::~CallbackButton()
 {
 }

@@ -21,7 +21,6 @@ public:
 		English,
 		Swedish
 	};
-
 	Languages currentLanguage;
 
 private:
