@@ -70,8 +70,11 @@ void Label::DrawDebug()
 	sf::Vector2f rectSize(text->getGlobalBounds().width, text->getGlobalBounds().height);
 	sf::RectangleShape debugRectangle(rectSize);
 	sf::Color transparentColor(0, 0, 0, 0);
-	sf::Vector2f position = text->getPosition() + sf::Vector2f(0, text->getGlobalBounds().height / 4);
-
+	sf::Vector2f position;
+	
+	debugRectangle.setOrigin(text->getOrigin());
+	position = sf::Vector2f(text->getPosition().x, text->getPosition().y + 7.0f);
+	
 	debugRectangle.setPosition(position);
 	debugRectangle.setFillColor(transparentColor);
 	debugRectangle.setOutlineColor(sf::Color::Red);
@@ -124,5 +127,17 @@ void Label::Highlight(sf::Color color)
 void Label::DeHighlight()
 {
 	isHighlighted = false;
+}
+
+void Label::OriginMiddle()
+{
+	sf::FloatRect textRect = text->getLocalBounds();
+	text->setOrigin(textRect.left + textRect.width * 0.5f, textRect.top + textRect.height * 0.5f);
+}
+
+void Label::SetOrigin(sf::Vector2f modifier)
+{
+	sf::FloatRect textRect = text->getLocalBounds();
+	text->setOrigin(textRect.left + textRect.width * modifier.x, textRect.top + textRect.height * modifier.y);
 }
 
