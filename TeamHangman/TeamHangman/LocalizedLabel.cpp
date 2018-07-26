@@ -5,42 +5,16 @@ LocalizedLabel::LocalizedLabel()
 	Initialize();
 }
 
-LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string text, int textSize, sf::Color textColor)
+LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor)
 {
 	Initialize();
-	std::cout << GetLocalizedString("KEY_HELLO");
+	this->text->setString(GetLocalizedString(key));
 }
 
 
 LocalizedLabel::~LocalizedLabel()
 {
-	if (isInitialized)
-	{
-		delete english;
-		delete swedish;
-	}
-}
 
-void LocalizedLabel::InitializeLanguages()
-{
-
-	english = new dictionary{
-		{ "KEY_HELLO", "Hello" },
-		{ "KEY_HANGMAN", "Hangman" },
-		{ "KEY_START", "Start" },
-		{ "KEY_QUIT", "Quit" },
-		{ "KEY_YOU_LOSE", "You lose!" },
-		{ "KEY_YOU_WIN", "You win!" }
-	};
-
-	swedish = new dictionary{
-		{ "KEY_HELLO", "Hej" },
-		{ "KEY_HANGMAN", "Hangman" },
-		{ "KEY_START", "Start" },
-		{ "KEY_QUIT", "Quit" },
-		{ "KEY_YOU_LOSE", "You lose!" },
-		{ "KEY_YOU_WIN", "You win!" }
-	};
 }
 
 std::string LocalizedLabel::GetLocalizedString(std::string key)
@@ -69,13 +43,13 @@ void LocalizedLabel::UpdateChosenLanguage()
 		switch (gamestate->currentLanguage)
 		{
 		case languages::English:
-			pickedLanguage = english;
+			pickedLanguage = &Localization::english;
 				break;
 		case languages::Swedish:
-			pickedLanguage = swedish;
+			pickedLanguage = &Localization::swedish;
 			break;
 		default:
-			pickedLanguage = english;
+			pickedLanguage = &Localization::english;
 			std::cout << "Could not find desired language, defaulting to english.\n";
 			break;
 		}
@@ -86,6 +60,5 @@ void LocalizedLabel::Initialize()
 {
 	isInitialized = true;
 	gamestate = Gamestate::Get();
-	InitializeLanguages();
 	UpdateChosenLanguage();
 }

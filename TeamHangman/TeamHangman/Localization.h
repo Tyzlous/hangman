@@ -7,8 +7,8 @@ class Localization
 {
 public:
 
-	static dictionary* english;
-	static dictionary* swedish;
+	static dictionary english;
+	static dictionary swedish;
 
 };
 
