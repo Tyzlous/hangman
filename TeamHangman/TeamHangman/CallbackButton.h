@@ -12,11 +12,14 @@ public:
 	void update();
 	void draw();
 	void activate();
+	void OriginMiddle();
+	void SetOrigin(sf::Vector2f modifier);
 private:
 	std::string callbackParameter;
 	std::function<void(std::string)> callback;
 	sf::RenderWindow* window;
 	bool isPressed = false;
+	bool pressedOutside = false;
 	Label* label;
 };
 
