@@ -53,7 +53,6 @@ void CallbackButton::update()
 			pressedOutside = true;
 		}
 	}
-
 }
 
 void CallbackButton::draw()
