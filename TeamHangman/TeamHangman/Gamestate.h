@@ -16,6 +16,14 @@ public:
 	};
 	State currentState;
 
+	enum Languages
+	{
+		English,
+		Swedish
+	};
+
+	Languages currentLanguage;
+
 private:
 	Gamestate();
 	static Gamestate* Instance;

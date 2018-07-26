@@ -4,6 +4,8 @@ Gamestate* Gamestate::Instance = nullptr;
 
 Gamestate::Gamestate()
 {
+	currentState = State::MainMenu;
+	currentLanguage = Languages::English;
 }
 
 
