@@ -55,14 +55,36 @@ void MainMenu::InitializeButtons()
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
 	
-	topButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", Erri is Great.", "Play", topPosition);
+	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "Play", topPosition);
 	topButton->OriginMiddle();
 	
-	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "Options", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f));
+	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "Options", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f));
 	middleButton->OriginMiddle();
 
-	bottomButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike havrenoms.", "Quit", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f));
+	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "Quit", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f));
 	bottomButton->OriginMiddle();
+}
+
+void MainMenu::ChangeGamestate(std::string parameter)
+{
+	typedef Gamestate::State state;
+
+	std::string Play = "PLAY";
+	std::string Options = "OPTIONS";
+	std::string Quit = "QUIT";
+
+	if (Play.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::Game;
+	}
+	else if (Options.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::MainMenu;
+	}
+	else if (Quit.compare(parameter) == 0)
+	{
+		gamestate->currentState = state::Quit;
+	}
 }
 
 /*

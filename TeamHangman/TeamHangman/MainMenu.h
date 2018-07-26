@@ -13,6 +13,7 @@ public:
 	void draw();
 	void fuckOff(std::string parameter);
 	void InitializeButtons();
+	void ChangeGamestate(std::string parameter);
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;

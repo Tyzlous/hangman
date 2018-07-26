@@ -15,7 +15,7 @@ int main()
 
 	HWindow::Get()->Clean();
 	Gamestate::Clean();
-
+	delete hangman;
 
 	return 0;
 }
