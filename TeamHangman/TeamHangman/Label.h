@@ -1,13 +1,14 @@
 #pragma once
 #include "HWindow.h"
 #include <string>
+#include <iostream>
 
 class Label
 {
 public:
 	Label();
 	Label(sf::Vector2f position, std::string text, int textSize, sf::Color textColor);
-	~Label();
+	virtual ~Label();
 	void Draw();
 	sf::Vector2f GetPosition();
 	void SetPosition(sf::Vector2f position);
@@ -19,7 +20,7 @@ public:
 	void Highlight(sf::Color color = sf::Color::Blue);
 	void DeHighlight();
 
-private:
+protected:
 	sf::RenderWindow* window = nullptr;
 	sf::Text* text = nullptr;
 	sf::Font* font;
