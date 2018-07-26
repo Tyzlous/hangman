@@ -71,15 +71,10 @@ void Label::DrawDebug()
 	sf::RectangleShape debugRectangle(rectSize);
 	sf::Color transparentColor(0, 0, 0, 0);
 	sf::Vector2f position;
+	
 	debugRectangle.setOrigin(text->getOrigin());
-	//if (originIsCentered)
-	//{
-	//	position = sf::Vector2f(text->getPosition().x - (text->getLocalBounds().width * 0.5f), text->getPosition().y - (text->getLocalBounds().height * 0.5f));
-	//}
-
 	position = sf::Vector2f(text->getPosition().x, text->getPosition().y + 7.0f);
-
-
+	
 	debugRectangle.setPosition(position);
 	debugRectangle.setFillColor(transparentColor);
 	debugRectangle.setOutlineColor(sf::Color::Red);

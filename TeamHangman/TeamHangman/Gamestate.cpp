@@ -17,7 +17,6 @@ void Gamestate::PraiseErri(int iterations)
 	{
 		std::cout << "Erri is the greatest!\n";
 	}
-	
 }
 
 Gamestate * Gamestate::Get()

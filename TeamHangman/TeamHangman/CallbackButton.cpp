@@ -43,8 +43,6 @@ void CallbackButton::update()
 				activate();
 				isPressed = false;
 		}
-		
-
 	}
 	else
 	{

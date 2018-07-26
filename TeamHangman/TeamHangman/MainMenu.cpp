@@ -7,8 +7,6 @@ MainMenu::MainMenu()
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
 	InitializeButtons();
-
-	
 }
 
 
@@ -54,7 +52,6 @@ void MainMenu::InitializeButtons()
 	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
-	
 	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "Play", topPosition);
 	topButton->OriginMiddle();
 	
@@ -69,19 +66,19 @@ void MainMenu::ChangeGamestate(std::string parameter)
 {
 	typedef Gamestate::State state;
 
-	std::string Play = "PLAY";
-	std::string Options = "OPTIONS";
-	std::string Quit = "QUIT";
+	std::string play = "PLAY";
+	std::string options = "OPTIONS";
+	std::string quit = "QUIT";
 
-	if (Play.compare(parameter) == 0)
+	if (play.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::Game;
 	}
-	else if (Options.compare(parameter) == 0)
+	else if (options.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::MainMenu;
 	}
-	else if (Quit.compare(parameter) == 0)
+	else if (quit.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::Quit;
 	}
