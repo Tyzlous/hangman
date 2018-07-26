@@ -3,6 +3,7 @@
 #include <functional>
 #include "HWindow.h"
 #include "Label.h"
+#include "LocalizedLabel.h"
 class CallbackButton
 {
 public:
@@ -12,11 +13,12 @@ public:
 	void update();
 	void draw();
 	void activate();
+	void UpdateChosenLanguage();
 private:
 	std::string callbackParameter;
 	std::function<void(std::string)> callback;
 	sf::RenderWindow* window;
 	bool isPressed = false;
-	Label* label;
+	LocalizedLabel* label;
 };
 

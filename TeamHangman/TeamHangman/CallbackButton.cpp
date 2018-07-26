@@ -7,7 +7,7 @@ CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::s
 	window = HWindow::GetWindow();
 	callbackParameter = callbackString;
 	this->callback = callback;
-	label = new Label(position, buttonText, 30, sf::Color::White);
+	label = new LocalizedLabel(position, buttonText, 30, sf::Color::White);
 	label->EnableDebugDraw(true);
 }
 
@@ -49,4 +49,9 @@ void CallbackButton::draw()
 void CallbackButton::activate()
 {
 	callback(callbackParameter);
+}
+
+void CallbackButton::UpdateChosenLanguage()
+{
+	label->UpdateChosenLanguage();
 }
