@@ -7,7 +7,7 @@ MainMenu::MainMenu()
 	using namespace std::placeholders;
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
-	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "I are button, prea press", sf::Vector2f(300,300));
+	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "KEY_YOU_WIN", sf::Vector2f(300,300));
 }
 
 
