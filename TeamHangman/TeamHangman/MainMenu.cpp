@@ -24,12 +24,14 @@ void MainMenu::update()
 {
 	topButton->update();
 	middleButton->update();
+	bottomButton->update();
 }
 
 void MainMenu::draw()
 {
 	topButton->draw();
 	middleButton->draw();
+	bottomButton->draw();
 	// window->draw(me);
 }
 
@@ -41,14 +43,18 @@ void MainMenu::fuckOff(std::string parameter)
 void MainMenu::InitializeButtons()
 {
 	using namespace std::placeholders;
-	sf::Vector2f top = sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.4f);
-	sf::Vector2f middle = (sf::Vector2f)window->getSize() * 0.5f;
+	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
+	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
+
 	
-	topButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", Erri is Great.", "Hello, first button here", top);
+	topButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", Erri is Great.", "Play", topPosition);
 	topButton->OriginMiddle();
 	
-	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "I are button, prea press", middle);
+	middleButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike bread.", "Options", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f));
 	middleButton->OriginMiddle();
+
+	bottomButton = new CallbackButton(std::bind(&MainMenu::fuckOff, this, _1), ", I rike havrenoms.", "Quit", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f));
+	bottomButton->OriginMiddle();
 }
 
 /*

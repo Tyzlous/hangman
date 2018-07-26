@@ -16,8 +16,10 @@ public:
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
+	
 	CallbackButton* topButton;
 	CallbackButton* middleButton;
+	CallbackButton* bottomButton;
 
 };
 
