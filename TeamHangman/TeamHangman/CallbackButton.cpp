@@ -2,19 +2,19 @@
 
 
 
-CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position)
+CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized)
 {
 	window = HWindow::GetWindow();
 	callbackParameter = callbackString;
 	this->callback = callback;
-	label = new Label(position, buttonText, 30, sf::Color::White);
+
+	label = new LocalizedLabel(position, buttonText, 30, sf::Color::White, isLocalized);
 	label->EnableDebugDraw(true);
 }
 
 CallbackButton::CallbackButton()
 {
 }
-
 
 CallbackButton::~CallbackButton()
 {
@@ -64,7 +64,10 @@ void CallbackButton::activate()
 {
 	callback(callbackParameter);
 }
-
+void CallbackButton::UpdateChosenLanguage()
+{
+	label->UpdateChosenLanguage();
+}
 void CallbackButton::OriginMiddle()
 {
 	label->OriginMiddle();

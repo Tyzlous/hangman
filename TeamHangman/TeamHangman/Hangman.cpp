@@ -4,11 +4,15 @@
 
 Hangman::Hangman()
 {
-	window = HWindow::GetWindow();
+	typedef Gamestate::State state;
+	typedef Gamestate::Languages languages;
 	gamestate = Gamestate::Get();
+	gamestate->currentState = state::MainMenu;
+	gamestate->currentLanguage = languages::Swedish;
+
+	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
 }
-
 
 Hangman::~Hangman()
 {
@@ -18,7 +22,7 @@ Hangman::~Hangman()
 void Hangman::Start()
 {
 	typedef Gamestate::State state;
-	gamestate->currentState = state::MainMenu;
+
 	while (window->isOpen())
 	{
 		sf::Event event;
