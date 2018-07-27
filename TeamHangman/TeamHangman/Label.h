@@ -28,7 +28,7 @@ protected:
 	sf::Font* font;
 	sf::Color baseColor, highlightColor;
 
-	const std::string FONT_NAME = "gameFont.ttf";
+	const std::string FONT_NAME = "arial.ttf";
 	bool debugDrawEnabled = false;
 	bool isHighlighted = false;
 	void DrawDebug();
