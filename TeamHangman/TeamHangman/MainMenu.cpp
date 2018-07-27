@@ -52,13 +52,13 @@ void MainMenu::InitializeButtons()
 	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
-	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "KEY_PLAY", topPosition);
+	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "KEY_PLAY", topPosition, true);
 	topButton->OriginMiddle();
 	
-	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "KEY_OPTIONS", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f));
+	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "KEY_OPTIONS", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f), true);
 	middleButton->OriginMiddle();
 
-	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "KEY_QUIT", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f));
+	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "KEY_QUIT", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f), true);
 	bottomButton->OriginMiddle();
 }
 

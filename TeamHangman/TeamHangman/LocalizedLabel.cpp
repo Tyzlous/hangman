@@ -5,10 +5,13 @@ LocalizedLabel::LocalizedLabel() : Label()
 	Initialize();
 }
 
-LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor) : Label(position, key, textSize, textColor)
+LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor, bool isLocalized) : Label(position, key, textSize, textColor)
 {
 	Initialize();
-	this->text->setString(GetLocalizedString(key));
+	if (isLocalized)
+	{
+		this->text->setString(GetLocalizedString(key));
+	}
 }
 
 LocalizedLabel::~LocalizedLabel()

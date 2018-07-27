@@ -7,7 +7,7 @@
 class CallbackButton
 {
 public:
-	CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position);
+	CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized);
 	CallbackButton();
 	~CallbackButton();
 	void update();

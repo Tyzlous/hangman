@@ -6,7 +6,7 @@ class LocalizedLabel : public Label
 {
 public:
 	LocalizedLabel();
-	LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor);
+	LocalizedLabel(sf::Vector2f position, std::string key, int textSize, sf::Color textColor, bool isLocalized);
 	~LocalizedLabel();
 	void UpdateChosenLanguage();
 
