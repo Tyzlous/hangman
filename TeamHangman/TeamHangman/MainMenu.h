@@ -22,10 +22,13 @@ private:
 	CallbackButton* middleButton;
 	CallbackButton* bottomButton;
 
-	sf::Texture* texture = nullptr;
+	sf::Texture* backgroundTexture = nullptr;
+	sf::Texture* titleTexture = nullptr;
 	sf::RectangleShape* backgroundImage = nullptr;
+	sf::RectangleShape* titleImage = nullptr;
 
 	const std::string BACKGROUND_IMAGE_PATH = "resources/mainMenuBackground.png";
+	const std::string TITLE_IMAGE_PATH = "resources/title.png";
 
 };
 

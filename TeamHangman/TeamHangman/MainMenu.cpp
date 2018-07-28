@@ -8,17 +8,33 @@ MainMenu::MainMenu()
 	gamestate = Gamestate::Get();
 	InitializeButtons();
 
-	texture = new sf::Texture();
-	if (!texture->loadFromFile(BACKGROUND_IMAGE_PATH))
+	backgroundTexture = new sf::Texture();
+	if (!backgroundTexture->loadFromFile(BACKGROUND_IMAGE_PATH))
 	{
 		std::cout << "cannot find MainMenu background image png\n";
 	}
 	else
 	{
-		texture->setSmooth(true);
+		backgroundTexture->setSmooth(true);
 		backgroundImage = new sf::RectangleShape();
-		backgroundImage->setTexture(texture, true);
+		backgroundImage->setTexture(backgroundTexture, true);
 		backgroundImage->setSize(sf::Vector2f(window->getSize()));
+	}
+
+	titleTexture = new sf::Texture();
+	if (!titleTexture->loadFromFile(TITLE_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu title image png\n";
+	}
+	else
+	{
+		titleTexture->setSmooth(true);
+		titleImage = new sf::RectangleShape();
+		titleImage->setTexture(titleTexture, true);
+		titleImage->setSize(sf::Vector2f(350,100));
+
+		float centeredXPosition = (window->getSize().x / 2) - (titleImage->getSize().x / 2);
+		titleImage->setPosition(centeredXPosition, 10);
 	}
 }
 
@@ -37,13 +53,21 @@ MainMenu::~MainMenu()
 	{
 		delete bottomButton;
 	}
-	if (texture != nullptr)
+	if (backgroundTexture != nullptr)
 	{
-		delete texture;
+		delete backgroundTexture;
 	}
 	if (backgroundImage != nullptr)
 	{
 		delete backgroundImage;
+	}
+	if (titleTexture != nullptr)
+	{
+		delete titleTexture;
+	}
+	if (titleImage != nullptr)
+	{
+		delete titleImage;
 	}
 }
 
@@ -59,6 +83,10 @@ void MainMenu::draw()
 	if (backgroundImage != nullptr)
 	{
 		window->draw(*backgroundImage);
+	}
+	if (titleImage != nullptr)
+	{
+		window->draw(*titleImage);
 	}
 	topButton->draw();
 	middleButton->draw();
