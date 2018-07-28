@@ -16,6 +16,9 @@ public:
 	void UpdateChosenLanguage();
 	void OriginMiddle();
 	void SetOrigin(sf::Vector2f modifier);
+	void SetTexture(std::string texturePath);
+	sf::Vector2f GetOrigin();
+
 private:
 	std::string callbackParameter;
 	std::function<void(std::string)> callback;
@@ -23,5 +26,7 @@ private:
 	bool isPressed = false;
 	LocalizedLabel* label;
 	bool pressedOutside = false;
+	sf::Texture* texture = nullptr;
+	sf::RectangleShape* backgroundImage = nullptr;
 };
 
