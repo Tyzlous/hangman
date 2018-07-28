@@ -54,7 +54,7 @@ void Game::KeyboardInit()
 void Game::WordVectorInit()
 {
 	std::string baseFilePath = "resources/words";
-	std::string language = GetLocalizedString("KEY_ABBREVATION");
+	std::string language = GetLocalizedString("KEY_ABBREVIATION");
 	std::string fileType = ".txt";
 	std::string fullPath = baseFilePath + language + fileType;
 	
