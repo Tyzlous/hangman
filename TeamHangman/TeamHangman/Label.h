@@ -21,6 +21,7 @@ public:
 	void DeHighlight();
 	void OriginMiddle();
 	void SetOrigin(sf::Vector2f modifier);
+	sf::Vector2f GetOrigin();
 
 protected:
 	sf::RenderWindow* window = nullptr;

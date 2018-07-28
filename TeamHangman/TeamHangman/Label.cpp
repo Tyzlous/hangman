@@ -141,3 +141,8 @@ void Label::SetOrigin(sf::Vector2f modifier)
 	text->setOrigin(textRect.left + textRect.width * modifier.x, textRect.top + textRect.height * modifier.y);
 }
 
+sf::Vector2f Label::GetOrigin()
+{
+	return text->getOrigin();
+}
+
