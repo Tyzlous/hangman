@@ -45,7 +45,6 @@ void Game::KeyboardInit()
 				rowStartY += 0.1f;
 				rowStartX = 0.1f;
 			}
-
 		}
 		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
 		rowStartX += letterDist;
@@ -74,7 +73,6 @@ void Game::WordVectorInit()
 		}
 		file.close();
 	}
-
 }
 
 void Game::Update()
