@@ -37,7 +37,11 @@ void CallbackButton::update()
 	if (label->Contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
 	{
 		label->Highlight();
-		backgroundImage->setFillColor(sf::Color::Magenta);
+		if (backgroundImage != nullptr)
+		{
+			backgroundImage->setFillColor(sf::Color::Magenta);
+		}
+
 		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && pressedOutside)
 		{
 			pressedOutside = false;
@@ -56,7 +60,11 @@ void CallbackButton::update()
 	{
 		isPressed = false;
 		label->DeHighlight();
-		backgroundImage->setFillColor(sf::Color::White);
+		if (backgroundImage != nullptr)
+		{
+			backgroundImage->setFillColor(sf::Color::White);
+		}
+
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !label->Contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
 		{
 			pressedOutside = true;
