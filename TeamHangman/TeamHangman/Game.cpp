@@ -136,11 +136,10 @@ std::string Game::GetLocalizedString(std::string key)
 
 std::string Game::GetRandomLine()
 {
-	unsigned int max = words.size() - 1;
-	unsigned int min = 0;
-	unsigned int randomValue = rand() % (max - min + 1) + min;
+	unsigned int max = words.size();
+	unsigned int randomValue = rand() % max;
 	
-	std::string randomLine = words[randomValue];
+	std::string randomLine = words.at(randomValue);
 	
 	return randomLine;
 }
