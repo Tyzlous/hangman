@@ -7,6 +7,19 @@ MainMenu::MainMenu()
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
 	InitializeButtons();
+
+	texture = new sf::Texture();
+	if (!texture->loadFromFile(BACKGROUND_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu background image png\n";
+	}
+	else
+	{
+		texture->setSmooth(true);
+		backgroundImage = new sf::RectangleShape();
+		backgroundImage->setTexture(texture, true);
+		backgroundImage->setSize(sf::Vector2f(window->getSize()));
+	}
 }
 
 
@@ -24,6 +37,14 @@ MainMenu::~MainMenu()
 	{
 		delete bottomButton;
 	}
+	if (texture != nullptr)
+	{
+		delete texture;
+	}
+	if (backgroundImage != nullptr)
+	{
+		delete backgroundImage;
+	}
 }
 
 void MainMenu::update()
@@ -35,6 +56,10 @@ void MainMenu::update()
 
 void MainMenu::draw()
 {
+	if (backgroundImage != nullptr)
+	{
+		window->draw(*backgroundImage);
+	}
 	topButton->draw();
 	middleButton->draw();
 	bottomButton->draw();
@@ -53,12 +78,15 @@ void MainMenu::InitializeButtons()
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
 	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "KEY_PLAY", topPosition, true);
+	topButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	topButton->OriginMiddle();
 	
 	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "KEY_OPTIONS", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f), true);
+	middleButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	middleButton->OriginMiddle();
 
 	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "KEY_QUIT", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f), true);
+	bottomButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	bottomButton->OriginMiddle();
 }
 
