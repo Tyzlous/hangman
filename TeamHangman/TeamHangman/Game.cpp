@@ -4,8 +4,9 @@
 
 Game::Game()
 {
-	Initialize();
+	InitializeState();
 	KeyboardInit();
+	WordVectorInit();
 }
 
 Game::~Game()
@@ -16,7 +17,7 @@ Game::~Game()
 	}
 }
 
-void Game::Initialize()
+void Game::InitializeState()
 {
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
@@ -49,6 +50,31 @@ void Game::KeyboardInit()
 		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
 		rowStartX += letterDist;
 	}
+}
+
+void Game::WordVectorInit()
+{
+	std::string baseFilePath = "resources/words";
+	std::string language = GetLocalizedString("KEY_ABBREVATION");
+	std::string fileType = ".txt";
+	std::string fullPath = baseFilePath + language + fileType;
+	
+	std::fstream file;
+	std::string line;
+	file.open(fullPath, std::ios::in);
+	if (!file.is_open())
+	{
+		std::cout << "error opening file\n";
+	}
+	else
+	{
+		while (std::getline(file, line))
+		{
+			words.push_back(line);
+		}
+		file.close();
+	}
+
 }
 
 void Game::Update()
@@ -110,7 +136,24 @@ std::string Game::GetLocalizedString(std::string key)
 	return localizedString;
 }
 
+std::string Game::GetRandomLine()
+{
+	unsigned int max = words.size() - 1;
+	unsigned int min = 0;
+	unsigned int randomValue = rand() % (max - min + 1) + min;
+	
+	std::string randomLine = words[randomValue];
+	
+	return randomLine;
+}
+
+void Game::print(std::string string)
+{
+	std::cout << string << std::endl;
+}
+
 void Game::OnLetterPressed(std::string letter)
 {
 	std::cout << letter << std::endl;
+	std::cout << GetRandomLine() << std::endl;
 }
