@@ -4,6 +4,7 @@
 #include "HWindow.h"
 #include "Gamestate.h"
 #include "MainMenu.h"
+#include "Game.h"
 class Hangman
 {
 public:
@@ -14,5 +15,6 @@ private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	MainMenu* mainMenu;
+	Game* game;
 };
 

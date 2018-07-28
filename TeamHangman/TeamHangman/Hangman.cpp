@@ -12,11 +12,13 @@ Hangman::Hangman()
 
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
+	game = new Game();
 }
 
 Hangman::~Hangman()
 {
 	delete mainMenu;
+	delete game;
 }
 
 void Hangman::Start()
@@ -42,7 +44,8 @@ void Hangman::Start()
 		}
 		if (gamestate->currentState == state::Game)
 		{
-
+			game->Update();
+			game->Draw();
 		}
 		if (gamestate->currentState == state::Quit)
 		{
