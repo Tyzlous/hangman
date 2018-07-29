@@ -12,13 +12,16 @@ Hangman::Hangman()
 
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
+	soundManager = new HangmanSoundManager();
 	game = new Game();
+	game->SetSoundManager(soundManager);
 }
 
 Hangman::~Hangman()
 {
 	delete mainMenu;
 	delete game;
+	delete soundManager;
 }
 
 void Hangman::Start()
@@ -39,11 +42,19 @@ void Hangman::Start()
 
 		if (gamestate->currentState == state::MainMenu)
 		{
+			if (!soundManager->isMainMenuMusicPlaying)
+			{
+				soundManager->StartMainMenuMusic();
+			}
 			mainMenu->update();
 			mainMenu->draw();
 		}
 		if (gamestate->currentState == state::Game)
 		{
+			if (!soundManager->isGameMusicPlaying)
+			{
+				soundManager->StartGameMusic();
+			}
 			game->Update();
 			game->Draw();
 		}

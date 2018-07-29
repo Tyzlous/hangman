@@ -3,6 +3,8 @@
 #include <fstream>
 #include "Gamestate.h"
 #include "CallbackButton.h"
+#include "HangmanSoundManager.h"
+
 class Game
 {
 public:
@@ -17,6 +19,7 @@ public:
 	std::string GetLocalizedString(std::string key);
 	std::string GetRandomLine();
 	void print(std::string string);
+	void SetSoundManager(HangmanSoundManager* soundManager);
 
 private:
 	sf::RenderWindow* window;
@@ -24,6 +27,7 @@ private:
 	dictionary* pickedLanguage;
 	std::vector<CallbackButton*> gameButtons;
 	std::vector<std::string> words;
+	HangmanSoundManager* soundManager;
 
 	void OnLetterPressed(std::string letter);
 };

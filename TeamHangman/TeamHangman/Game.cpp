@@ -7,6 +7,7 @@ Game::Game()
 	InitializeState();
 	KeyboardInit();
 	WordVectorInit();
+	soundManager = nullptr;
 }
 
 Game::~Game()
@@ -153,4 +154,13 @@ void Game::OnLetterPressed(std::string letter)
 {
 	std::cout << letter << std::endl;
 	std::cout << GetRandomLine() << std::endl;
+	if (soundManager != nullptr)
+	{
+		soundManager->PlayButtonPositive();
+	}
+}
+
+void Game::SetSoundManager(HangmanSoundManager * soundManager)
+{
+	this->soundManager = soundManager;
 }
