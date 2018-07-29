@@ -24,6 +24,7 @@ HangmanSoundManager::HangmanSoundManager()
 	{
 		buttonNegative.setBuffer(buttonNegativeBuffer);
 	}
+	SetVolume(0.8f);
 }
 
 
@@ -59,4 +60,12 @@ void HangmanSoundManager::PlayButtonPositive()
 void HangmanSoundManager::PlayButtonNegative()
 {
 	buttonNegative.play();
+}
+
+void HangmanSoundManager::SetVolume(float volume)
+{
+	mainMenuMusic.setVolume(volume);
+	gameMusic.setVolume(volume);
+	buttonPositive.setVolume(volume);
+	buttonNegative.setVolume(volume);
 }

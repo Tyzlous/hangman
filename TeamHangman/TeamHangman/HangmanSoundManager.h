@@ -11,6 +11,7 @@ public:
 	bool isMainMenuMusicPlaying, isGameMusicPlaying;
 	void PlayButtonPositive();
 	void PlayButtonNegative();
+	void SetVolume(float volume);
 
 private:
 	sf::Music mainMenuMusic, gameMusic;
