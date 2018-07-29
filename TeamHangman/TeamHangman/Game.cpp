@@ -7,6 +7,7 @@ Game::Game()
 	InitializeState();
 	KeyboardInit();
 	WordVectorInit();
+	LettersVectorInit();
 }
 
 Game::~Game()
@@ -14,6 +15,10 @@ Game::~Game()
 	for (int i = 0; i < gameButtons.size(); i++)	
 	{
 		delete gameButtons[i];
+	}
+	for (int i = 0; i < gameLetters.size(); i++)
+	{	
+		delete gameLetters[i];
 	}
 }
 
@@ -75,6 +80,23 @@ void Game::WordVectorInit()
 	}
 }
 
+void Game::LettersVectorInit()
+{
+	std::string word = GetRandomLine();
+	std::cout << word << std::endl;
+	std::string letter;
+	for (int i = 0; i < word.size(); i++)	
+	{
+		letter = word.at(i);
+		gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * (0.1f + 0.1f * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+	}
+	
+	for (int i = 0; i < gameLetters.size(); i++)
+	{
+		gameLetters[i]->OriginMiddle();
+	}
+}
+
 void Game::Update()
 {
 	typedef Gamestate::State state;
@@ -93,6 +115,10 @@ void Game::Draw()
 	for (int i = 0; i < gameButtons.size(); i++)
 	{
 		gameButtons[i]->draw();
+	}
+	for (int i = 0; i < gameLetters.size(); i++)
+	{
+		gameLetters[i]->Draw();
 	}
 }
 
@@ -152,5 +178,8 @@ void Game::print(std::string string)
 void Game::OnLetterPressed(std::string letter)
 {
 	std::cout << letter << std::endl;
-	std::cout << GetRandomLine() << std::endl;
+	for (int i = 0; i < gameLetters.size(); i++)
+	{
+		gameLetters[i]->CompareToMyLetter(letter);
+	}
 }

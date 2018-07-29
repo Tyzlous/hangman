@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Gamestate.h"
 #include "CallbackButton.h"
+#include "GameLetter.h"
 class Game
 {
 public:
@@ -11,6 +12,7 @@ public:
 	void InitializeState();
 	void KeyboardInit();
 	void WordVectorInit();
+	void LettersVectorInit();
 	void Update();
 	void Draw();
 	void UpdateChosenLanguage();
@@ -24,6 +26,7 @@ private:
 	dictionary* pickedLanguage;
 	std::vector<CallbackButton*> gameButtons;
 	std::vector<std::string> words;
+	std::vector<GameLetter*> gameLetters;
 
 	void OnLetterPressed(std::string letter);
 };
