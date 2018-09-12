@@ -5,6 +5,7 @@
 #include "Gamestate.h"
 #include "MainMenu.h"
 #include "Game.h"
+#include "HangmanSoundManager.h"
 class Hangman
 {
 public:
@@ -16,5 +17,6 @@ private:
 	Gamestate* gamestate;
 	MainMenu* mainMenu;
 	Game* game;
+	HangmanSoundManager* soundManager;
 };
 

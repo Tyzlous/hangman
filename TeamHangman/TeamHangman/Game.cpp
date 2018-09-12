@@ -8,6 +8,7 @@ Game::Game()
 	KeyboardInit();
 	WordVectorInit();
 	LettersVectorInit();
+	soundManager = nullptr;
 }
 
 Game::~Game()
@@ -208,4 +209,14 @@ void Game::OnLetterPressed(std::string letter)
 		}
 	}
 	// if (correctLetters == 0) {failedGuess();}
+	
+	if (soundManager != nullptr)
+	{
+		soundManager->PlayButtonPositive();
+	}
+}
+
+void Game::SetSoundManager(HangmanSoundManager * soundManager)
+{
+	this->soundManager = soundManager;
 }

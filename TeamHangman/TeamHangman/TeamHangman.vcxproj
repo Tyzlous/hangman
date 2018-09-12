@@ -128,6 +128,7 @@
     <ClCompile Include="GameLetter.cpp" />
     <ClCompile Include="Gamestate.cpp" />
     <ClCompile Include="Hangman.cpp" />
+    <ClCompile Include="HangmanSoundManager.cpp" />
     <ClCompile Include="HWindow.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Localization.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="GameLetter.h" />
     <ClInclude Include="Gamestate.h" />
     <ClInclude Include="Hangman.h" />
+    <ClInclude Include="HangmanSoundManager.h" />
     <ClInclude Include="HWindow.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="Localization.h" />
