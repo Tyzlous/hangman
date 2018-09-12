@@ -22,6 +22,14 @@ GameLetter::GameLetter()
 
 GameLetter::~GameLetter()
 {
+	if (label != nullptr)
+	{
+		delete label;
+	}
+	if (bottomLine != nullptr)
+	{
+		delete bottomLine;
+	}
 }
 
 void GameLetter::Update()
@@ -55,7 +63,7 @@ void GameLetter::OriginMiddle()
 {
 	label->OriginMiddle();
 	sf::FloatRect lineRect = bottomLine->getLocalBounds();
-	bottomLine->setOrigin(lineRect.left + lineRect.width * 0.5f, lineRect.top + lineRect.height * 0.5f);
+	bottomLine->setOrigin(lineRect.left + lineRect.width * 0.5f, lineRect.top + lineRect.height * 0.0f);
 	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + label->GetGlobalBounds().height));
 }
 
