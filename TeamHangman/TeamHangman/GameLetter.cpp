@@ -6,7 +6,7 @@ GameLetter::GameLetter(sf::Vector2f position, std::string letter, int textSize, 
 {
 	window = HWindow::GetWindow();
 	label = new Label(position, letter, textSize, textColor);
-	bottomLine = new sf::RectangleShape(sf::Vector2f(30.0f, label->GetGlobalBounds().height * 0.1f));
+	bottomLine = new sf::RectangleShape(sf::Vector2f(30.0f, 3.0f));
 	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + label->GetGlobalBounds().height));
 	bottomLine->setFillColor(sf::Color::White);
 	myLetter = letter;
@@ -30,19 +30,25 @@ void GameLetter::Update()
 
 void GameLetter::Draw()
 {
-	if (isFound)
+	if (isFoundBefore)
 	{
 		label->Draw();
 	}
 	window->draw(*bottomLine);
 }
 
-void GameLetter::CompareToMyLetter(std::string letter)
+bool GameLetter::CompareToMyLetter(std::string letter)
 {
-	if (myLetter.compare(letter) == 0)
+	bool isFoundNow = false;
+	if (myLetter.compare(letter) == 0 && !isFoundBefore)
 	{
-		isFound = true;
+		isFoundNow = true;
 	}
+	if (isFoundNow == true)
+	{
+		isFoundBefore = true;
+	}
+	return isFoundNow;
 }
 
 void GameLetter::OriginMiddle()
@@ -55,5 +61,5 @@ void GameLetter::OriginMiddle()
 
 bool GameLetter::beenFound()
 {
-	return isFound;
+	return isFoundBefore;
 }

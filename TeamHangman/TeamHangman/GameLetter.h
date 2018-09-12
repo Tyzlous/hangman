@@ -8,14 +8,14 @@ public:
 	~GameLetter();
 	void Update();
 	void Draw();
-	void CompareToMyLetter(std::string letter);
+	bool CompareToMyLetter(std::string letter);
 	void OriginMiddle();
 	bool beenFound();
 private:
 	sf::RenderWindow* window;
 	Label* label;
 	sf::RectangleShape* bottomLine;
-	bool isFound = false;
+	bool isFoundBefore = false;
 	std::string myLetter;
 };
 

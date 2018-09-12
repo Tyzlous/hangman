@@ -85,10 +85,31 @@ void Game::LettersVectorInit()
 	std::string word = GetRandomLine();
 	std::cout << word << std::endl;
 	std::string letter;
+	float letterSpacing;
+	float firstLetterPos;
+	float lastLetterPos;
+	if (word.size() <= 10)
+	{
+		firstLetterPos = 0.3f;
+		lastLetterPos = 0.7f - firstLetterPos;
+		letterSpacing = window->getSize().x * lastLetterPos / word.size();
+	}
+	else if (word.size() >= 30)
+	{
+		firstLetterPos = 0.05f;
+		lastLetterPos = 0.95f - firstLetterPos;
+		letterSpacing = window->getSize().x * lastLetterPos / word.size();
+	}
+	else
+	{
+		firstLetterPos = 0.1f;
+		lastLetterPos = 0.9f - firstLetterPos;
+		letterSpacing = window->getSize().x * lastLetterPos / word.size();
+	}
 	for (int i = 0; i < word.size(); i++)	
 	{
 		letter = word.at(i);
-		gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * (0.1f + 0.1f * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+		gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * firstLetterPos + (letterSpacing * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
 	}
 	
 	for (int i = 0; i < gameLetters.size(); i++)
@@ -177,9 +198,14 @@ void Game::print(std::string string)
 
 void Game::OnLetterPressed(std::string letter)
 {
+	int correctLetters = 0;
 	std::cout << letter << std::endl;
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
-		gameLetters[i]->CompareToMyLetter(letter);
+		if (gameLetters[i]->CompareToMyLetter(letter) == true)
+		{
+			correctLetters++;
+		}
 	}
+	// if (correctLetters == 0) {failedGuess();}
 }
