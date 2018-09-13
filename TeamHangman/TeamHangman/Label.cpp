@@ -25,7 +25,7 @@ Label::Label(sf::Vector2f position, std::string text, int textSize, sf::Color te
 	font->loadFromFile(FONT_NAME);
 
 	this->text = new sf::Text(text, *font);
-	this->text->setCharacterSize(30);
+	this->text->setCharacterSize(textSize);
 	this->text->setStyle(sf::Text::Bold);
 	this->text->setFillColor(baseColor);
 	this->text->setPosition(position);
