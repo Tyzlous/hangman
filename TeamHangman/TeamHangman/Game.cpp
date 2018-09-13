@@ -52,7 +52,7 @@ void Game::KeyboardInit()
 				rowStartX = 0.1f;
 			}
 		}
-		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
+		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1, _2), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
 		rowStartX += letterDist;
 	}
 }
@@ -93,20 +93,18 @@ void Game::LettersVectorInit()
 	{
 		firstLetterPos = 0.3f;
 		lastLetterPos = 0.7f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
 	}
-	else if (word.size() >= 30)
-	{
-		firstLetterPos = 0.05f;
-		lastLetterPos = 0.95f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
-	}
-	else
+	else if (word.size() <= 30)
 	{
 		firstLetterPos = 0.1f;
 		lastLetterPos = 0.9f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
 	}
+	else
+	{
+		firstLetterPos = 0.05f;
+		lastLetterPos = 0.95f - firstLetterPos;
+	}
+	letterSpacing = window->getSize().x * lastLetterPos / word.size();
 	for (int i = 0; i < word.size(); i++)	
 	{
 		letter = word.at(i);
@@ -197,23 +195,29 @@ void Game::print(std::string string)
 	std::cout << string << std::endl;
 }
 
-void Game::OnLetterPressed(std::string letter)
+void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 {
-	int correctLetters = 0;
-	std::cout << letter << std::endl;
+	bool correctGuess = false;
+	buttonPressed->disable();
+	print(letter);
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
-		if (gameLetters[i]->CompareToMyLetter(letter) == true)
+		if (gameLetters[i]->CompareToMyLetter(letter))
 		{
+			correctGuess = true;
 			correctLetters++;
 		}
 	}
-	// if (correctLetters == 0) {failedGuess();}
+		if (correctGuess)
+		{
+			if (soundManager != nullptr) soundManager->PlayButtonPositive();
+		}
+		else
+		{
+			if (soundManager != nullptr) soundManager->PlayButtonNegative();
+
+		}
 	
-	if (soundManager != nullptr)
-	{
-		soundManager->PlayButtonPositive();
-	}
 }
 
 void Game::SetSoundManager(HangmanSoundManager * soundManager)

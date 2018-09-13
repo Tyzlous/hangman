@@ -31,7 +31,7 @@ private:
 	std::vector<std::string> words;
 	std::vector<GameLetter*> gameLetters;
 	HangmanSoundManager* soundManager;
-
-	void OnLetterPressed(std::string letter);
+	int correctLetters = 0;
+	void OnLetterPressed(std::string letter, CallbackButton* buttonPressed);
 };
 

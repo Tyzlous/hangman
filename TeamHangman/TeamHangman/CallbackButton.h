@@ -7,12 +7,13 @@
 class CallbackButton
 {
 public:
-	CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized);
+	CallbackButton(std::function<void(std::string, CallbackButton*)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized);
 	CallbackButton();
 	~CallbackButton();
 	void update();
 	void draw();
 	void activate();
+	void disable();
 	void UpdateChosenLanguage();
 	void OriginMiddle();
 	void SetOrigin(sf::Vector2f modifier);
@@ -21,11 +22,12 @@ public:
 
 private:
 	std::string callbackParameter;
-	std::function<void(std::string)> callback;
+	std::function<void(std::string, CallbackButton*)> callback;
 	sf::RenderWindow* window;
 	bool isPressed = false;
 	LocalizedLabel* label;
 	bool pressedOutside = false;
+	bool enabled = true;
 	sf::Texture* texture = nullptr;
 	sf::RectangleShape* backgroundImage = nullptr;
 };

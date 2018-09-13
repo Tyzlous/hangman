@@ -47,16 +47,12 @@ void GameLetter::Draw()
 
 bool GameLetter::CompareToMyLetter(std::string letter)
 {
-	bool isFoundNow = false;
-	if (myLetter.compare(letter) == 0 && !isFoundBefore)
-	{
-		isFoundNow = true;
-	}
-	if (isFoundNow == true)
+	if (myLetter.compare(letter) == 0)
 	{
 		isFoundBefore = true;
 	}
-	return isFoundNow;
+
+	return myLetter.compare(letter) == 0;
 }
 
 void GameLetter::OriginMiddle()
@@ -65,9 +61,4 @@ void GameLetter::OriginMiddle()
 	sf::FloatRect lineRect = bottomLine->getLocalBounds();
 	bottomLine->setOrigin(lineRect.left + lineRect.width * 0.5f, lineRect.top + lineRect.height * 0.0f);
 	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + label->GetGlobalBounds().height));
-}
-
-bool GameLetter::beenFound()
-{
-	return isFoundBefore;
 }
