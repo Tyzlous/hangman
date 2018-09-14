@@ -57,6 +57,10 @@ void Hangman::Start()
 			}
 			game->Update();
 			game->Draw();
+			if (gamestate->currentState == state::MainMenu)
+			{
+				game->resetGame();
+			}
 		}
 		if (gamestate->currentState == state::Quit)
 		{

@@ -130,7 +130,6 @@ void Game::Update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		gamestate->currentState = state::MainMenu;
-		resetGame();
 	}
 }
 
