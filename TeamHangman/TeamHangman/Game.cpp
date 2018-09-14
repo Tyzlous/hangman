@@ -83,7 +83,10 @@ void Game::WordVectorInit()
 
 void Game::LettersVectorInit()
 {
-	gameLetters.clear();
+	for (int i = 0; i < gameLetters.size(); i++)
+	{
+		delete gameLetters[i];
+	}
 	std::string word = GetRandomLine();
 	std::cout << word << std::endl;
 	std::string letter;
