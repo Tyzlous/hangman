@@ -34,5 +34,6 @@ private:
 	void KeyboardInit();
 	void WordVectorInit();
 	void LettersVectorInit();
+	void Win();
 };
 

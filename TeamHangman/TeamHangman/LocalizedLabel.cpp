@@ -16,7 +16,6 @@ LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textS
 
 LocalizedLabel::~LocalizedLabel()
 {
-
 }
 
 std::string LocalizedLabel::GetLocalizedString(std::string key)

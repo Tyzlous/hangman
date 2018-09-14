@@ -6,6 +6,7 @@
 #include "MainMenu.h"
 #include "Game.h"
 #include "HangmanSoundManager.h"
+#include "Victory.h"
 class Hangman
 {
 public:
@@ -18,5 +19,6 @@ private:
 	MainMenu* mainMenu;
 	Game* game;
 	HangmanSoundManager* soundManager;
+	Victory* victory;
 };
 

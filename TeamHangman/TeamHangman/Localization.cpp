@@ -9,7 +9,8 @@ dictionary Localization::english = dictionary{
 	{ "KEY_YOU_LOSE", "You lose!" },
 	{ "KEY_YOU_WIN", "You win!" },
 	{ "KEY_ALPHABET", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
-	{ "KEY_ABBREVIATION", "EN"}
+	{ "KEY_ABBREVIATION", "EN"},
+	{ "KEY_MENU", "Menu" }
 };
 
 dictionary Localization::swedish = dictionary{
@@ -21,5 +22,6 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_YOU_LOSE", "Du förlorade!" },
 	{ "KEY_YOU_WIN", "Du vann!" },
 	{ "KEY_ALPHABET", "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ" },
-	{ "KEY_ABBREVIATION", "SE" }
+	{ "KEY_ABBREVIATION", "SE" },
+	{ "KEY_MENU", "Meny" }
 };

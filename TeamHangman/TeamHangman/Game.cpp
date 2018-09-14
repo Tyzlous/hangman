@@ -120,6 +120,13 @@ void Game::LettersVectorInit()
 	}
 }
 
+void Game::Win()
+{
+	typedef Gamestate::State state;
+	if(soundManager != nullptr) soundManager->PlayVictory();
+	gamestate->currentState = state::Victory;
+}
+
 void Game::Update()
 {
 	typedef Gamestate::State state;
@@ -223,7 +230,7 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 	}
 		if (correctGuess)
 		{
-			if (soundManager != nullptr && correctLetters == gameLetters.size()) soundManager->PlayVictory();
+			if (soundManager != nullptr && correctLetters == gameLetters.size()) Win();
 			else if (soundManager != nullptr) soundManager->PlayButtonPositive();
 		}
 		else

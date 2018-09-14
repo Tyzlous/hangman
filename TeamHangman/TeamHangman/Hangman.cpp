@@ -15,6 +15,7 @@ Hangman::Hangman()
 	soundManager = new HangmanSoundManager();
 	game = new Game();
 	game->SetSoundManager(soundManager);
+	victory = new Victory();
 }
 
 Hangman::~Hangman()
@@ -22,6 +23,7 @@ Hangman::~Hangman()
 	delete mainMenu;
 	delete game;
 	delete soundManager;
+	delete victory;
 }
 
 void Hangman::Start()
@@ -57,10 +59,15 @@ void Hangman::Start()
 			}
 			game->Update();
 			game->Draw();
-			if (gamestate->currentState == state::MainMenu)
+			if (gamestate->currentState != state::Game)
 			{
 				game->ResetGame();
 			}
+		}
+		if (gamestate->currentState == state::Victory)
+		{
+			victory->Update();
+			victory->Draw();
 		}
 		if (gamestate->currentState == state::Quit)
 		{
