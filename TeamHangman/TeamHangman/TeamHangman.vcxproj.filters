@@ -48,6 +48,12 @@
     <ClCompile Include="GameLetter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HangmanSoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Victory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gamestate.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameLetter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HangmanSoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Victory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

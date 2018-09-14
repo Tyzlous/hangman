@@ -166,7 +166,7 @@ void Game::UpdateChosenLanguage()
 	}
 }
 
-void Game::resetGame()
+void Game::ResetGame()
 {
 	LettersVectorInit();
 	for (int i = 0; i < gameButtons.size(); i++)

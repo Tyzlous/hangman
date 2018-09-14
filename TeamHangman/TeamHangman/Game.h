@@ -14,7 +14,7 @@ public:
 	void Update();
 	void Draw();
 	void UpdateChosenLanguage();
-	void resetGame();
+	void ResetGame();
 	std::string GetLocalizedString(std::string key);
 	std::string GetRandomLine();
 	void print(std::string string);

@@ -135,6 +135,7 @@
     <ClCompile Include="LocalizedLabel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Victory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CallbackButton.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Localization.h" />
     <ClInclude Include="LocalizedLabel.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Victory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
