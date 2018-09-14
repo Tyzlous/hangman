@@ -14,6 +14,7 @@ public:
 	void draw();
 	void activate();
 	void disable();
+	void enable();
 	void UpdateChosenLanguage();
 	void OriginMiddle();
 	void SetOrigin(sf::Vector2f modifier);

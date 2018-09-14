@@ -83,6 +83,7 @@ void Game::WordVectorInit()
 
 void Game::LettersVectorInit()
 {
+	gameLetters.clear();
 	std::string word = GetRandomLine();
 	std::cout << word << std::endl;
 	std::string letter;
@@ -105,12 +106,14 @@ void Game::LettersVectorInit()
 		lastLetterPos = 0.95f - firstLetterPos;
 	}
 	letterSpacing = window->getSize().x * lastLetterPos / word.size();
-	for (int i = 0; i < word.size(); i++)	
+	if (gameLetters.empty()) 
 	{
-		letter = word.at(i);
-		gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * firstLetterPos + (letterSpacing * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+		for (int i = 0; i < word.size(); i++)
+		{
+			letter = word.at(i);
+			gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * firstLetterPos + (letterSpacing * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+		}
 	}
-	
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
 		gameLetters[i]->OriginMiddle();
@@ -127,6 +130,7 @@ void Game::Update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		gamestate->currentState = state::MainMenu;
+		resetGame();
 	}
 }
 
@@ -161,6 +165,16 @@ void Game::UpdateChosenLanguage()
 			break;
 		}
 	}
+}
+
+void Game::resetGame()
+{
+	LettersVectorInit();
+	for (int i = 0; i < gameButtons.size(); i++)
+	{
+		gameButtons[i]->enable();
+	}
+	correctLetters = 0;
 }
 
 std::string Game::GetLocalizedString(std::string key)

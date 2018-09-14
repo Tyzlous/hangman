@@ -95,6 +95,10 @@ void CallbackButton::disable()
 {
 	enabled = false;
 }
+void CallbackButton::enable()
+{
+	enabled = true;
+}
 void CallbackButton::UpdateChosenLanguage()
 {
 	label->UpdateChosenLanguage();
