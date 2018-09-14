@@ -11,6 +11,7 @@ Victory::Victory()
 
 Victory::~Victory()
 {
+	delete winText;
 	for (int i = 0; i < buttons.size(); i++)
 	{
 		delete buttons[i];
