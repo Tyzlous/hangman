@@ -210,14 +210,14 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 	}
 		if (correctGuess)
 		{
-			if (soundManager != nullptr) soundManager->PlayButtonPositive();
+			if (soundManager != nullptr && correctLetters == gameLetters.size()) soundManager->PlayVictory();
+			else if (soundManager != nullptr) soundManager->PlayButtonPositive();
 		}
 		else
 		{
 			if (soundManager != nullptr) soundManager->PlayButtonNegative();
 
 		}
-	
 }
 
 void Game::SetSoundManager(HangmanSoundManager * soundManager)

@@ -11,12 +11,13 @@ public:
 	bool isMainMenuMusicPlaying, isGameMusicPlaying;
 	void PlayButtonPositive();
 	void PlayButtonNegative();
+	void PlayVictory();
 	void SetVolume(float volume);
 
 private:
 	sf::Music mainMenuMusic, gameMusic;
-	sf::SoundBuffer buttonPositiveBuffer, buttonNegativeBuffer;
-	sf::Sound buttonPositive, buttonNegative;
+	sf::SoundBuffer buttonPositiveBuffer, buttonNegativeBuffer, victoryBuffer;
+	sf::Sound buttonPositive, buttonNegative, victory;
 
 	const std::string AUDIO_PATH = "resources/";
 };

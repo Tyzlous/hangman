@@ -24,6 +24,11 @@ HangmanSoundManager::HangmanSoundManager()
 	{
 		buttonNegative.setBuffer(buttonNegativeBuffer);
 	}
+
+	if (victoryBuffer.loadFromFile(AUDIO_PATH + "victory.wav"))
+	{
+		victory.setBuffer(victoryBuffer);
+	}
 	SetVolume(0.8f);
 }
 
@@ -62,10 +67,16 @@ void HangmanSoundManager::PlayButtonNegative()
 	buttonNegative.play();
 }
 
+void HangmanSoundManager::PlayVictory()
+{
+	victory.play();
+}
+
 void HangmanSoundManager::SetVolume(float volume)
 {
 	mainMenuMusic.setVolume(volume);
 	gameMusic.setVolume(volume);
 	buttonPositive.setVolume(volume);
 	buttonNegative.setVolume(volume);
+	victory.setVolume(volume + 1.5f);
 }
