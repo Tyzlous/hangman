@@ -7,7 +7,7 @@ GameLetter::GameLetter(sf::Vector2f position, std::string letter, int textSize, 
 	window = HWindow::GetWindow();
 	label = new Label(position, letter, textSize, textColor);
 	bottomLine = new sf::RectangleShape(sf::Vector2f(30.0f, 3.0f));
-	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + label->GetGlobalBounds().height));
+	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + 28.0f));
 	bottomLine->setFillColor(sf::Color::White);
 	myLetter = letter;
 }
@@ -60,5 +60,5 @@ void GameLetter::OriginMiddle()
 	label->OriginMiddle();
 	sf::FloatRect lineRect = bottomLine->getLocalBounds();
 	bottomLine->setOrigin(lineRect.left + lineRect.width * 0.5f, lineRect.top + lineRect.height * 0.0f);
-	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + label->GetGlobalBounds().height));
+	bottomLine->setPosition(sf::Vector2f(label->GetGlobalBounds().left + label->GetGlobalBounds().width * 0.5f, label->GetGlobalBounds().top + 28.0f));
 }

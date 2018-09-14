@@ -11,10 +11,6 @@ class Game
 public:
 	Game();
 	~Game();
-	void InitializeState();
-	void KeyboardInit();
-	void WordVectorInit();
-	void LettersVectorInit();
 	void Update();
 	void Draw();
 	void UpdateChosenLanguage();
@@ -34,5 +30,9 @@ private:
 	HangmanSoundManager* soundManager;
 	int correctLetters = 0;
 	void OnLetterPressed(std::string letter, CallbackButton* buttonPressed);
+	void InitializeState();
+	void KeyboardInit();
+	void WordVectorInit();
+	void LettersVectorInit();
 };
 
