@@ -12,6 +12,8 @@ public:
 	{
 		Game,
 		MainMenu,
+		Options,
+		Victory,
 		Quit
 	};
 	State currentState;
