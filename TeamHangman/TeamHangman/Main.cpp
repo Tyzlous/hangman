@@ -14,7 +14,6 @@ int main()
 	srand(time(NULL));
 	Hangman* hangman = new Hangman();
 	hangman->Start();
-
 	HWindow::Get()->Clean();
 	Gamestate::Clean();
 	delete hangman;
