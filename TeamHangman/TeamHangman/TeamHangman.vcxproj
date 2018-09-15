@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="CallbackButton.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameLetter.cpp" />
     <ClCompile Include="Gamestate.cpp" />
     <ClCompile Include="Hangman.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="CallbackButton.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameLetter.h" />
     <ClInclude Include="Gamestate.h" />
     <ClInclude Include="Hangman.h" />
