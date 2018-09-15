@@ -19,6 +19,7 @@ public:
 	unsigned int GetTotalCorrectGuesses();
 	unsigned int GetGamesWon();
 	sf::Time GetTimePlayed();
+	void printMe();
 private:
 	std::string saveFilePath = "resources/";
 	std::string saveFileName = "playerdata.bin";

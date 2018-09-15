@@ -14,10 +14,10 @@ GameData::GameData()
 GameData::GameData(std::string playerName)
 {
 	username = playerName;
-	totalGuesses = 0;
-	totalCorrectGuesses = 0;
-	gamesWon = 0;
-	timePlayed = sf::seconds(0.0f);
+	totalGuesses = 2;
+	totalCorrectGuesses = 1;
+	gamesWon = 1;
+	timePlayed = sf::seconds(1.0f);
 	if (SearchDataFor(playerName))
 	{
 		LoadData(playerName);
@@ -86,11 +86,20 @@ sf::Time GameData::GetTimePlayed()
 	return timePlayed;
 }
 
+void GameData::printMe()
+{
+	std::cout << username << std::endl;	
+	std::cout << totalGuesses << std::endl;
+	std::cout << totalCorrectGuesses << std::endl;
+	std::cout << gamesWon << std::endl;
+	std::cout << std::to_string(timePlayed.asSeconds()) << std::endl;
+}
+
 void GameData::SaveData()
 {
 	using namespace std;
 	std::string file = saveFilePath + saveFileName;
-	int size;
+	size_t size;
 	if (SearchDataFor(username))
 	{
 		fstream saveFile(file, ios::out | ios::in| ios::binary);
@@ -105,9 +114,12 @@ void GameData::SaveData()
 
 			while (username.compare(nameFetched) != 0 && !saveFile.eof())
 			{
-				saveFile.read((char*)&size, sizeof(int));
-				nameFetched.reserve(size);
-				saveFile.read((char*)&nameFetched, size);
+				saveFile.read((char*)&size, sizeof(size_t));
+				char* tempMem = new char[size + 1];
+				saveFile.read(tempMem, size);
+				tempMem[size] = '\0';
+				nameFetched = tempMem;
+				delete[] tempMem;
 				if (username.compare(nameFetched) != 0)
 				{
 					saveFile.seekg(toSkip, ios_base::cur);
@@ -120,7 +132,7 @@ void GameData::SaveData()
 			}
 			if (username.compare(nameFetched) == 0)
 			{
-				saveFile.seekp(saveFile.tellg);
+				saveFile.seekp(saveFile.tellg());
 				saveFile.write((char*)&totalGuesses, sizeof(int));
 				saveFile.write((char*)&totalCorrectGuesses, sizeof(int));
 				saveFile.write((char*)&gamesWon, sizeof(int));
@@ -140,8 +152,8 @@ void GameData::SaveData()
 		else 
 		{
 			size = username.size();
-			saveFile.write((char *)&size, sizeof(int));
-			saveFile.write((char*)&username, size);
+			saveFile.write((char*)&size, sizeof(size_t));
+			saveFile.write(username.c_str(), size);
 			saveFile.write((char*)&totalGuesses, sizeof(int));
 			saveFile.write((char*)&totalCorrectGuesses, sizeof(int));
 			saveFile.write((char*)&gamesWon, sizeof(int));
@@ -157,22 +169,30 @@ void GameData::LoadData(std::string playerName)
 {
 	using namespace std;
 	std::string file = saveFilePath + saveFileName;
-	int size;
+	size_t size;
 	fstream saveFile(file, ios::in | ios::binary);
 	if (!saveFile.is_open())
 	{
 		cout << "Error opening SaveFile " + file << endl;
+	}
+	else if (saveFile.peek() == std::ifstream::traits_type::eof())
+	{
+		cout << "File is empty, skipping save load in " + file << endl;
+		saveFile.close();
 	}
 	else
 	{
 		std::string nameFetched;
 		int toSkip = 12 + sizeof(sf::Time);
 
-		while (playerName.compare(nameFetched) != 0 && !saveFile.eof())
+		while (playerName.compare(nameFetched) != 0 && saveFile.peek() != std::ifstream::traits_type::eof())
 		{
-			saveFile.read((char*)&size, sizeof(int));
-			nameFetched.reserve(size);
-			saveFile.read((char*)&nameFetched, size);
+			saveFile.read((char*)&size, sizeof(size_t));
+			char* tempMem = new char[size + 1];
+			saveFile.read(tempMem, size);
+			tempMem[size] = '\0';
+			nameFetched = tempMem;
+			delete[] tempMem;
 			if (playerName.compare(nameFetched) != 0)
 			{
 				saveFile.seekg(toSkip, ios_base::cur);
@@ -202,23 +222,34 @@ bool GameData::SearchDataFor(std::string playerName)
 	using namespace std;
 	std::string file = saveFilePath + saveFileName;
 	std::string nameFetched;
-	int size;
+	size_t size;
 	int toSkip = 12 + sizeof(sf::Time);
+	char byte;
 	fstream saveFile(file, ios::in | ios::binary);
 	if (!saveFile.is_open())
 	{
 		cout << "Error opening SaveFile " + file << endl;
 	}
+	else if (saveFile.peek() == std::ifstream::traits_type::eof())
+	{
+		cout << "File is empty, skipping username search in " + file << endl;
+		saveFile.close();
+	}
 	else
 	{
-		while (playerName.compare(nameFetched) !=0 && !saveFile.eof())
+		while (playerName.compare(nameFetched) !=0 && saveFile.peek() != std::ifstream::traits_type::eof())
 		{
-			saveFile.read((char*)&size, sizeof(int));
-			nameFetched.reserve(size);
-			saveFile.read((char*)&nameFetched, size);
-			if (username.compare(nameFetched) != 0)
+			saveFile.read((char*)&size, sizeof(size_t));
+			char* tempMem = new char[size + 1];
+			saveFile.read(tempMem, size);
+			tempMem[size] = '\0';
+			nameFetched = tempMem;
+			delete[] tempMem;
+			if (playerName.compare(nameFetched) != 0)
 			{
-				saveFile.seekg(toSkip, ios_base::cur);
+				int place = saveFile.tellg();
+				place += toSkip;
+				saveFile.seekg(place);
 				for (int i = 0; i < nameFetched.size(); i++)
 				{
 					nameFetched.pop_back();
@@ -227,6 +258,8 @@ bool GameData::SearchDataFor(std::string playerName)
 			}
 		}
 		saveFile.close();
+		if (playerName.compare(nameFetched) == 0) usernameIsFound = true;
+		if (usernameIsFound == false) std::cout << "End of file, no player data for " + playerName << " found." << endl;
 	}
 	return usernameIsFound;
 }
