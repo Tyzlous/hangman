@@ -8,6 +8,8 @@ public:
 	GameData();
 	GameData(std::string username);
 	~GameData();
+	void SaveData();
+	void LoadData(std::string playerName);
 	void SetUsername(std::string playerName);
 	void AddGuess(bool correctOrNot);
 	void UpdateTimePlayed(sf::Time timeToAdd);
@@ -25,8 +27,6 @@ private:
 	unsigned int totalCorrectGuesses;
 	unsigned int gamesWon;
 	sf::Time timePlayed;
-	void SaveData();
-	void LoadData(std::string playerName);
 	bool SearchDataFor(std::string playerName);
 };
 
