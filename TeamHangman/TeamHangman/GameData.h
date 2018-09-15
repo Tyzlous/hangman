@@ -23,11 +23,13 @@ public:
 private:
 	std::string saveFilePath = "resources/";
 	std::string saveFileName = "playerdata.bin";
+	int toSkip = 12 + sizeof(sf::Time);
 	std::string username;
 	unsigned int totalGuesses;
 	unsigned int totalCorrectGuesses;
 	unsigned int gamesWon;
 	sf::Time timePlayed;
 	bool SearchDataFor(std::string playerName);
+	std::string IterateFstreamAndFindUsername(std::fstream* saveFile, std::string nameToSearch);
 };
 
