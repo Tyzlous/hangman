@@ -9,19 +9,24 @@ public:
 	GameData(std::string username);
 	~GameData();
 	void SetUsername(std::string playerName);
-	void SetWord(std::string word);
 	void AddGuess(bool correctOrNot);
 	void UpdateTimePlayed(sf::Time timeToAdd);
-	void GameWon();
+	void GameEnded(bool winOrNot);
+	std::string GetUsername();
+	unsigned int GetTotalGuesses();
+	unsigned int GetTotalCorrectGuesses();
+	unsigned int GetGamesWon();
+	sf::Time GetTimePlayed();
 private:
+	std::string saveFilePath = "resources/";
+	std::string saveFileName = "playerdata.bin";
 	std::string username;
-	std::string word;
 	unsigned int totalGuesses;
 	unsigned int totalCorrectGuesses;
 	unsigned int gamesWon;
 	sf::Time timePlayed;
 	void SaveData();
-	void LoadData();
-	
+	void LoadData(std::string playerName);
+	bool SearchDataFor(std::string playerName);
 };
 
