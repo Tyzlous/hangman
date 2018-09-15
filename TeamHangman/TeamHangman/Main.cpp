@@ -21,10 +21,15 @@ int main()
 	//delete hangman;
 	GameData testFile = GameData("Hodor");
 	GameData testFile2 = GameData();
+	GameData testFile3 = GameData("Elias");
+	testFile3.printMe();
+	testFile3.SaveData();
 	testFile2.SaveData();
 	testFile.printMe();
 	testFile.SaveData();
 	testFile.LoadData("Name");
+	testFile.printMe();
+	testFile.LoadData("Elias");
 	testFile.printMe();
 	std::cin.get();
 	return 0;

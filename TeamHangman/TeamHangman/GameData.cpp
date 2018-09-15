@@ -14,9 +14,9 @@ GameData::GameData()
 GameData::GameData(std::string playerName)
 {
 	username = playerName;
-	totalGuesses = 2;
+	totalGuesses = 1;
 	totalCorrectGuesses = 1;
-	gamesWon = 1;
+	gamesWon = 999;
 	timePlayed = sf::seconds(1.0f);
 	if (SearchDataFor(playerName))
 	{
