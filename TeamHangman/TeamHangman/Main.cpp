@@ -13,24 +13,12 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	//typedef Gamestate::State state;
 	
-	//srand(time(NULL));
-	//Hangman* hangman = new Hangman();
-	//hangman->Start();
-	//HWindow::Get()->Clean();
-	//Gamestate::Clean();
-	//delete hangman;
-	GameData testFile = GameData("Hodor");
-	GameData testFile2 = GameData();
-	GameData testFile3 = GameData("Elias");
-	testFile3.printMe();
-	testFile3.SaveData();
-	testFile2.SaveData();
-	testFile.printMe();
-	testFile.SaveData();
-	testFile.LoadData("Name");
-	testFile.printMe();
-	testFile.LoadData("Elias");
-	testFile.printMe();
+	srand(time(NULL));
+	Hangman* hangman = new Hangman();
+	hangman->Start();
+	HWindow::Get()->Clean();
+	Gamestate::Clean();
+	delete hangman;
 	std::cin.get();
 	return 0;
 }

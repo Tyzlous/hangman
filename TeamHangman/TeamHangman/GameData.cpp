@@ -7,6 +7,7 @@ GameData::GameData()
 	username = "Name";
 	totalGuesses = 0;
 	totalCorrectGuesses = 0;
+	gamesPlayed = 0;
 	gamesWon = 0;
 	timePlayed = sf::seconds(0.0f);
 }
@@ -14,10 +15,11 @@ GameData::GameData()
 GameData::GameData(std::string playerName)
 {
 	username = playerName;
-	totalGuesses = 1;
-	totalCorrectGuesses = 1;
-	gamesWon = 999;
-	timePlayed = sf::seconds(1.0f);
+	totalGuesses = 0;
+	totalCorrectGuesses = 0;
+	gamesPlayed = 0;
+	gamesWon = 0;
+	timePlayed = sf::seconds(0.0f);
 	if (SearchDataFor(playerName))
 	{
 		LoadData(playerName);
@@ -83,6 +85,7 @@ void GameData::printMe()
 	std::cout << username << std::endl;	
 	std::cout << totalGuesses << std::endl;
 	std::cout << totalCorrectGuesses << std::endl;
+	std::cout << gamesPlayed << std::endl;
 	std::cout << gamesWon << std::endl;
 	std::cout << std::to_string(timePlayed.asSeconds()) << std::endl;
 }
@@ -111,6 +114,7 @@ void GameData::SaveData()
 				saveFile.seekp(saveFile.tellg());
 				saveFile.write((char*)&totalGuesses, sizeof(int));
 				saveFile.write((char*)&totalCorrectGuesses, sizeof(int));
+				saveFile.write((char*)&gamesPlayed, sizeof(int));
 				saveFile.write((char*)&gamesWon, sizeof(int));
 				saveFile.write((char*)&timePlayed, sizeof(sf::Time));
 			}
@@ -132,6 +136,7 @@ void GameData::SaveData()
 			saveFile.write(username.c_str(), size);
 			saveFile.write((char*)&totalGuesses, sizeof(int));
 			saveFile.write((char*)&totalCorrectGuesses, sizeof(int));
+			saveFile.write((char*)&gamesPlayed, sizeof(int));
 			saveFile.write((char*)&gamesWon, sizeof(int));
 			saveFile.write((char*)&timePlayed, sizeof(sf::Time));
 			saveFile.close();
@@ -167,6 +172,7 @@ void GameData::LoadData(std::string playerName)
 			username = nameFetched;
 			saveFile.read((char*)&totalGuesses, sizeof(int));
 			saveFile.read((char*)&totalCorrectGuesses, sizeof(int));
+			saveFile.read((char*)&gamesPlayed, sizeof(int));
 			saveFile.read((char*)&gamesWon, sizeof(int));
 			saveFile.read((char*)&timePlayed, sizeof(sf::Time));
 		}
