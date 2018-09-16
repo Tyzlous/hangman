@@ -77,3 +77,7 @@ void Hangman::Start()
 		window->display();
 	}
 }
+
+void Hangman::GameDataEvent()
+{
+}

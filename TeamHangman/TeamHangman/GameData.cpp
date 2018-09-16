@@ -52,7 +52,11 @@ void GameData::UpdateTimePlayed(sf::Time timeToAdd)
 
 void GameData::GameEnded(bool winOrNot)
 {
-	gamesWon++;
+	gamesPlayed++;
+	if (winOrNot)
+	{
+	gamesWon++;	
+	}
 }
 
 std::string GameData::GetUsername()

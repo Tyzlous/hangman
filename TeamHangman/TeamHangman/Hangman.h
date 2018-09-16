@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "HangmanSoundManager.h"
 #include "Victory.h"
+#include "GameData.h"
 class Hangman
 {
 public:
@@ -18,7 +19,9 @@ private:
 	Gamestate* gamestate;
 	MainMenu* mainMenu;
 	Game* game;
+	GameData* playerData;
 	HangmanSoundManager* soundManager;
 	Victory* victory;
+	void GameDataEvent();
 };
 
