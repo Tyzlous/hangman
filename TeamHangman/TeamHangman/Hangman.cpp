@@ -29,7 +29,8 @@ Hangman::~Hangman()
 void Hangman::Start()
 {
 	typedef Gamestate::State state;
-
+	std::string test;
+	std::string code = "ErriAlwaysWins";
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -37,6 +38,23 @@ void Hangman::Start()
 		{
 			if (event.type == sf::Event::Closed)
 				window->close();
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (event.text.unicode < 128)
+					std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+				if (event.text.unicode == 8 && test.size() != 0) test.pop_back();
+				else
+				{
+				test.push_back((char)event.text.unicode);
+				}
+	
+				if (code.compare(test) == 0)
+				{
+					gamestate->currentState = state::Game;
+					std::cout << "Thing\n";
+				}
+			}
+
 		}
 
 		window->clear();
