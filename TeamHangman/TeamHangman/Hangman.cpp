@@ -41,17 +41,25 @@ void Hangman::Start()
 			if (event.type == sf::Event::TextEntered)
 			{
 				if (event.text.unicode < 128)
+				{
 					std::cout << "ASCII character number typed: " << event.text.unicode << std::endl;
-				if (event.text.unicode == 8 && test.size() != 0) test.pop_back();
-				else
-				{
-				test.push_back((char)event.text.unicode);
-				}
-	
-				if (code.compare(test) == 0)
-				{
-					gamestate->currentState = state::Victory;
-					std::cout << "Thing\n";
+
+					if (event.text.unicode == 8 && test.size() != 0)
+					{
+						test.pop_back();
+						std::cout << test << std::endl;
+					}
+					else
+					{
+						test.push_back((char)event.text.unicode);
+						std::cout << test << std::endl;
+					}
+
+					if (code.compare(test) == 0)
+					{
+						gamestate->currentState = state::Victory;
+						std::cout << "Thing\n";
+					}
 				}
 			}
 

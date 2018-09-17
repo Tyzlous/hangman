@@ -132,7 +132,7 @@ void MainMenu::ChangeGamestate(std::string parameter)
 	}
 	else if (options.compare(parameter) == 0)
 	{
-		gamestate->currentState = state::MainMenu;
+		gamestate->currentState = state::Options;
 	}
 	else if (quit.compare(parameter) == 0)
 	{

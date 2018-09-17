@@ -22,6 +22,5 @@ private:
 	GameData* playerData;
 	HangmanSoundManager* soundManager;
 	Victory* victory;
-	void GameDataEvent();
 };
 
