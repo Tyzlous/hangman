@@ -5,6 +5,7 @@
 #include "Gamestate.h"
 #include "MainMenu.h"
 #include "Game.h"
+#include "Options.h"
 #include "HangmanSoundManager.h"
 #include "Victory.h"
 #include "GameData.h"
@@ -19,6 +20,7 @@ private:
 	Gamestate* gamestate;
 	MainMenu* mainMenu;
 	Game* game;
+	Options* options;
 	GameData* playerData;
 	HangmanSoundManager* soundManager;
 	Victory* victory;

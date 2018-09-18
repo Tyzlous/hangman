@@ -5,19 +5,40 @@
 Options::Options()
 {
 	window = HWindow::GetWindow();
+	InitializeButtons();
+	gamestate = Gamestate::Get();
 }
 
 
 Options::~Options()
 {
+	if (menuButton != nullptr)
+	{
+		delete menuButton;
+	}
+	if (confirmNameButton != nullptr)
+	{ 
+		delete confirmNameButton;
+	}
+	if (saveButton != nullptr)
+	{
+		delete saveButton;
+	}
+
 }
 
 void Options::Update()
 {
+	menuButton->update();
+	confirmNameButton->update();
+	saveButton->update();
 }
 
 void Options::Draw()
 {
+	menuButton->draw();
+	confirmNameButton->draw();
+	saveButton->draw();
 }
 
 void Options::InitializeButtons()
@@ -26,36 +47,36 @@ void Options::InitializeButtons()
 	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
-	topButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "PLAY", "KEY_PLAY", topPosition, true);
-	topButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
-	topButton->OriginMiddle();
+	menuButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "MENU", "KEY_MENU", topPosition, true);
+	menuButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
+	menuButton->OriginMiddle();
 
-	middleButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "OPTIONS", "KEY_OPTIONS", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f), true);
-	middleButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
-	middleButton->OriginMiddle();
+	confirmNameButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "CONFIRM", "KEY_CONFIRM", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.1f), true);
+	confirmNameButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
+	confirmNameButton->OriginMiddle();
 
-	bottomButton = new CallbackButton(std::bind(&MainMenu::ChangeGamestate, this, _1), "QUIT", "KEY_QUIT", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f), true);
-	bottomButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
-	bottomButton->OriginMiddle();
+	saveButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "SAVE", "KEY_SAVE", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f), true);
+	saveButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
+	saveButton->OriginMiddle();
 }
 
-void Options::ChangeGamestate(std::string parameter)
+void Options::ButtonFunctions(std::string parameter)
 {
 	typedef Gamestate::State state;
 
-	std::string play = "PLAY";
-	std::string options = "OPTIONS";
-	std::string quit = "QUIT";
+	std::string menu = "MENU";
+	std::string confirm = "CONFIRM";
+	std::string save = "SAVE";
 
-	if (play.compare(parameter) == 0)
+	if (menu.compare(parameter) == 0)
 	{
-		gamestate->currentState = state::Game;
+		gamestate->currentState = state::MainMenu;
 	}
-	else if (options.compare(parameter) == 0)
+	else if (confirm.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::Options;
 	}
-	else if (quit.compare(parameter) == 0)
+	else if (save.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::Quit;
 	}

@@ -12,7 +12,7 @@ public:
 	void Update();
 	void Draw();
 	void InitializeButtons();
-	void ChangeGamestate(std::string parameter);
+	void ButtonFunctions(std::string parameter);
 	void UpdateChosenLanguage();
 private:
 	sf::RenderWindow* window;
@@ -20,5 +20,6 @@ private:
 	dictionary* pickedLanguage;
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;
+	CallbackButton* saveButton;
 };
 

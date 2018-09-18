@@ -19,6 +19,5 @@ int main()
 	HWindow::Get()->Clean();
 	Gamestate::Clean();
 	delete hangman;
-	std::cin.get();
 	return 0;
 }
