@@ -58,6 +58,7 @@ void Options::InitializeButtons()
 	saveButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "SAVE", "KEY_SAVE", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.2f), true);
 	saveButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	saveButton->OriginMiddle();
+
 }
 
 void Options::ButtonFunctions(std::string parameter)

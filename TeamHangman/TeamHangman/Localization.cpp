@@ -12,7 +12,9 @@ dictionary Localization::english = dictionary{
 	{ "KEY_ABBREVIATION", "EN"},
 	{ "KEY_MENU", "Menu" },
 	{ "KEY_CONFIRM", "Confirm" },
-	{ "KEY_SAVE", "Save" }
+	{ "KEY_SAVE", "Save" },
+	{ "KEY_NAME", "Name" }
+	{ "KEY_VOLUME", "Volume"}
 };
 
 dictionary Localization::swedish = dictionary{
@@ -27,5 +29,7 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_ABBREVIATION", "SE" },
 	{ "KEY_MENU", "Meny" },
 	{ "KEY_CONFIRM", "Bekräfta" },
-	{ "KEY_SAVE", "Spara" }
+	{ "KEY_SAVE", "Spara" },
+	{ "KEY_NAME", "Namn" },
+	{ "KEY_VOLUME", "Volym"}
 };
