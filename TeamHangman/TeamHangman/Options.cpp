@@ -5,8 +5,8 @@
 Options::Options()
 {
 	window = HWindow::GetWindow();
-	InitializeButtons();
 	gamestate = Gamestate::Get();
+	InitializeButtons();
 }
 
 
