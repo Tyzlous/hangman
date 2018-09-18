@@ -77,6 +77,10 @@ void Hangman::Start()
 			mainMenu->update();
 			mainMenu->draw();
 		}
+		if (gamestate->currentState == state::Options)
+		{
+			
+		}
 		if (gamestate->currentState == state::Game)
 		{
 			if (!soundManager->isGameMusicPlaying)

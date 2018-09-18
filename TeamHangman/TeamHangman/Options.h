@@ -11,7 +11,14 @@ public:
 	~Options();
 	void Update();
 	void Draw();
+	void InitializeButtons();
+	void ChangeGamestate(std::string parameter);
+	void UpdateChosenLanguage();
 private:
 	sf::RenderWindow* window;
+	Gamestate* gamestate;
+	dictionary* pickedLanguage;
+	CallbackButton* menuButton;
+	CallbackButton* confirmNameButton;
 };
 
