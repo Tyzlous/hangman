@@ -31,6 +31,7 @@ void Slider::Update()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
 			UpdatePosition();
+			Callback();
 			beingDragged = true;
 		}
 	}
@@ -79,9 +80,14 @@ void Slider::UpdatePosition()
 		slider->setPosition(sf::Vector2f(line->getGlobalBounds().left + line->getGlobalBounds().width, slider->getPosition().y));
 		std::cout << "C\n";
 	}
-	float lineStart = line->getGlobalBounds().left;
-	float sliderPos = slider->getPosition().x - lineStart;
-	float lineEnd = line->getGlobalBounds().width;
-	float value = sliderPos / lineEnd;
+}
+
+void Slider::Callback()
+{
+	lineStart = line->getGlobalBounds().left;
+	sliderPos = slider->getPosition().x - lineStart;
+	lineEnd = line->getGlobalBounds().width;
+	value = sliderPos / lineEnd;
+
 	callback(value);
 }
