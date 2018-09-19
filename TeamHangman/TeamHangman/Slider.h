@@ -17,5 +17,6 @@ private:
 	bool isLocalized;
 	bool beingDragged;
 	void Init(sf::Vector2f position, float width, std::string textKey);
+	void UpdatePosition();
 };
 

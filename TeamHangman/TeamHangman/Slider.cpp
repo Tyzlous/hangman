@@ -30,11 +30,7 @@ void Slider::Update()
 		slider->setFillColor(sf::Color::White);
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			if (line->getGlobalBounds().contains(sf::Mouse::getPosition(*window).x, slider->getPosition().y))
-			{
-				slider->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, slider->getPosition().y));
-			}
-
+			UpdatePosition();
 			beingDragged = true;
 		}
 	}
@@ -64,4 +60,28 @@ void Slider::Init(sf::Vector2f position, float width, std::string textKey)
 
 	line->setPosition(position);
 	slider->setPosition(line->getGlobalBounds().left + line->getGlobalBounds().width, line->getGlobalBounds().top + line->getGlobalBounds().height * 0.5f);
+}
+
+void Slider::UpdatePosition()
+{
+	if (line->getGlobalBounds().contains(sf::Mouse::getPosition(*window).x, slider->getPosition().y))
+	{
+		slider->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, slider->getPosition().y));
+		std::cout << "A\n";
+	}
+	if (sf::Mouse::getPosition(*window).x < line->getGlobalBounds().left)
+	{
+		slider->setPosition(sf::Vector2f(line->getGlobalBounds().left, slider->getPosition().y));
+		std::cout << "B\n";
+	}
+	if (sf::Mouse::getPosition(*window).x > line->getGlobalBounds().left + line->getGlobalBounds().width)
+	{
+		slider->setPosition(sf::Vector2f(line->getGlobalBounds().left + line->getGlobalBounds().width, slider->getPosition().y));
+		std::cout << "C\n";
+	}
+	float lineStart = line->getGlobalBounds().left;
+	float sliderPos = slider->getPosition().x - lineStart;
+	float lineEnd = line->getGlobalBounds().width;
+	float value = sliderPos / lineEnd;
+	callback(value);
 }
