@@ -4,6 +4,7 @@
 #include "Gamestate.h"
 #include "HWindow.h"
 #include "CallbackButton.h"
+#include "Slider.h"
 class Options
 {
 public:
@@ -14,6 +15,7 @@ public:
 	void InitializeButtons();
 	void ButtonFunctions(std::string parameter);
 	void UpdateChosenLanguage();
+	void SetVolume(float modifier);
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
@@ -21,5 +23,6 @@ private:
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;
 	CallbackButton* saveButton;
+	Slider* slider;
 };
 

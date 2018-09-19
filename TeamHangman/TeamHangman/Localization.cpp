@@ -13,7 +13,7 @@ dictionary Localization::english = dictionary{
 	{ "KEY_MENU", "Menu" },
 	{ "KEY_CONFIRM", "Confirm" },
 	{ "KEY_SAVE", "Save" },
-	{ "KEY_NAME", "Name" }
+	{ "KEY_NAME", "Name" },
 	{ "KEY_VOLUME", "Volume"}
 };
 

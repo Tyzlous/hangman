@@ -7,6 +7,7 @@ Options::Options()
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
 	InitializeButtons();
+	slider = new Slider(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 170.0f, "hodor", std::bind(&Options::SetVolume, this, std::placeholders::_1), true);
 }
 
 
@@ -24,6 +25,10 @@ Options::~Options()
 	{
 		delete saveButton;
 	}
+	if (slider != nullptr)
+	{
+		delete slider;
+	}
 
 }
 
@@ -32,6 +37,7 @@ void Options::Update()
 	menuButton->update();
 	confirmNameButton->update();
 	saveButton->update();
+	slider->Update();
 }
 
 void Options::Draw()
@@ -39,6 +45,7 @@ void Options::Draw()
 	menuButton->draw();
 	confirmNameButton->draw();
 	saveButton->draw();
+	slider->Draw();
 }
 
 void Options::InitializeButtons()
@@ -101,4 +108,9 @@ void Options::UpdateChosenLanguage()
 			break;
 		}
 	}
+}
+
+void Options::SetVolume(float modifier)
+{
+	std::cout << std::to_string(modifier) + "\n";
 }

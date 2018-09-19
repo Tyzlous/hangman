@@ -15,6 +15,7 @@ private:
 	float value;
 	std::function<void(float value)> callback;
 	bool isLocalized;
+	bool beingDragged;
 	void Init(sf::Vector2f position, float width, std::string textKey);
 };
 
