@@ -7,7 +7,8 @@ Options::Options()
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
 	InitializeButtons();
-	slider = new Slider(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 170.0f, "hodor", std::bind(&Options::SetVolume, this, std::placeholders::_1), true);
+	slider = new Slider(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 170.0f, "KEY_VOLUME", std::bind(&Options::SetVolume, this, std::placeholders::_1), true);
+	slider->SetTexture("resources/gradientcube.png");
 }
 
 

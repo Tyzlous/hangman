@@ -5,18 +5,28 @@
 Slider::Slider(sf::Vector2f position, float width, std::string textKey, std::function<void(float value)> callback, bool isLocalized)
 {
 	window = HWindow::GetWindow();
-	Init(position, width, textKey);
 	this->callback = callback;
 	this->isLocalized = isLocalized;
 	beingDragged = false;
+	Init(position, width, textKey);
 
 }
 
 
 Slider::~Slider()
 {
-	delete line;
-	delete slider;
+	if (line != nullptr)
+	{
+		delete line;
+	}
+	if (slider != nullptr)
+	{
+		delete slider;
+	}
+	if (texture != nullptr)
+	{
+		delete texture;
+	}
 }
 
 void Slider::Update()
@@ -37,13 +47,29 @@ void Slider::Update()
 	}
 	else
 	{
-		slider->setFillColor(sf::Color::Green);
+		slider->setFillColor(sf::Color::Cyan);
 	}
 }
 void Slider::Draw()
 {
 	window->draw(*line);
 	window->draw(*slider);
+	label->Draw();
+}
+
+void Slider::SetTexture(std::string texturePath)
+{
+	texture = new sf::Texture();
+
+	if (!texture->loadFromFile(texturePath))
+	{
+		std::cout << "could not load texture from path " + texturePath + "\n";
+	}
+	else
+	{
+		slider->setTexture(texture, true);
+		line->setTexture(texture, true);
+	}
 }
 
 void Slider::Init(sf::Vector2f position, float width, std::string textKey)
@@ -56,11 +82,15 @@ void Slider::Init(sf::Vector2f position, float width, std::string textKey)
 	rect = slider->getLocalBounds();
 	slider->setOrigin(rect.left + rect.width * 0.5f, rect.top + rect.height * 0.5f);
 
-	line->setFillColor(sf::Color::Green);
-	slider->setFillColor(sf::Color::Green);
+	line->setFillColor(sf::Color(255, 105, 85, 255));
+	slider->setFillColor(sf::Color::Blue);
 
 	line->setPosition(position);
 	slider->setPosition(line->getGlobalBounds().left + line->getGlobalBounds().width, line->getGlobalBounds().top + line->getGlobalBounds().height * 0.5f);
+
+	label = new LocalizedLabel(sf::Vector2f(line->getGlobalBounds().left, line->getPosition().y), textKey, 20.0f, sf::Color::Magenta, isLocalized);
+	label->OriginMiddle();
+	label->SetPosition(sf::Vector2f(line->getGlobalBounds().left - label->GetGlobalBounds().width * 0.65f, label->GetPosition().y));
 }
 
 void Slider::UpdatePosition()
@@ -68,26 +98,22 @@ void Slider::UpdatePosition()
 	if (line->getGlobalBounds().contains(sf::Mouse::getPosition(*window).x, slider->getPosition().y))
 	{
 		slider->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, slider->getPosition().y));
-		std::cout << "A\n";
 	}
 	if (sf::Mouse::getPosition(*window).x < line->getGlobalBounds().left)
 	{
 		slider->setPosition(sf::Vector2f(line->getGlobalBounds().left, slider->getPosition().y));
-		std::cout << "B\n";
 	}
 	if (sf::Mouse::getPosition(*window).x > line->getGlobalBounds().left + line->getGlobalBounds().width)
 	{
 		slider->setPosition(sf::Vector2f(line->getGlobalBounds().left + line->getGlobalBounds().width, slider->getPosition().y));
-		std::cout << "C\n";
 	}
 }
 
 void Slider::Callback()
 {
-	lineStart = line->getGlobalBounds().left;
-	sliderPos = slider->getPosition().x - lineStart;
-	lineEnd = line->getGlobalBounds().width;
-	value = sliderPos / lineEnd;
-
+	lineRectLeft = line->getGlobalBounds().left;
+	sliderPosX = slider->getPosition().x - lineRectLeft;
+	lineWidth = line->getGlobalBounds().width;
+	value = sliderPosX / lineWidth;
 	callback(value);
 }

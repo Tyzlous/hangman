@@ -8,11 +8,14 @@ public:
 	~Slider();
 	void Update();
 	void Draw();
+	void SetTexture(std::string texturePath);
 private:
 	sf::RenderWindow* window;
 	sf::RectangleShape* line;
 	sf::RectangleShape* slider;
-	float lineStart, sliderPos, lineEnd, value;
+	sf::Texture* texture;
+	LocalizedLabel* label;
+	float lineRectLeft, sliderPosX, lineWidth, value;
 	std::function<void(float value)> callback;
 	bool isLocalized;
 	bool beingDragged;
