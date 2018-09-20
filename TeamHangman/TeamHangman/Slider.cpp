@@ -27,6 +27,10 @@ Slider::~Slider()
 	{
 		delete texture;
 	}
+	if (label != nullptr)
+	{
+		delete label;
+	}
 }
 
 void Slider::Update()
