@@ -5,6 +5,7 @@
 #include "HWindow.h"
 #include "CallbackButton.h"
 #include "Slider.h"
+#include "HangmanSoundManager.h"
 class Options
 {
 public:
@@ -12,13 +13,16 @@ public:
 	~Options();
 	void Update();
 	void Draw();
-	void InitializeButtons();
 	void ButtonFunctions(std::string parameter);
 	void UpdateChosenLanguage();
-	void SetVolume(float modifier);
+	void SetSoundManager(HangmanSoundManager* soundmanager);
 private:
+	void SetVolume(float modifier);
+	void InitializeButtons();
+	void InitializeSliders();
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
+	HangmanSoundManager* soundManager;
 	dictionary* pickedLanguage;
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;

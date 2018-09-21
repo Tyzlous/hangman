@@ -29,7 +29,9 @@ HangmanSoundManager::HangmanSoundManager()
 	{
 		victory.setBuffer(victoryBuffer);
 	}
-	SetVolume(0.8f);
+	masterVolume = 1.0f;
+	baseVolume = 1.0f;
+	SetBaseVolume(baseVolume);
 }
 
 
@@ -72,11 +74,23 @@ void HangmanSoundManager::PlayVictory()
 	victory.play();
 }
 
-void HangmanSoundManager::SetVolume(float volume)
+void HangmanSoundManager::SetBaseVolume(float volume)
 {
-	mainMenuMusic.setVolume(volume);
-	gameMusic.setVolume(volume);
-	buttonPositive.setVolume(volume);
-	buttonNegative.setVolume(volume);
-	victory.setVolume(volume + 1.5f);
+	baseVolume = volume;
+	UpdateVolume();
+}
+
+void HangmanSoundManager::SetMasterVolume(float volume)
+{
+	masterVolume = volume;
+	UpdateVolume();
+}
+
+void HangmanSoundManager::UpdateVolume()
+{
+	mainMenuMusic.setVolume(baseVolume * masterVolume);
+	gameMusic.setVolume(baseVolume * masterVolume);
+	buttonPositive.setVolume(baseVolume * masterVolume);
+	buttonNegative.setVolume(baseVolume * masterVolume);
+	victory.setVolume(baseVolume * masterVolume);
 }

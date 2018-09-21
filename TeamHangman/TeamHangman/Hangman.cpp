@@ -15,8 +15,9 @@ Hangman::Hangman()
 	options = new Options();
 	soundManager = new HangmanSoundManager();
 	game = new Game();
-	game->SetSoundManager(soundManager);
 	victory = new Victory();
+	options->SetSoundManager(soundManager);
+	game->SetSoundManager(soundManager);
 }
 
 Hangman::~Hangman()

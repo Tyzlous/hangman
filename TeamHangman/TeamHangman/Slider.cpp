@@ -9,7 +9,6 @@ Slider::Slider(sf::Vector2f position, float width, std::string textKey, std::fun
 	this->isLocalized = isLocalized;
 	beingDragged = false;
 	Init(position, width, textKey);
-
 }
 
 
