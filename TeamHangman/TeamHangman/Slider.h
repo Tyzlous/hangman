@@ -8,7 +8,8 @@ public:
 	~Slider();
 	void Update();
 	void Draw();
-	void SetTexture(std::string texturePath);
+	void SetLineTexture(std::string texturePath);
+	void SetHandleTexture(std::string texturePath);
 private:
 	sf::RenderWindow* window;
 	sf::RectangleShape* line;

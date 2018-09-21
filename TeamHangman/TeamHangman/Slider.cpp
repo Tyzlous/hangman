@@ -61,7 +61,21 @@ void Slider::Draw()
 	label->Draw();
 }
 
-void Slider::SetTexture(std::string texturePath)
+void Slider::SetLineTexture(std::string texturePath)
+{
+	texture = new sf::Texture();
+
+	if (!texture->loadFromFile(texturePath))
+	{
+		std::cout << "could not load texture from path " + texturePath + "\n";
+	}
+	else
+	{
+		line->setTexture(texture, true);
+	}
+}
+
+void Slider::SetHandleTexture(std::string texturePath)
 {
 	texture = new sf::Texture();
 
@@ -72,7 +86,6 @@ void Slider::SetTexture(std::string texturePath)
 	else
 	{
 		slider->setTexture(texture, true);
-		line->setTexture(texture, true);
 	}
 }
 
