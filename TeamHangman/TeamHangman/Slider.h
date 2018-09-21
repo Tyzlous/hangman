@@ -14,7 +14,8 @@ private:
 	sf::RenderWindow* window;
 	sf::RectangleShape* line;
 	sf::RectangleShape* slider;
-	sf::Texture* texture;
+	sf::Texture* lineTexture;
+	sf::Texture* handleTexture;
 	LocalizedLabel* label;
 	float lineRectLeft, sliderPosX, lineWidth, value;
 	std::function<void(float value)> callback;

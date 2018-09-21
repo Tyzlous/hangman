@@ -23,9 +23,13 @@ Slider::~Slider()
 	{
 		delete slider;
 	}
-	if (texture != nullptr)
+	if (lineTexture != nullptr)
 	{
-		delete texture;
+		delete lineTexture;
+	}
+	if (handleTexture != nullptr)
+	{
+		delete handleTexture;
 	}
 	if (label != nullptr)
 	{
@@ -63,29 +67,29 @@ void Slider::Draw()
 
 void Slider::SetLineTexture(std::string texturePath)
 {
-	texture = new sf::Texture();
+	lineTexture = new sf::Texture();
 
-	if (!texture->loadFromFile(texturePath))
+	if (!lineTexture->loadFromFile(texturePath))
 	{
 		std::cout << "could not load texture from path " + texturePath + "\n";
 	}
 	else
 	{
-		line->setTexture(texture, true);
+		line->setTexture(lineTexture, true);
 	}
 }
 
 void Slider::SetHandleTexture(std::string texturePath)
 {
-	texture = new sf::Texture();
+	handleTexture = new sf::Texture();
 
-	if (!texture->loadFromFile(texturePath))
+	if (!handleTexture->loadFromFile(texturePath))
 	{
 		std::cout << "could not load texture from path " + texturePath + "\n";
 	}
 	else
 	{
-		slider->setTexture(texture, true);
+		slider->setTexture(handleTexture, true);
 	}
 }
 
@@ -99,8 +103,8 @@ void Slider::Init(sf::Vector2f position, float width, std::string textKey)
 	rect = slider->getLocalBounds();
 	slider->setOrigin(rect.left + rect.width * 0.5f, rect.top + rect.height * 0.5f);
 
-	line->setFillColor(sf::Color(255, 105, 85, 255));
-	slider->setFillColor(sf::Color::Blue);
+	line->setFillColor(sf::Color::White);
+	slider->setFillColor(sf::Color::White);
 
 	line->setPosition(position);
 	slider->setPosition(line->getGlobalBounds().left + line->getGlobalBounds().width, line->getGlobalBounds().top + line->getGlobalBounds().height * 0.5f);
