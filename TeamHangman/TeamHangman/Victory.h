@@ -20,5 +20,6 @@ private:
 	Gamestate* gamestate;
 	std::vector<CallbackButton*> buttons;
 	LocalizedLabel* winText;
+	bool playMusic;
 };
 

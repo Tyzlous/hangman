@@ -6,6 +6,7 @@ Victory::Victory()
 {
 	InitializeState();
 	InitializeButtons();
+	playMusic = true;
 }
 
 
@@ -20,6 +21,11 @@ Victory::~Victory()
 
 void Victory::Update()
 {
+	if (playMusic)
+	{
+		if (soundManager != nullptr) soundManager->PlayVictory();
+		playMusic = false;
+	}
 	for (int i = 0; i < buttons.size(); i++)	
 	{
 		buttons[i]->update();
@@ -72,6 +78,7 @@ void Victory::ChangeGamestate(std::string parameter)
 	if (menu.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::MainMenu;
+		playMusic = true;
 	}
 	else if (quit.compare(parameter) == 0)
 	{

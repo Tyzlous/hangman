@@ -127,7 +127,6 @@ void Game::LettersVectorInit()
 void Game::Win()
 {
 	typedef Gamestate::State state;
-	if(soundManager != nullptr) soundManager->PlayVictory();
 	gamestate->currentState = state::Victory;
 }
 

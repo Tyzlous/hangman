@@ -71,6 +71,16 @@ void HangmanSoundManager::PlayButtonNegative()
 
 void HangmanSoundManager::PlayVictory()
 {
+	if (isMainMenuMusicPlaying)
+	{
+		mainMenuMusic.stop();
+		isMainMenuMusicPlaying = false;
+	}
+	else if (isGameMusicPlaying)
+	{
+		gameMusic.stop();
+		isGameMusicPlaying = false;
+	}
 	victory.play();
 }
 
