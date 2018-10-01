@@ -54,7 +54,7 @@ void Options::InitializeButtons()
 	sf::Vector2f topMod = sf::Vector2f(0.5f, 0.3f);
 	sf::Vector2f topPosition = sf::Vector2f(window->getSize().x * topMod.x, window->getSize().y * topMod.y);
 
-	menuButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "MENU", "KEY_MENU", topPosition, true);
+	menuButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "MENU", "KEY_MENU", sf::Vector2f(50.0f, 25.0f) , true);
 	menuButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	menuButton->OriginMiddle();
 
