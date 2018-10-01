@@ -6,11 +6,16 @@ Gamestate::Gamestate()
 {
 	currentState = State::MainMenu;
 	currentLanguage = Languages::English;
+	playerData = new GameData("Default Plebian");
 }
 
 
 Gamestate::~Gamestate()
 {
+	if (playerData != nullptr)
+	{
+		delete playerData;
+	}
 }
 
 void Gamestate::PraiseErri(int iterations)

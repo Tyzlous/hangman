@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "GameData.h"
 class Gamestate
 {
 public:
@@ -25,6 +26,7 @@ public:
 	};
 	Languages currentLanguage;
 
+	GameData* playerData;
 private:
 	Gamestate();
 	static Gamestate* Instance;
