@@ -9,6 +9,7 @@ Hangman::Hangman()
 	gamestate = Gamestate::Get();
 	gamestate->currentState = state::MainMenu;
 	gamestate->currentLanguage = languages::Swedish;
+	textInit();
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
 	options = new Options();
@@ -34,6 +35,7 @@ void Hangman::Start()
 	typedef Gamestate::State state;
 	std::string test;
 	std::string code = "ErriAlwaysWins";
+	std::string string = text->getString();
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -108,6 +110,17 @@ void Hangman::Start()
 			window->close();
 		}
 		
+		window->draw(*text);
 		window->display();
 	}
+}
+
+void Hangman::textInit()
+{
+	font = new sf::Font();
+	font->loadFromFile("arial.ttf");
+
+	text = new sf::Text("Derp", *font);
+	text->setCharacterSize(35);
+	text->setFillColor(sf::Color::Red);
 }
