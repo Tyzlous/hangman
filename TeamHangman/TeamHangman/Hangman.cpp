@@ -28,6 +28,8 @@ Hangman::~Hangman()
 	delete soundManager;
 	delete victory;
 	delete options;
+	delete text;
+	delete font;
 }
 
 void Hangman::Start()
@@ -36,6 +38,8 @@ void Hangman::Start()
 	std::string test;
 	std::string code = "ErriAlwaysWins";
 	std::string string = text->getString();
+	text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
+	text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -55,13 +59,16 @@ void Hangman::Start()
 						{
 							string.pop_back();
 							text->setString(string);
-
+							text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
+							text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
 						}
 					}
 					else
 					{
 						string.push_back((char)event.text.unicode);
 						text->setString(string);
+						text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
+						text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
 					}
 				}
 			}
