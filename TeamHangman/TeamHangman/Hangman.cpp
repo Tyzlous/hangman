@@ -49,21 +49,19 @@ void Hangman::Start()
 				{
 					std::cout << "ASCII character number typed: " << event.text.unicode << std::endl;
 
-					if (event.text.unicode == 8 && test.size() != 0)
+					if (event.text.unicode == 8)
 					{
-						test.pop_back();
-						std::cout << test << std::endl;
+						if (string.size() != 0)
+						{
+							string.pop_back();
+							text->setString(string);
+
+						}
 					}
 					else
 					{
-						test.push_back((char)event.text.unicode);
-						std::cout << test << std::endl;
-					}
-
-					if (code.compare(test) == 0)
-					{
-						gamestate->currentState = state::Victory;
-						std::cout << "Thing\n";
+						string.push_back((char)event.text.unicode);
+						text->setString(string);
 					}
 				}
 			}
