@@ -1,0 +1,30 @@
+#pragma once
+#include<iostream>
+#include<SFML/Graphics.hpp>
+#include"HWindow.h"
+#include"LocalizedLabel.h"
+class TextBox
+{
+public:
+	TextBox();
+	TextBox(sf::Vector2f position, unsigned int size, unsigned int maxLetterCount, std::string key);
+	~TextBox();
+	void Update();
+	void Draw();
+	void SetString(std::string newString);
+	void UpdateString(char charToAdd);
+	void SetPosition(sf::Vector2f value);
+	sf::Vector2f GetPosition();
+	bool IsActive();
+private:
+	sf::RenderWindow* window;
+	sf::RectangleShape* box;
+	sf::Text* text;
+	sf::Font* font;
+	bool isActive;
+	unsigned int maxLetterCount;
+	void TextInit(sf::Vector2f position, unsigned int size);
+	void BoxInit(sf::Vector2f position, unsigned int size);
+	void Centralize();
+};
+

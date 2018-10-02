@@ -1,6 +1,6 @@
 #pragma once
+#include<functional>
 #include "LocalizedLabel.h"
-#include "CallbackButton.h"
 class Slider
 {
 public:

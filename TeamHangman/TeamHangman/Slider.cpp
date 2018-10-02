@@ -108,7 +108,7 @@ void Slider::Init(sf::Vector2f position, float width, std::string textKey)
 	line->setPosition(position);
 	slider->setPosition(line->getGlobalBounds().left + line->getGlobalBounds().width, line->getGlobalBounds().top + line->getGlobalBounds().height * 0.5f);
 
-	label = new LocalizedLabel(sf::Vector2f(line->getGlobalBounds().left, line->getPosition().y), textKey, 20.0f, sf::Color::Magenta, isLocalized);
+	label = new LocalizedLabel(sf::Vector2f(line->getGlobalBounds().left, line->getPosition().y), textKey, 20, sf::Color::Magenta, isLocalized);
 	label->OriginMiddle();
 	label->SetPosition(sf::Vector2f(line->getGlobalBounds().left - label->GetGlobalBounds().width * 0.65f, label->GetPosition().y));
 }

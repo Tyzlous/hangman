@@ -6,6 +6,7 @@
 #include "CallbackButton.h"
 #include "Slider.h"
 #include "HangmanSoundManager.h"
+#include "TextBox.h"
 class Options
 {
 public:
@@ -20,6 +21,7 @@ private:
 	void SetVolume(float modifier);
 	void InitializeButtons();
 	void InitializeSliders();
+	void InitializeTextBoxes();
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	HangmanSoundManager* soundManager;
@@ -28,5 +30,6 @@ private:
 	CallbackButton* confirmNameButton;
 	CallbackButton* saveButton;
 	Slider* slider;
+	TextBox* textBox;
 };
 
