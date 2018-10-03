@@ -13,6 +13,7 @@ public:
 	void Draw();
 	void SetString(std::string newString);
 	void UpdateString(char charToAdd);
+	void PopBackString();
 	void SetPosition(sf::Vector2f value);
 	sf::Vector2f GetPosition();
 	bool IsActive();

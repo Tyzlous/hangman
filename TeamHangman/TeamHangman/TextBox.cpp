@@ -33,6 +33,14 @@ TextBox::~TextBox()
 
 void TextBox::Update()
 {
+	if (box->getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
+	{
+		box->setOutlineColor(sf::Color::Green);
+	}
+	else
+	{
+		box->setOutlineColor(sf::Color::Red);
+	}
 }
 
 void TextBox::Draw()
@@ -43,19 +51,41 @@ void TextBox::Draw()
 
 void TextBox::SetString(std::string newString)
 {
+	text->setString(newString);
+	Centralize();
 }
 
 void TextBox::UpdateString(char charToAdd)
 {
+	std::string string = text->getString();
+	if (string.size() < maxLetterCount)
+	{
+	string.push_back(charToAdd);
+	text->setString(string);
+	Centralize();
+	}
+}
+
+void TextBox::PopBackString()
+{
+	std::string string = text->getString();
+	if (string.size() > 0)
+	{
+		string.pop_back();
+		text->setString(string);
+		Centralize();
+	}
 }
 
 void TextBox::SetPosition(sf::Vector2f value)
 {
+	text->setPosition(value);
+	box->setPosition(value);
 }
 
 sf::Vector2f TextBox::GetPosition()
 {
-	return sf::Vector2f();
+	return text->getPosition();
 }
 
 bool TextBox::IsActive()
@@ -89,5 +119,5 @@ void TextBox::BoxInit(sf::Vector2f position, unsigned int size)
 void TextBox::Centralize()
 {
 	text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
-		
+	text->setPosition(box->getPosition());
 }
