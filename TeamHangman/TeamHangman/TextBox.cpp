@@ -35,11 +35,33 @@ void TextBox::Update()
 {
 	if (box->getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
 	{
-		box->setOutlineColor(sf::Color::Green);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			isActive = true;
+		}
+		if (isActive)
+		{
+			box->setOutlineColor(sf::Color::Blue);
+		}
+		else
+		{
+			box->setOutlineColor(sf::Color::Green);
+		}
 	}
 	else
 	{
-		box->setOutlineColor(sf::Color::Red);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			isActive = false;
+		}
+		if (isActive)
+		{
+			box->setOutlineColor(sf::Color::Blue);
+		}
+		else
+		{
+			box->setOutlineColor(sf::Color::Red);
+		}
 	}
 }
 
