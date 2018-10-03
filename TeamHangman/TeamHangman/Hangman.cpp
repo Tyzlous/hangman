@@ -9,7 +9,6 @@ Hangman::Hangman()
 	gamestate = Gamestate::Get();
 	gamestate->currentState = state::MainMenu;
 	gamestate->currentLanguage = languages::Swedish;
-	textInit();
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
 	options = new Options();
@@ -28,18 +27,12 @@ Hangman::~Hangman()
 	delete soundManager;
 	delete victory;
 	delete options;
-	delete text;
-	delete font;
+
 }
 
 void Hangman::Start()
 {
 	typedef Gamestate::State state;
-	std::string test;
-	std::string code = "ErriAlwaysWins";
-	std::string string = text->getString();
-	text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
-	text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -49,27 +42,14 @@ void Hangman::Start()
 				window->close();
 			if (event.type == sf::Event::TextEntered)
 			{
-				if (event.text.unicode < 128)
+				if (options->TextBoxActive())
 				{
-					std::cout << "ASCII character number typed: " << event.text.unicode << std::endl;
+					if (event.text.unicode < 128)
+					{
+						std::cout << "ASCII character number typed: " << event.text.unicode << std::endl;
+						options->TextBoxProcess(event.text.unicode);
+					}
 
-					if (event.text.unicode == 8)
-					{
-						if (string.size() != 0)
-						{
-							string.pop_back();
-							text->setString(string);
-							text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
-							text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
-						}
-					}
-					else
-					{
-						string.push_back((char)event.text.unicode);
-						text->setString(string);
-						text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
-						text->setPosition(window->getSize().x * 0.3f, window->getSize().y * 0.4f);
-					}
 				}
 			}
 
@@ -115,17 +95,6 @@ void Hangman::Start()
 			window->close();
 		}
 		
-		window->draw(*text);
 		window->display();
 	}
-}
-
-void Hangman::textInit()
-{
-	font = new sf::Font();
-	font->loadFromFile("arial.ttf");
-
-	text = new sf::Text("Derp", *font);
-	text->setCharacterSize(35);
-	text->setFillColor(sf::Color::Red);
 }

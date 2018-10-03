@@ -13,6 +13,7 @@ TextBox::TextBox(sf::Vector2f position, unsigned int size, unsigned int maxLette
 	this->maxLetterCount = maxLetterCount;
 	TextInit(position, size);
 	BoxInit(position, size);
+	SetTitle(key, size);
 }
 
 TextBox::~TextBox()
@@ -28,6 +29,10 @@ TextBox::~TextBox()
 	if (box != nullptr)
 	{
 		delete box;
+	}
+	if (title != nullptr)
+	{
+		delete title;
 	}
 }
 
@@ -69,6 +74,7 @@ void TextBox::Draw()
 {
 	window->draw(*box);
 	window->draw(*text);
+	title->Draw();
 }
 
 void TextBox::SetString(std::string newString)
@@ -120,7 +126,7 @@ void TextBox::TextInit(sf::Vector2f position, unsigned int size)
 	font = new sf::Font();
 	font->loadFromFile("arial.ttf");
 
-	text = new sf::Text("HaHaHapa", *font);
+	text = new sf::Text("", *font);
 	text->setCharacterSize(size);
 	text->setFillColor(sf::Color::Red);
 	text->setOrigin(text->getLocalBounds().left + text->getLocalBounds().width * 0.5f, text->getLocalBounds().top + text->getLocalBounds().height * 0.5f);
@@ -136,6 +142,13 @@ void TextBox::BoxInit(sf::Vector2f position, unsigned int size)
 	box->setOrigin(box->getLocalBounds().left + box->getLocalBounds().width * 0.5f, box->getLocalBounds().top + box->getLocalBounds().height * 0.5f);
 	box->setPosition(position);
 
+}
+
+void TextBox::SetTitle(std::string key, unsigned int size)
+{
+	title = new LocalizedLabel(box->getPosition(), key, size, sf::Color::Red, true);
+	title->OriginMiddle();
+	title->SetPosition(sf::Vector2f(box->getGlobalBounds().left - title->GetGlobalBounds().width * 0.6f, box->getPosition().y));
 }
 
 void TextBox::Centralize()

@@ -24,8 +24,5 @@ private:
 	GameData* playerData;
 	HangmanSoundManager* soundManager;
 	Victory* victory;
-	sf::Text* text;
-	sf::Font* font;
-	void textInit();
 };
 

@@ -17,6 +17,8 @@ public:
 	void ButtonFunctions(std::string parameter);
 	void UpdateChosenLanguage();
 	void SetSoundManager(HangmanSoundManager* soundmanager);
+	bool TextBoxActive();
+	void TextBoxProcess(sf::Uint32 value);
 private:
 	void SetVolume(float modifier);
 	void InitializeButtons();

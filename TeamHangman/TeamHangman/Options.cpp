@@ -83,7 +83,8 @@ void Options::InitializeSliders()
 
 void Options::InitializeTextBoxes()
 {
-	textBox = new TextBox(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 25, 15, "test");
+	textBox = new TextBox(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 25, 15, "KEY_NAME");
+	textBox->SetString(gamestate->playerData->GetUsername());
 }
 
 void Options::ButtonFunctions(std::string parameter)
@@ -100,7 +101,7 @@ void Options::ButtonFunctions(std::string parameter)
 	}
 	else if (confirm.compare(parameter) == 0)
 	{
-		gamestate->currentState = state::Options;
+		
 	}
 	else if (save.compare(parameter) == 0)
 	{
@@ -131,6 +132,23 @@ void Options::UpdateChosenLanguage()
 void Options::SetSoundManager(HangmanSoundManager * soundmanager)
 {
 	soundManager = soundmanager;		
+}
+
+bool Options::TextBoxActive()
+{
+	return textBox->IsActive();
+}
+
+void Options::TextBoxProcess(sf::Uint32 value)
+{
+	if (value == 8)
+	{
+		textBox->PopBackString();
+	}
+	else
+	{
+	textBox->UpdateString((char) value);
+	}
 }
 
 void Options::SetVolume(float modifier)

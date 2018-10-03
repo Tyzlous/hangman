@@ -20,6 +20,7 @@ public:
 	unsigned int GetGamesWon();
 	sf::Time GetTimePlayed();
 	void printMe();
+	bool SearchDataFor(std::string playerName);
 private:
 	std::string saveFilePath = "resources/";
 	std::string saveFileName = "playerdata.bin";
@@ -30,7 +31,6 @@ private:
 	unsigned int gamesWon;
 	unsigned int gamesPlayed;
 	sf::Time timePlayed;
-	bool SearchDataFor(std::string playerName);
 	std::string IterateFstreamAndFindUsername(std::fstream* saveFile, std::string nameToSearch);
 };
 

@@ -22,10 +22,12 @@ private:
 	sf::RectangleShape* box;
 	sf::Text* text;
 	sf::Font* font;
+	LocalizedLabel* title;
 	bool isActive;
 	unsigned int maxLetterCount;
 	void TextInit(sf::Vector2f position, unsigned int size);
 	void BoxInit(sf::Vector2f position, unsigned int size);
+	void SetTitle(std::string key, unsigned int size);
 	void Centralize();
 };
 
