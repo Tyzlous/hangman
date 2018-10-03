@@ -58,6 +58,11 @@ void TextBox::Update()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
 			isActive = false;
+			if (GetLabelString().compare(confirmedString) != 0 && confirmedString.size() > 0)
+			{
+				text->setString(confirmedString);
+				Centralize();
+			}
 		}
 		if (isActive)
 		{
@@ -119,6 +124,30 @@ sf::Vector2f TextBox::GetPosition()
 bool TextBox::IsActive()
 {
 	return isActive;
+}
+
+bool TextBox::IsNotEmpty()
+{
+	if (text->getString().getSize() > 0)
+	{
+		return true;
+	}
+	else return false;
+}
+
+std::string TextBox::GetString()
+{
+	return confirmedString;
+}
+
+std::string TextBox::GetLabelString()
+{
+	return (std::string)text->getString();
+}
+
+void TextBox::ConfirmCurrentString()
+{
+	confirmedString = text->getString();
 }
 
 void TextBox::TextInit(sf::Vector2f position, unsigned int size)

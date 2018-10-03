@@ -17,11 +17,16 @@ public:
 	void SetPosition(sf::Vector2f value);
 	sf::Vector2f GetPosition();
 	bool IsActive();
+	bool IsNotEmpty();
+	std::string GetString();
+	std::string GetLabelString();
+	void ConfirmCurrentString();
 private:
 	sf::RenderWindow* window;
 	sf::RectangleShape* box;
 	sf::Text* text;
 	sf::Font* font;
+	std::string confirmedString;
 	LocalizedLabel* title;
 	bool isActive;
 	unsigned int maxLetterCount;

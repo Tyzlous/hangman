@@ -31,6 +31,8 @@ private:
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;
 	CallbackButton* saveButton;
+	CallbackButton* loadButton;
+	CallbackButton* createButton;
 	Slider* slider;
 	TextBox* textBox;
 };

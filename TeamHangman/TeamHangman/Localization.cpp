@@ -14,7 +14,12 @@ dictionary Localization::english = dictionary{
 	{ "KEY_CONFIRM", "Confirm" },
 	{ "KEY_SAVE", "Save" },
 	{ "KEY_NAME", "Name" },
-	{ "KEY_VOLUME", "Volume"}
+	{ "KEY_VOLUME", "Volume"},
+	{ "KEY_LOAD", "Load"},
+	{ "KEY_CREATE", "Create"},
+	{ "KEY_PROFILE", "Profile"},
+	{ "KEY_SEARCH", "Search"},
+	{ "KEY_FOUND", "Found"}
 };
 
 dictionary Localization::swedish = dictionary{
@@ -31,5 +36,10 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_CONFIRM", "Bekräfta" },
 	{ "KEY_SAVE", "Spara" },
 	{ "KEY_NAME", "Namn" },
-	{ "KEY_VOLUME", "Volym"}
+	{ "KEY_VOLUME", "Volym"},
+	{ "KEY_LOAD", "Ladda"},
+	{ "KEY_CREATE", "Skapa"},
+	{ "KEY_PROFILE", "Profil"},
+	{ "KEY_SEARCH", "Sök"},
+	{ "KEY_FOUND", "Hittad"}
 };
