@@ -1,6 +1,7 @@
 #include "Localization.h"
 
 dictionary Localization::english = dictionary{
+	{ "KEY_LANGUAGE", "Language"},
 	{ "KEY_HELLO", "Hello" },
 	{ "KEY_HANGMAN", "Hangman" },
 	{ "KEY_PLAY", "Play" },
@@ -24,6 +25,7 @@ dictionary Localization::english = dictionary{
 };
 
 dictionary Localization::swedish = dictionary{
+	{ "KEY_LANGUAGE", "Språk"},
 	{ "KEY_HELLO", "Hej" },
 	{ "KEY_HANGMAN", "Hänga gubben" },
 	{ "KEY_PLAY", "Starta" },
