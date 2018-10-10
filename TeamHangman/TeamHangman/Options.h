@@ -29,6 +29,7 @@ private:
 	Gamestate* gamestate;
 	HangmanSoundManager* soundManager;
 	dictionary* pickedLanguage;
+	std::vector<const CallbackButton*> callbackButtonAddresses;
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;
 	CallbackButton* saveButton;

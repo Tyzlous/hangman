@@ -9,34 +9,15 @@ Options::Options()
 	InitializeSliders();
 	InitializeTextBoxes();
 	InitializeButtons();
+	InitializeLanguagebuttons();
 }
 
 
 Options::~Options()
 {
-	if (menuButton != nullptr)
+	for (int i = 0; i < callbackButtonAddresses.size(); i++)
 	{
-		delete menuButton;
-	}
-	if (confirmNameButton != nullptr)
-	{ 
-		delete confirmNameButton;
-	}
-	if (saveButton != nullptr)
-	{
-		delete saveButton;
-	}
-	if (loadButton != nullptr)
-	{
-		delete loadButton;
-	}
-	if (createButton != nullptr)
-	{
-		delete createButton;
-	}
-	if (revertButton != nullptr)
-	{
-		delete revertButton;
+		delete callbackButtonAddresses[i];
 	}
 	if (slider != nullptr)
 	{
@@ -81,27 +62,33 @@ void Options::InitializeButtons()
 	menuButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "MENU", "KEY_MENU", sf::Vector2f(50.0f, 25.0f) , true);
 	menuButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	menuButton->OriginMiddle();
+	callbackButtonAddresses.push_back(&*menuButton); //  saving const addresses of every button made to delete them quickly later, add the address of any new button and they will be deleted.
 
 	confirmNameButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "CONFIRM", "KEY_CONFIRM", sf::Vector2f(textBox->GetPosition().x, textBox->GetPosition().y + 35.0f), true);
 	confirmNameButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	confirmNameButton->OriginMiddle();
+	callbackButtonAddresses.push_back(&*confirmNameButton);
 
 	saveButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "SAVE", "KEY_SAVE", sf::Vector2f(textBox->GetPosition().x, textBox->GetPosition().y + 70.0f), true);
 	saveButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	saveButton->OriginMiddle();
+	callbackButtonAddresses.push_back(&*saveButton);
 
 	loadButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "LOAD", "KEY_LOAD", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.4f), true);
 	loadButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	loadButton->OriginMiddle();
+	callbackButtonAddresses.push_back(&*loadButton);
 
 	createButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "CREATE", "KEY_CREATE", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.4f), true);
 	createButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	createButton->OriginMiddle();
+	callbackButtonAddresses.push_back(&*createButton);
 
 	revertButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "REVERT", "KEY_REVERT", sf::Vector2f(textBox->GetPosition().x, textBox->GetPosition().y + 75.0f), true);
 	revertButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	revertButton->OriginMiddle();
-	
+	callbackButtonAddresses.push_back(&*revertButton);
+
 	if (textBox->GetLabelString().size() == 0)
 	{
 	confirmNameButton->disable();
@@ -114,7 +101,17 @@ void Options::InitializeButtons()
 
 void Options::InitializeLanguagebuttons()
 {
-	flagRect1 = new sf::RectangleShape()
+	sf::Vector2f flagRectSize(255.0f, 160.0f);
+	flagRect1 = new sf::RectangleShape(flagRectSize);
+	flagRect2 = new sf::RectangleShape(flagRectSize);
+	sweFlagTexture = new sf::Texture();
+	engFlagTexture = new sf::Texture();
+
+	sweFlagTexture->loadFromFile("resources/sweflag.jpg");
+	engFlagTexture->loadFromFile("resources/engflag.jpg");
+
+	flagRect1->setTexture(sweFlagTexture);
+	flagRect2->setTexture(engFlagTexture);
 }
 
 void Options::InitializeSliders()
