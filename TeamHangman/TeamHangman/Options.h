@@ -22,6 +22,7 @@ public:
 private:
 	void SetVolume(float modifier);
 	void InitializeButtons();
+	void InitializeLanguagebuttons();
 	void InitializeSliders();
 	void InitializeTextBoxes();
 	sf::RenderWindow* window;
@@ -36,5 +37,10 @@ private:
 	CallbackButton* revertButton;
 	Slider* slider;
 	TextBox* textBox;
+	LocalizedLabel* languageLabel;
+	sf::RectangleShape* flagRect1;
+	sf::RectangleShape* flagRect2;
+	sf::Texture* sweFlagTexture;
+	sf::Texture* engFlagTexture;
 };
 
