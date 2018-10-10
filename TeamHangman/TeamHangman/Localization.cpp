@@ -19,7 +19,8 @@ dictionary Localization::english = dictionary{
 	{ "KEY_CREATE", "Create"},
 	{ "KEY_PROFILE", "Profile"},
 	{ "KEY_SEARCH", "Search"},
-	{ "KEY_FOUND", "Found"}
+	{ "KEY_FOUND", "Found"},
+	{ "KEY_FOUND", "Revert"}
 };
 
 dictionary Localization::swedish = dictionary{
@@ -41,5 +42,6 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_CREATE", "Skapa"},
 	{ "KEY_PROFILE", "Profil"},
 	{ "KEY_SEARCH", "Sök"},
-	{ "KEY_FOUND", "Hittad"}
+	{ "KEY_FOUND", "Hittad"},
+	{ "KEY_REVERT", "Ångra"}
 };

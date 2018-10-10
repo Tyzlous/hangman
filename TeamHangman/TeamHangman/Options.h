@@ -33,6 +33,7 @@ private:
 	CallbackButton* saveButton;
 	CallbackButton* loadButton;
 	CallbackButton* createButton;
+	CallbackButton* revertButton;
 	Slider* slider;
 	TextBox* textBox;
 };

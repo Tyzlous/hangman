@@ -34,6 +34,10 @@ Options::~Options()
 	{
 		delete createButton;
 	}
+	if (revertButton != nullptr)
+	{
+		delete revertButton;
+	}
 	if (slider != nullptr)
 	{
 		delete slider;
@@ -51,6 +55,7 @@ void Options::Update()
 	saveButton->update();
 	loadButton->update();
 	createButton->update();
+	revertButton->update();
 	slider->Update();
 	textBox->Update();
 }
@@ -62,6 +67,7 @@ void Options::Draw()
 	saveButton->draw();
 	loadButton->draw();
 	createButton->draw();
+	revertButton->draw();
 	slider->Draw();
 	textBox->Draw();
 }
@@ -91,10 +97,15 @@ void Options::InitializeButtons()
 	createButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "CREATE", "KEY_CREATE", sf::Vector2f(topPosition.x, topPosition.y + window->getSize().y * 0.4f), true);
 	createButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
 	createButton->OriginMiddle();
+
+	revertButton = new CallbackButton(std::bind(&Options::ButtonFunctions, this, _1), "REVERT", "KEY_REVERT", sf::Vector2f(textBox->GetPosition().x, textBox->GetPosition().y + 75.0f), true);
+	revertButton->SetTexture("resources/menuButton.png"); // very important to setTexture before OriginMiddle, because reasons
+	revertButton->OriginMiddle();
 	
 	if (textBox->GetLabelString().size() == 0)
 	{
 	confirmNameButton->disable();
+	revertButton->disable();
 	}
 	loadButton->disable();
 	createButton->disable();
@@ -123,6 +134,7 @@ void Options::ButtonFunctions(std::string parameter)
 	std::string save = "SAVE";
 	std::string load = "LOAD";
 	std::string create = "CREATE";
+	std::string revert = "REVERT";
 
 	if (menu.compare(parameter) == 0)
 	{
@@ -130,8 +142,9 @@ void Options::ButtonFunctions(std::string parameter)
 	}
 	else if (confirm.compare(parameter) == 0)
 	{
+		revertButton->disable();
 		textBox->ConfirmCurrentString();
-		if (gamestate->playerData->SearchDataFor(textBox->GetString()))
+		if (gamestate->playerData->SearchDataFor(textBox->GetConfirmedString()))
 		{
 			loadButton->enable();
 			createButton->disable();
@@ -143,18 +156,38 @@ void Options::ButtonFunctions(std::string parameter)
 		}
 		saveButton->disable();
 	}
+	else if (revert.compare(parameter) == 0)
+	{
+		confirmNameButton->disable();
+		textBox->SetString(textBox->GetConfirmedString());
+		if (textBox->GetConfirmedString().size() != 0)
+		{
+			if (gamestate->playerData->SearchDataFor(textBox->GetConfirmedString()))
+			{
+				loadButton->enable();
+				createButton->disable();
+			}
+			else
+			{
+				createButton->enable();
+				loadButton->disable();
+			}
+		}
+		saveButton->disable();
+		revertButton->disable();
+	}
 	else if (save.compare(parameter) == 0)
 	{
 		gamestate->playerData->SaveData();
 	}
 	else if (load.compare(parameter) == 0)
 	{
-		gamestate->playerData->LoadData(textBox->GetString());
+		gamestate->playerData->LoadData(textBox->GetConfirmedString());
 		saveButton->enable();
 	}
 	else if (create.compare(parameter) == 0)
 	{
-		gamestate->playerData->SetUsername(textBox->GetString());
+		gamestate->playerData->SetUsername(textBox->GetConfirmedString());
 		gamestate->playerData->SaveData();
 		createButton->disable();
 		loadButton->enable();
@@ -194,12 +227,17 @@ bool Options::TextBoxActive()
 
 void Options::TextBoxProcess(sf::Uint32 value)
 {
-	if (value == 8)
+	if (value == 8) // 8 is backspace
 	{
 		textBox->PopBackString();
 		createButton->disable();
 		loadButton->disable();
 		saveButton->disable();
+		if (textBox->GetConfirmedString().compare(textBox->GetLabelString()) == 0)
+		{
+			revertButton->disable();
+		}
+		else revertButton->enable();
 	}
 	else if (value != 32) // 32 is spacebar
 	{
@@ -207,7 +245,13 @@ void Options::TextBoxProcess(sf::Uint32 value)
 		createButton->disable();
 		loadButton->disable();
 		saveButton->disable();
+		if (textBox->GetConfirmedString().compare(textBox->GetLabelString()) == 0)
+		{
+			revertButton->disable();
+		}
+		else revertButton->enable();
 	}
+
 	if (textBox->IsNotEmpty())
 	{
 		confirmNameButton->enable();

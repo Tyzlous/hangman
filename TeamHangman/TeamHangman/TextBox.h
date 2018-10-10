@@ -18,7 +18,7 @@ public:
 	sf::Vector2f GetPosition();
 	bool IsActive();
 	bool IsNotEmpty();
-	std::string GetString();
+	std::string GetConfirmedString();
 	std::string GetLabelString();
 	void ConfirmCurrentString();
 private:

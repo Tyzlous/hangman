@@ -58,11 +58,6 @@ void TextBox::Update()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
 			isActive = false;
-			if (GetLabelString().compare(confirmedString) != 0 && confirmedString.size() > 0)
-			{
-				text->setString(confirmedString);
-				Centralize();
-			}
 		}
 		if (isActive)
 		{
@@ -135,7 +130,7 @@ bool TextBox::IsNotEmpty()
 	else return false;
 }
 
-std::string TextBox::GetString()
+std::string TextBox::GetConfirmedString()
 {
 	return confirmedString;
 }
