@@ -27,6 +27,22 @@ Options::~Options()
 	{
 		delete textBox;
 	}
+	if (sweFlagTexture != nullptr)
+	{
+		delete sweFlagTexture;
+	}
+	if (engFlagTexture != nullptr)
+	{
+		delete engFlagTexture;
+	}
+	if (flagRect1 != nullptr)
+	{
+		delete flagRect1;
+	}
+	if (flagRect2 != nullptr)
+	{
+		delete flagRect2;
+	}
 }
 
 void Options::Update()
