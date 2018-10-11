@@ -43,30 +43,34 @@ Options::~Options()
 	{
 		delete flagRect2;
 	}
+	if (languageLabel != nullptr)
+	{
+		delete languageLabel;
+	}
 }
 
 void Options::Update()
 {
-	menuButton->update();
-	confirmNameButton->update();
-	saveButton->update();
-	loadButton->update();
-	createButton->update();
-	revertButton->update();
+	for (int i = 0; i < callbackButtonAddresses.size(); i++)
+	{
+	 callbackButtonAddresses[i]->draw();
+	}
 	slider->Update();
 	textBox->Update();
+	UpdateLanguageButtons();
 }
 
 void Options::Draw()
 {
-	menuButton->draw();
-	confirmNameButton->draw();
-	saveButton->draw();
-	loadButton->draw();
-	createButton->draw();
-	revertButton->draw();
+	for (int i = 0; i < callbackButtonAddresses.size(); i++)
+	{
+		callbackButtonAddresses[i]->update();
+	}
 	slider->Draw();
 	textBox->Draw();
+	window->draw(*flagRect1);
+	window->draw(*flagRect2);
+	languageLabel->Draw();
 }
 
 void Options::InitializeButtons()
@@ -128,6 +132,11 @@ void Options::InitializeLanguagebuttons()
 
 	flagRect1->setTexture(sweFlagTexture);
 	flagRect2->setTexture(engFlagTexture);
+
+	flagRect1->setPosition(window->getSize().x * 0.0f, window->getSize().y * 0.3f);
+	flagRect2->setPosition(flagRect1->getPosition().x, flagRect1->getPosition().y + 220.f);
+
+	languageLabel = new LocalizedLabel(sf::Vector2f(flagRect1->getPosition().x + 72.0f, flagRect1->getPosition().y - 45), "KEY_LANGUAGE", 30.0f, sf::Color::Red, true);
 }
 
 void Options::InitializeSliders()
@@ -141,6 +150,33 @@ void Options::InitializeTextBoxes()
 {
 	textBox = new TextBox(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 25, 15, "KEY_NAME");
 	textBox->SetString(gamestate->playerData->GetUsername());
+}
+
+void Options::UpdateLanguageButtons()
+{
+	if (flagRect1->getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
+	{
+		flagRect1->setOutlineColor(sf::Color::Green);
+		flagRect1->setOutlineThickness(3.0f);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			gamestate->currentLanguage = gamestate->Swedish;
+			languageLabel->UpdateChosenLanguage();
+		}
+	}
+	else flagRect1->setOutlineThickness(0.0f);
+	
+	if (flagRect2->getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window)))
+	{
+		flagRect2->setOutlineColor(sf::Color::Green);
+		flagRect2->setOutlineThickness(3.0f);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			gamestate->currentLanguage = gamestate->English;
+			languageLabel->UpdateChosenLanguage();
+		}
+	}
+	else flagRect2->setOutlineThickness(0.0f);
 }
 
 void Options::ButtonFunctions(std::string parameter)
@@ -160,6 +196,7 @@ void Options::ButtonFunctions(std::string parameter)
 	}
 	else if (confirm.compare(parameter) == 0)
 	{
+		confirmNameButton->disable();
 		revertButton->disable();
 		textBox->ConfirmCurrentString();
 		if (gamestate->playerData->SearchDataFor(textBox->GetConfirmedString()))

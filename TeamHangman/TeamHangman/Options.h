@@ -25,11 +25,12 @@ private:
 	void InitializeLanguagebuttons();
 	void InitializeSliders();
 	void InitializeTextBoxes();
+	void UpdateLanguageButtons();
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	HangmanSoundManager* soundManager;
 	dictionary* pickedLanguage;
-	std::vector<const CallbackButton*> callbackButtonAddresses;
+	std::vector<CallbackButton*> callbackButtonAddresses;
 	CallbackButton* menuButton;
 	CallbackButton* confirmNameButton;
 	CallbackButton* saveButton;
