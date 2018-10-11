@@ -136,7 +136,10 @@ void Options::InitializeLanguagebuttons()
 	flagRect1->setPosition(window->getSize().x * 0.0f, window->getSize().y * 0.3f);
 	flagRect2->setPosition(flagRect1->getPosition().x, flagRect1->getPosition().y + 220.f);
 
-	languageLabel = new LocalizedLabel(sf::Vector2f(flagRect1->getPosition().x + 72.0f, flagRect1->getPosition().y - 45), "KEY_LANGUAGE", 30.0f, sf::Color::Red, true);
+	languageLabel = new LocalizedLabel(sf::Vector2f(0.0f, 0.0f), "KEY_LANGUAGE", 30.0f, sf::Color::Red, true);
+	languageLabel->OriginMiddle();
+	languageLabel->SetPosition(sf::Vector2f(flagRect1->getPosition().x + flagRect1->getLocalBounds().width * 0.5f, flagRect1->getPosition().y - 45));
+
 }
 
 void Options::InitializeSliders()
@@ -162,6 +165,10 @@ void Options::UpdateLanguageButtons()
 		{
 			gamestate->currentLanguage = gamestate->Swedish;
 			languageLabel->UpdateChosenLanguage();
+			for (int i = 0; i < callbackButtonAddresses.size(); i++)
+			{
+				callbackButtonAddresses[i]->UpdateChosenLanguage();
+			}
 		}
 	}
 	else flagRect1->setOutlineThickness(0.0f);
@@ -174,6 +181,10 @@ void Options::UpdateLanguageButtons()
 		{
 			gamestate->currentLanguage = gamestate->English;
 			languageLabel->UpdateChosenLanguage();
+			for (int i = 0; i < callbackButtonAddresses.size(); i++)
+			{
+				callbackButtonAddresses[i]->UpdateChosenLanguage();
+			}
 		}
 	}
 	else flagRect2->setOutlineThickness(0.0f);

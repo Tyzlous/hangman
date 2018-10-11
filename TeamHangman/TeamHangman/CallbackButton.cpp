@@ -102,6 +102,13 @@ void CallbackButton::enable()
 void CallbackButton::UpdateChosenLanguage()
 {
 	label->UpdateChosenLanguage();
+	if (texture != nullptr)
+	{
+	backgroundImage->setSize(sf::Vector2f(label->GetGlobalBounds().width * 1.1f, label->GetGlobalBounds().height * 1.2f));
+	backgroundImage->setOrigin(label->GetOrigin());
+	backgroundImage->setPosition(label->GetPosition());
+	OriginMiddle();
+	}
 }
 void CallbackButton::OriginMiddle()
 {

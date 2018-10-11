@@ -21,7 +21,7 @@ dictionary Localization::english = dictionary{
 	{ "KEY_PROFILE", "Profile"},
 	{ "KEY_SEARCH", "Search"},
 	{ "KEY_FOUND", "Found"},
-	{ "KEY_FOUND", "Revert"}
+	{ "KEY_REVERT", "Revert"}
 };
 
 dictionary Localization::swedish = dictionary{
