@@ -139,7 +139,7 @@ void Options::InitializeLanguagebuttons()
 	languageLabel = new LocalizedLabel(sf::Vector2f(0.0f, 0.0f), "KEY_LANGUAGE", 30.0f, sf::Color::Red, true);
 	languageLabel->OriginMiddle();
 	languageLabel->SetPosition(sf::Vector2f(flagRect1->getPosition().x + flagRect1->getLocalBounds().width * 0.5f, flagRect1->getPosition().y - 45));
-
+	
 }
 
 void Options::InitializeSliders()
@@ -161,15 +161,12 @@ void Options::UpdateLanguageButtons()
 	{
 		flagRect1->setOutlineColor(sf::Color::Green);
 		flagRect1->setOutlineThickness(3.0f);
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && gamestate->currentLanguage != gamestate->Swedish)
 		{
-			gamestate->currentLanguage = gamestate->Swedish;
-			languageLabel->UpdateChosenLanguage();
-			for (int i = 0; i < callbackButtonAddresses.size(); i++)
-			{
-				callbackButtonAddresses[i]->UpdateChosenLanguage();
-			}
+		gamestate->currentLanguage = gamestate->Swedish;
+		callback();
 		}
+
 	}
 	else flagRect1->setOutlineThickness(0.0f);
 	
@@ -177,19 +174,15 @@ void Options::UpdateLanguageButtons()
 	{
 		flagRect2->setOutlineColor(sf::Color::Green);
 		flagRect2->setOutlineThickness(3.0f);
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && gamestate->currentLanguage != gamestate->English)
 		{
 			gamestate->currentLanguage = gamestate->English;
-			languageLabel->UpdateChosenLanguage();
-			for (int i = 0; i < callbackButtonAddresses.size(); i++)
-			{
-				callbackButtonAddresses[i]->UpdateChosenLanguage();
-			}
+			callback();
 		}
 	}
 	else flagRect2->setOutlineThickness(0.0f);
-}
 
+}
 void Options::ButtonFunctions(std::string parameter)
 {
 	typedef Gamestate::State state;
@@ -279,6 +272,11 @@ void Options::UpdateChosenLanguage()
 			break;
 		}
 	}
+	languageLabel->UpdateChosenLanguage();
+	for (int i = 0; i < callbackButtonAddresses.size(); i++)
+	{
+		callbackButtonAddresses[i]->UpdateChosenLanguage();
+	}
 }
 
 void Options::SetSoundManager(HangmanSoundManager * soundmanager)
@@ -326,6 +324,11 @@ void Options::TextBoxProcess(sf::Uint32 value)
 	{
 		confirmNameButton->disable();
 	}
+}
+
+void Options::BindCallback(std::function<void()> cbFunction)
+{
+	callback = cbFunction;
 }
 
 void Options::SetVolume(float modifier)

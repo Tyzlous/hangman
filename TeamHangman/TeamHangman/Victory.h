@@ -11,6 +11,7 @@ public:
 	void Update();
 	void Draw();
 	void SetSoundManager(HangmanSoundManager* soundManager);
+	void UpdateLanguage();
 private:
 	void InitializeState();
 	void InitializeButtons();

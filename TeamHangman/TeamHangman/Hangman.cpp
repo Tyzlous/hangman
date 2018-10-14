@@ -18,6 +18,7 @@ Hangman::Hangman()
 	options->SetSoundManager(soundManager);
 	game->SetSoundManager(soundManager);
 	victory->SetSoundManager(soundManager);
+	options->BindCallback(std::bind(&Hangman::UpdateLanguage, this));
 }
 
 Hangman::~Hangman()
@@ -97,4 +98,12 @@ void Hangman::Start()
 		
 		window->display();
 	}
+}
+
+void Hangman::UpdateLanguage()
+{
+	victory->UpdateLanguage();
+	game->UpdateChosenLanguage();
+	mainMenu->UpdateLanguage();
+	options->UpdateChosenLanguage();
 }

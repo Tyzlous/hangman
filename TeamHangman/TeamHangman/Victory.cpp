@@ -46,6 +46,15 @@ void Victory::SetSoundManager(HangmanSoundManager * soundManager)
 	this->soundManager = soundManager;
 }
 
+void Victory::UpdateLanguage()
+{
+	for (int i = 0; i < buttons.size(); i++)
+	{
+		buttons[i]->UpdateChosenLanguage();
+	}
+	winText->UpdateChosenLanguage();
+}
+
 void Victory::InitializeState()
 {
 	window = HWindow::GetWindow();

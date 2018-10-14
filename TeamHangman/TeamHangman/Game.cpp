@@ -32,6 +32,11 @@ void Game::InitializeState()
 
 void Game::KeyboardInit()
 {
+	for (int i = 0; i < gameButtons.size(); i++)
+	{
+		delete gameButtons[i];
+	}
+	gameButtons.clear();
 	using namespace std::placeholders;
 	std::string alphabet = GetLocalizedString("KEY_ALPHABET");
 	std::string letter;
@@ -59,6 +64,7 @@ void Game::KeyboardInit()
 
 void Game::WordVectorInit()
 {
+	words.clear();
 	std::string baseFilePath = "resources/words";
 	std::string language = GetLocalizedString("KEY_ABBREVIATION");
 	std::string fileType = ".txt";
@@ -174,10 +180,13 @@ void Game::UpdateChosenLanguage()
 			break;
 		}
 	}
+	ResetGame();
 }
 
 void Game::ResetGame()
 {
+	KeyboardInit();
+	WordVectorInit();
 	LettersVectorInit();
 	for (int i = 0; i < gameButtons.size(); i++)
 	{

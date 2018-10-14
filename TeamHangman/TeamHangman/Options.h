@@ -19,6 +19,7 @@ public:
 	void SetSoundManager(HangmanSoundManager* soundmanager);
 	bool TextBoxActive();
 	void TextBoxProcess(sf::Uint32 value);
+	void BindCallback(std::function<void()> cbFunction);
 private:
 	void SetVolume(float modifier);
 	void InitializeButtons();
@@ -39,6 +40,7 @@ private:
 	CallbackButton* revertButton;
 	Slider* slider;
 	TextBox* textBox;
+	std::function<void()> callback;
 	LocalizedLabel* languageLabel;
 	sf::RectangleShape* flagRect1;
 	sf::RectangleShape* flagRect2;
