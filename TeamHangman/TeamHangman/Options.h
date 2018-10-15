@@ -7,6 +7,7 @@
 #include "Slider.h"
 #include "HangmanSoundManager.h"
 #include "TextBox.h"
+#include "TextDisplay.h"
 class Options
 {
 public:
@@ -40,6 +41,7 @@ private:
 	CallbackButton* revertButton;
 	Slider* slider;
 	TextBox* textBox;
+	TextDisplay* statDisplay;
 	std::function<void()> callback;
 	LocalizedLabel* languageLabel;
 	sf::RectangleShape* flagRect1;

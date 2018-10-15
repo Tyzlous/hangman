@@ -47,6 +47,7 @@ Options::~Options()
 	{
 		delete languageLabel;
 	}
+	delete statDisplay;
 }
 
 void Options::Update()
@@ -71,6 +72,7 @@ void Options::Draw()
 	window->draw(*flagRect1);
 	window->draw(*flagRect2);
 	languageLabel->Draw();
+	statDisplay->Draw();
 }
 
 void Options::InitializeButtons()
@@ -153,6 +155,8 @@ void Options::InitializeTextBoxes()
 {
 	textBox = new TextBox(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.8f), 25, 15, "KEY_NAME");
 	textBox->SetString(gamestate->playerData->GetUsername());
+
+	statDisplay = new TextDisplay(sf::Vector2f(window->getSize().x * 0.7f, window->getSize().y * 0.3f), sf::Vector2f(250.0f, 250.0f), "TEST");
 }
 
 void Options::UpdateLanguageButtons()
