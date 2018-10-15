@@ -17,6 +17,7 @@ public:
 	std::string GetUsername();
 	unsigned int GetTotalGuesses();
 	unsigned int GetTotalCorrectGuesses();
+	unsigned int GetGamesPlayed();
 	unsigned int GetGamesWon();
 	sf::Time GetTimePlayed();
 	void printMe();

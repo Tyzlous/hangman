@@ -74,6 +74,11 @@ unsigned int GameData::GetTotalCorrectGuesses()
 	return totalCorrectGuesses;
 }
 
+unsigned int GameData::GetGamesPlayed()
+{
+	return gamesPlayed;
+}
+
 unsigned int GameData::GetGamesWon()
 {
 	return gamesWon;

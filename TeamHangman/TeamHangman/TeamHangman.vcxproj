@@ -139,6 +139,7 @@
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="Victory.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="TextBox.h" />
+    <ClInclude Include="TextDisplay.h" />
     <ClInclude Include="Victory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
