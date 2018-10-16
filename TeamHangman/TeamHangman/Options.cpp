@@ -157,7 +157,7 @@ void Options::InitializeTextBoxes()
 	textBox->SetString(gamestate->playerData->GetUsername());
 
 	statDisplay = new TextDisplay(sf::Vector2f(window->getSize().x * 0.7f, window->getSize().y * 0.3f), sf::Vector2f(350.0f, 350.0f), "TEST");
-	statDisplay->SetText("Elias is the best of all Eliases Elias is the best of all Eliases Elias is the best of all Eliases");
+	statDisplay->SetText("Elias is the best of all Eliases Elias is the best of all Eliases Elias is the best of all Eliases hodor hodoooooooooooooooooooooooooooooooooooooooooooooooooooooor DEEEEEERRPPPPPPPPPYDEEEEEEERRRRRPPPP");
 }
 
 void Options::UpdateLanguageButtons()

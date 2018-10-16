@@ -104,30 +104,64 @@ void TextDisplay::ProcessTextToLines()
 			tempStr.clear();
 		}
 	}
-	std::string currentLine;
 	for (int i = 0; i < wordVector.size(); i++)
 	{
 		if (tempTxt.getLocalBounds().width <= lineRect.width)
 		{
-			currentLine += wordVector[i];
 			tempStr += wordVector[i];
-			tempTxt.setString(currentLine);
+			tempTxt.setString(tempStr);
 		}
-		std::cout << tempTxt.getLocalBounds().width << "\t" << lineRect.width << "\t" << tempStr << "\n";
 		if (tempTxt.getLocalBounds().width > lineRect.width)
 		{
-			std::cout << "LINE BREAKING, " << wordVector[i] << "\n";
 			tempStr = tempStr.substr(0, tempStr.size() - wordVector[i].size()); //remove substring from tempStr
-			tempStr += "\n" + wordVector[i]; 
-			finalString += tempStr;
-			tempStr.clear();
-			currentLine.clear();
-			currentLine += wordVector[i];
-			tempTxt.setString("");
+			if (tempStr.size() > 0)
+			{
+				tempStr += "\n"; 
+				finalString += tempStr;				
+			}
+			tempStr = wordVector[i];
+			tempTxt.setString(tempStr);
+			if (tempTxt.getLocalBounds().width > lineRect.width)
+			{
+				std::string test = tempStr;
+				while (tempTxt.getLocalBounds().width > lineRect.width)
+				{
+					test = tempStr;
+					while (tempTxt.getLocalBounds().width > lineRect.width)
+					{
+						test.pop_back();
+						tempTxt.setString(test);
+					}
+					tempStr = tempStr.substr(test.size(), tempStr.size());
+					finalString += test + "\n";
+					tempTxt.setString(tempStr);
+
+				}
+			}
 		}
 		if (i == wordVector.size() - 1)
 		{
-			finalString += tempStr;
+			tempTxt.setString(tempStr);
+			if (tempTxt.getLocalBounds().width <= lineRect.width)
+			{
+				finalString += tempStr;
+			}
+			else
+			{
+				std::string test = tempStr;
+				while (tempTxt.getLocalBounds().width > lineRect.width)
+				{
+					test = tempStr;
+					while (tempTxt.getLocalBounds().width > lineRect.width)
+					{
+						test.pop_back();
+						tempTxt.setString(test);
+					}
+					tempStr = tempStr.substr(test.size(), tempStr.size());
+					finalString += test + "\n";
+					tempTxt.setString(tempStr);
+				}
+			}
 		}
 	}
 	contentLabel->SetString(finalString);
