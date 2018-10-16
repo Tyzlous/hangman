@@ -146,3 +146,18 @@ sf::Vector2f Label::GetOrigin()
 	return text->getOrigin();
 }
 
+float Label::GetLetterSpacing()
+{
+	return text->getLetterSpacing();
+}
+
+float Label::GetLineSpacing()
+{
+	return text->getLineSpacing();
+}
+
+void Label::SetString(std::string newString)
+{
+	text->setString(newString);
+}
+
