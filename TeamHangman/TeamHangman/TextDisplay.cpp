@@ -44,7 +44,8 @@ void TextDisplay::AddText(std::string stringToAdd)
 
 void TextDisplay::NewLineOfText(std::string text)
 {
-	
+	contentText += "\n" + text;
+	ProcessTextToLines();
 }
 
 void TextDisplay::InitializeDisplay(sf::Vector2f position, sf::Vector2f size, std::string title)
