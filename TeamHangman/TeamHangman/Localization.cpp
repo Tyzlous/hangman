@@ -27,8 +27,12 @@ dictionary Localization::english = dictionary{
 	{ "KEY_GUESSES", "Guesses"},
 	{ "KEY_CORRECT", "Correct"},
 	{ "KEY_TIME", "Time"},
-	{ "KEY_PLAYED", "Played"}
-
+	{ "KEY_PLAYED", "Played"},
+	{ "KEY_SECONDS", "Seconds"},
+	{ "KEY_MADE", "Made"},
+	{ "KEY_TO", "To"},
+	{ "KEY_CONTINUE", "Continue"},
+	{ "KEY_OR", "Or"}
 };
 
 dictionary Localization::swedish = dictionary{
@@ -58,5 +62,11 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_GUESSES", "Gissningar"},
 	{ "KEY_CORRECT", "Korrekta"},
 	{ "KEY_TIME", "Tid"},
-	{ "KEY_PLAYED", "Spelat"}
+	{ "KEY_PLAYED", "Spelat"},
+	{ "KEY_SECONDS", "Sekunder"},
+	{ "KEY_MADE", "Gjorda"},
+	{ "KEY_TO", "För att"},
+	{ "KEY_CONTINUE", "Fortsätta"},
+	{ "KEY_OR", "Eller"}
+
 };

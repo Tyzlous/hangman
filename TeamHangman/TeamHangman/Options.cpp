@@ -158,7 +158,7 @@ void Options::InitializeTextBoxes()
 	textBox->SetString(gamestate->playerData->GetUsername());
 
 	statDisplay = new TextDisplay(sf::Vector2f(window->getSize().x * 0.7f, window->getSize().y * 0.3f), sf::Vector2f(350.0f, 350.0f), gamestate->playerData->GetUsername());
-	statDisplay->AddText(Gamestate::Get()->GetLocalizedString("KEY_WINS"));
+	UpdateStatDisplay();
 }
 
 void Options::UpdateLanguageButtons()
@@ -249,6 +249,9 @@ void Options::ButtonFunctions(std::string parameter)
 	{
 		gamestate->playerData->LoadData(textBox->GetConfirmedString());
 		saveButton->enable();
+		menuButton->enable();
+		isDefaultProfile = false;
+		UpdateStatDisplay();
 	}
 	else if (create.compare(parameter) == 0)
 	{
@@ -257,6 +260,9 @@ void Options::ButtonFunctions(std::string parameter)
 		createButton->disable();
 		loadButton->enable();
 		saveButton->enable();
+		menuButton->enable();
+		isDefaultProfile = false;
+		UpdateStatDisplay();
 	}
 }
 void Options::UpdateChosenLanguage()
@@ -335,6 +341,36 @@ void Options::TextBoxProcess(sf::Uint32 value)
 void Options::BindCallback(std::function<void()> cbFunction)
 {
 	callback = cbFunction;
+}
+
+void Options::UpdateStatDisplay()
+{
+	std::string tempStr;
+	float winPercentage = 0.0f;
+	if (gamestate->playerData->GetGamesPlayed() > 0)
+	{
+		float a, b;
+		a = gamestate->playerData->GetGamesWon();
+		b = gamestate->playerData->GetGamesPlayed();
+		winPercentage =  a / b;
+		winPercentage *= 100;
+	}
+	statDisplay->SetTitle(gamestate->GetLocalizedString("KEY_PROFILE") + ": " + gamestate->playerData->GetUsername());
+	tempStr = gamestate->GetLocalizedString("KEY_TIME") + " " + gamestate->GetLocalizedString("KEY_PLAYED") + ": " + std::to_string((unsigned int)gamestate->playerData->GetTimePlayed().asSeconds()) + " " + gamestate->GetLocalizedString("KEY_SECONDS");
+	statDisplay->SetText(tempStr);
+	tempStr = gamestate->GetLocalizedString("KEY_MATCHES") + " " + gamestate->GetLocalizedString("KEY_PLAYED") + ": " + std::to_string(gamestate->playerData->GetGamesPlayed());
+	statDisplay->NewLineOfText(tempStr);
+	tempStr = gamestate->GetLocalizedString("KEY_WINS") + ": " + std::to_string(gamestate->playerData->GetGamesWon()) + " | " + std::to_string((unsigned int)winPercentage) + "%";
+	statDisplay->NewLineOfText(tempStr);
+	tempStr = gamestate->GetLocalizedString("KEY_GUESSES") + " " + gamestate->GetLocalizedString("KEY_MADE") + ": " + std::to_string(gamestate->playerData->GetTotalGuesses());
+	statDisplay->NewLineOfText(tempStr);
+	tempStr = gamestate->GetLocalizedString("KEY_CORRECT") + " " + gamestate->GetLocalizedString("KEY_GUESSES") + ": " + std::to_string(gamestate->playerData->GetTotalCorrectGuesses());
+	statDisplay->NewLineOfText(tempStr);
+	if (isDefaultProfile)
+	{
+		tempStr = tempStr = gamestate->GetLocalizedString("KEY_HELLO") + ", " + gamestate->GetLocalizedString("KEY_LOAD") + " " + gamestate->GetLocalizedString("KEY_OR") + " " + gamestate->GetLocalizedString("KEY_CREATE") + " " + gamestate->GetLocalizedString("KEY_PROFILE") + " " + gamestate->GetLocalizedString("KEY_TO") + " " + gamestate->GetLocalizedString("KEY_CONTINUE");
+		statDisplay->NewLineOfText(tempStr);
+	}
 }
 
 void Options::SetVolume(float modifier)

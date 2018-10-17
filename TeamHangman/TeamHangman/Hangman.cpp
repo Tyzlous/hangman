@@ -8,7 +8,7 @@ Hangman::Hangman()
 	typedef Gamestate::Languages languages;
 	gamestate = Gamestate::Get();
 	gamestate->currentState = state::Options;
-	gamestate->currentLanguage = languages::Swedish;
+	gamestate->currentLanguage = languages::English;
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
 	options = new Options();
@@ -70,6 +70,10 @@ void Hangman::Start()
 		}
 		if (gamestate->currentState == state::Options)
 		{
+			if (!soundManager->isMainMenuMusicPlaying)
+			{
+				soundManager->StartMainMenuMusic();
+			}
 			options->Update();
 			options->Draw();
 		}

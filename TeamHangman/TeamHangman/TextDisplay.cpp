@@ -178,5 +178,6 @@ void TextDisplay::SetSize(sf::Vector2f newSize)
 void TextDisplay::SetTitle(std::string newString)
 {
 	titleText->SetString(newString);
+	titleText->SetOrigin(sf::Vector2f(0.5f, 0.0f));
 	ProcessTextToLines();
 }

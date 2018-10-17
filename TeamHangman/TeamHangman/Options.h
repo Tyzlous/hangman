@@ -21,6 +21,7 @@ public:
 	bool TextBoxActive();
 	void TextBoxProcess(sf::Uint32 value);
 	void BindCallback(std::function<void()> cbFunction);
+	void UpdateStatDisplay();
 private:
 	void SetVolume(float modifier);
 	void InitializeButtons();
@@ -48,5 +49,6 @@ private:
 	sf::RectangleShape* flagRect2;
 	sf::Texture* sweFlagTexture;
 	sf::Texture* engFlagTexture;
+	bool isDefaultProfile = true;
 };
 
