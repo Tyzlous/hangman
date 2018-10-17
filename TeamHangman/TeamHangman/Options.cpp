@@ -289,6 +289,7 @@ void Options::UpdateChosenLanguage()
 	{
 		callbackButtonAddresses[i]->UpdateChosenLanguage();
 	}
+	UpdateStatDisplay();
 }
 
 void Options::SetSoundManager(HangmanSoundManager * soundmanager)
