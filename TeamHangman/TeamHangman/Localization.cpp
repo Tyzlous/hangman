@@ -21,7 +21,14 @@ dictionary Localization::english = dictionary{
 	{ "KEY_PROFILE", "Profile"},
 	{ "KEY_SEARCH", "Search"},
 	{ "KEY_FOUND", "Found"},
-	{ "KEY_REVERT", "Revert"}
+	{ "KEY_REVERT", "Revert"},
+	{ "KEY_MATCHES", "Matches"},
+	{ "KEY_WINS", "Wins"},
+	{ "KEY_GUESSES", "Guesses"},
+	{ "KEY_CORRECT", "Correct"},
+	{ "KEY_TIME", "Time"},
+	{ "KEY_PLAYED", "Played"}
+
 };
 
 dictionary Localization::swedish = dictionary{
@@ -45,5 +52,11 @@ dictionary Localization::swedish = dictionary{
 	{ "KEY_PROFILE", "Profil"},
 	{ "KEY_SEARCH", "Sök"},
 	{ "KEY_FOUND", "Hittad"},
-	{ "KEY_REVERT", "Ångra"}
+	{ "KEY_REVERT", "Ångra"},
+	{ "KEY_MATCHES", "Matcher"},
+	{ "KEY_WINS", "Vinster"},
+	{ "KEY_GUESSES", "Gissningar"},
+	{ "KEY_CORRECT", "Korrekta"},
+	{ "KEY_TIME", "Tid"},
+	{ "KEY_PLAYED", "Spelat"}
 };

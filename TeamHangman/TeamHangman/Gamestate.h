@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "GameData.h"
+#include <unordered_map>
+#include "Localization.h"
 class Gamestate
 {
 public:
@@ -8,7 +10,7 @@ public:
 	static Gamestate* Get();
 	static void Clean();
 
-	void PraiseErri(int iterations);
+	std::string GetLocalizedString(std::string KEY);
 	enum State
 	{
 		Game,

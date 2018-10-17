@@ -11,6 +11,7 @@ public:
 	void AddText(std::string stringToAdd);
 	void NewLineOfText(std::string text);
 	void SetSize(sf::Vector2f newSize);
+	void SetTitle(std::string newString);
 private:
 	void InitializeDisplay(sf::Vector2f position, sf::Vector2f size, std::string title);
 	void ProcessTextToLines();

@@ -18,12 +18,27 @@ Gamestate::~Gamestate()
 	}
 }
 
-void Gamestate::PraiseErri(int iterations)
+std::string Gamestate::GetLocalizedString(std::string KEY)
 {
-	for (int i = 0; i < iterations; i++)
+	std::string localizedString = "NAN";
+	std::unordered_map<std::string, std::string>::const_iterator value;
+	switch (currentLanguage)
 	{
-		std::cout << "Erri is the greatest!\n";
+	case English:
+		value = Localization::english.find(KEY);
+		localizedString = value->second;
+		break;
+	case Swedish:
+		value = Localization::swedish.find(KEY);
+		localizedString = value->second;
+		break;
+	default:
+		value = Localization::english.find(KEY);
+		localizedString = value->second;
+		std::cout << "Could not find desired language, defaulting to english.\n";
+		break;
 	}
+	return localizedString;
 }
 
 Gamestate * Gamestate::Get()

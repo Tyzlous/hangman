@@ -11,7 +11,7 @@ TextDisplay::TextDisplay(sf::Vector2f position, sf::Vector2f size, std::string t
 TextDisplay::TextDisplay()
 {
 	window = HWindow::GetWindow();
-	InitializeDisplay(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(100.0f, 100.0f), "TEST");
+	InitializeDisplay(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(100.0f, 100.0f), "DEFAULT");
 }
 
 
@@ -171,5 +171,12 @@ void TextDisplay::ProcessTextToLines()
 
 void TextDisplay::SetSize(sf::Vector2f newSize)
 {
+	display->setSize(newSize);
+	ProcessTextToLines();
+}
 
+void TextDisplay::SetTitle(std::string newString)
+{
+	titleText->SetString(newString);
+	ProcessTextToLines();
 }

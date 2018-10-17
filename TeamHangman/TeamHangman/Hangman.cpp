@@ -7,7 +7,7 @@ Hangman::Hangman()
 	typedef Gamestate::State state;
 	typedef Gamestate::Languages languages;
 	gamestate = Gamestate::Get();
-	gamestate->currentState = state::MainMenu;
+	gamestate->currentState = state::Options;
 	gamestate->currentLanguage = languages::Swedish;
 	window = HWindow::GetWindow();
 	mainMenu = new MainMenu();
