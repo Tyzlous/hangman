@@ -136,7 +136,6 @@ void TextDisplay::ProcessTextToLines()
 					tempStr = tempStr.substr(test.size(), tempStr.size());
 					finalString += test + "\n";
 					tempTxt.setString(tempStr);
-
 				}
 			}
 		}
