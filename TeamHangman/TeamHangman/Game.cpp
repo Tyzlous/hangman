@@ -229,18 +229,18 @@ void Game::print(std::string string)
 
 void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 {
-	bool correctGuess = false;
+	bool guessIsCorrect = false;
 	buttonPressed->disable();
 	print(letter);
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
 		if (gameLetters[i]->CompareToMyLetter(letter))
 		{
-			correctGuess = true;
+			guessIsCorrect = true;
 			correctLetters++;
 		}
 	}
-		if (correctGuess)
+		if (guessIsCorrect)
 		{
 			if (soundManager != nullptr && correctLetters == gameLetters.size()) Win();
 			else if (soundManager != nullptr) soundManager->PlayButtonPositive();
@@ -250,6 +250,7 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 			if (soundManager != nullptr) soundManager->PlayButtonNegative();
 
 		}
+		gamestate->playerData->AddGuess(guessIsCorrect);
 }
 
 void Game::SetSoundManager(HangmanSoundManager * soundManager)

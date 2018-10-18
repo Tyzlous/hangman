@@ -67,6 +67,10 @@ void Hangman::Start()
 			}
 			mainMenu->update();
 			mainMenu->draw();
+			if (gamestate->currentState == state::Options)
+			{
+				options->UpdateStatDisplay();
+			}
 		}
 		if (gamestate->currentState == state::Options)
 		{

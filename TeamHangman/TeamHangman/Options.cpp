@@ -76,6 +76,10 @@ Options::~Options()
 		delete languageLabel;
 	}
 	delete statDisplay;
+	delete backgroundTexture;
+	delete titleTexture;
+	delete backgroundImage;
+	delete titleImage;
 }
 
 void Options::Update()
