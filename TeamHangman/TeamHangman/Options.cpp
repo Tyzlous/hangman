@@ -82,7 +82,7 @@ void Options::Update()
 {
 	for (int i = 0; i < callbackButtonAddresses.size(); i++)
 	{
-	 callbackButtonAddresses[i]->draw();
+	 callbackButtonAddresses[i]->update();
 	}
 	slider->Update();
 	textBox->Update();
@@ -91,18 +91,18 @@ void Options::Update()
 
 void Options::Draw()
 {
-	window->draw(*backgroundImage);
 	window->draw(*titleImage);
-	for (int i = 0; i < callbackButtonAddresses.size(); i++)
-	{
-		callbackButtonAddresses[i]->update();
-	}
+	window->draw(*backgroundImage);
 	slider->Draw();
 	textBox->Draw();
 	window->draw(*flagRect1);
 	window->draw(*flagRect2);
 	languageLabel->Draw();
 	statDisplay->Draw();
+	for (int i = 0; i < callbackButtonAddresses.size(); i++)
+	{
+		callbackButtonAddresses[i]->draw();
+	}
 }
 
 void Options::InitializeButtons()
