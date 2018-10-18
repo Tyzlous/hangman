@@ -14,6 +14,7 @@ TextBox::TextBox(sf::Vector2f position, unsigned int size, unsigned int maxLette
 	TextInit(position, size);
 	BoxInit(position, size);
 	SetTitle(key, size);
+	titleKey = key;
 }
 
 TextBox::~TextBox()
@@ -143,6 +144,12 @@ std::string TextBox::GetLabelString()
 void TextBox::ConfirmCurrentString()
 {
 	confirmedString = text->getString();
+}
+
+void TextBox::UpdateLocalizedTitle()
+{
+	title->SetString(Gamestate::Get()->GetLocalizedString(titleKey));
+	title->OriginMiddle();
 }
 
 void TextBox::TextInit(sf::Vector2f position, unsigned int size)

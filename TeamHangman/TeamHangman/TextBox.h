@@ -21,6 +21,7 @@ public:
 	std::string GetConfirmedString();
 	std::string GetLabelString();
 	void ConfirmCurrentString();
+	void UpdateLocalizedTitle();
 private:
 	sf::RenderWindow* window;
 	sf::RectangleShape* box;
@@ -28,6 +29,7 @@ private:
 	sf::Font* font;
 	std::string confirmedString;
 	LocalizedLabel* title;
+	std::string titleKey;
 	bool isActive;
 	unsigned int maxLetterCount;
 	void TextInit(sf::Vector2f position, unsigned int size);
