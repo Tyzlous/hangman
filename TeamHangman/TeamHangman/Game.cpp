@@ -5,6 +5,7 @@
 Game::Game()
 {
 	InitializeState();
+	InitializeTextures();
 	KeyboardInit();
 	WordVectorInit();
 	LettersVectorInit();
@@ -21,6 +22,14 @@ Game::~Game()
 	{	
 		delete gameLetters[i];
 	}
+	for (int i = 0; i < hangmanTextures.size(); i++)
+	{
+		delete hangmanTextures[i];
+	}
+	delete backgroundTexture;
+	delete titleTexture;
+	delete backgroundImage;
+	delete titleImage;
 }
 
 void Game::InitializeState()
@@ -136,6 +145,47 @@ void Game::EndGame()
 	gamestate->currentState = state::EndGame;
 }
 
+void Game::InitializeTextures()
+{
+	backgroundTexture = new sf::Texture();
+	if (!backgroundTexture->loadFromFile(BACKGROUND_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu background image png\n";
+	}
+	else
+	{
+		backgroundTexture->setSmooth(true);
+		backgroundImage = new sf::RectangleShape();
+		backgroundImage->setTexture(backgroundTexture, true);
+		backgroundImage->setSize(sf::Vector2f(window->getSize()));
+	}
+
+	titleTexture = new sf::Texture();
+	if (!titleTexture->loadFromFile(TITLE_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu title image png\n";
+	}
+	else
+	{
+		titleTexture->setSmooth(true);
+		titleImage = new sf::RectangleShape();
+		titleImage->setTexture(titleTexture, true);
+		titleImage->setSize(sf::Vector2f(350, 100));
+
+		float centeredXPosition = (window->getSize().x / 2) - (titleImage->getSize().x / 2);
+		titleImage->setPosition(centeredXPosition, 10);
+	}
+	sf::Texture* hangmanTexture;
+	for (int i = 0; i < 8; i++)
+	{
+		hangmanTexture = new sf::Texture();
+		hangmanTexture->loadFromFile(PICTURE_PATH + std::to_string(1 + i) + ".png");
+		hangmanTextures.push_back(hangmanTexture);
+	}
+	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.5f));
+	hangManRect->setTexture(hangmanTextures[0]);
+}
+
 void Game::Update()
 {
 	typedef Gamestate::State state;
@@ -151,6 +201,8 @@ void Game::Update()
 
 void Game::Draw()
 {
+	window->draw(*backgroundImage);
+	window->draw(*titleImage);
 	for (int i = 0; i < gameButtons.size(); i++)
 	{
 		gameButtons[i]->draw();

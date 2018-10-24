@@ -95,8 +95,8 @@ void Options::Update()
 
 void Options::Draw()
 {
-	window->draw(*titleImage);
 	window->draw(*backgroundImage);
+	window->draw(*titleImage);
 	slider->Draw();
 	textBox->Draw();
 	window->draw(*flagRect1);

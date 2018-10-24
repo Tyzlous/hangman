@@ -22,12 +22,21 @@ public:
 	bool GameWasWon();
 
 private:
+	const std::string PICTURE_PATH = "resources/pictures/hangman";
+	const std::string BACKGROUND_IMAGE_PATH = "resources/mainMenuBackground.png";
+	const std::string TITLE_IMAGE_PATH = "resources/title.png";
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	dictionary* pickedLanguage;
 	std::vector<CallbackButton*> gameButtons;
 	std::vector<std::string> words;
 	std::vector<GameLetter*> gameLetters;
+	std::vector<sf::Texture*> hangmanTextures;
+	sf::RectangleShape* hangManRect;
+	sf::Texture* backgroundTexture;
+	sf::RectangleShape* backgroundImage;
+	sf::Texture* titleTexture;
+	sf::RectangleShape* titleImage;
 	HangmanSoundManager* soundManager;
 	int correctLetters = 0;
 	unsigned int wrongGuesses = 0;
@@ -37,5 +46,6 @@ private:
 	void WordVectorInit();
 	void LettersVectorInit();
 	void EndGame();
+	void InitializeTextures();
 };
 
