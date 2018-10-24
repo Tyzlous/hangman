@@ -22,6 +22,7 @@ public:
 	sf::Time GetTimePlayed();
 	void printMe();
 	bool SearchDataFor(std::string playerName);
+	void ClearOldData();
 private:
 	std::string saveFilePath = "resources/";
 	std::string saveFileName = "playerdata.bin";

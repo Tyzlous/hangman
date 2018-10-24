@@ -218,6 +218,16 @@ bool GameData::SearchDataFor(std::string playerName)
 	return usernameIsFound;
 }
 
+void GameData::ClearOldData()
+{
+	username = "";
+	totalGuesses = 0;
+	totalCorrectGuesses = 0;
+	gamesPlayed = 0;
+	gamesWon = 0;
+	timePlayed = sf::seconds(0.0f);
+}
+
 std::string GameData::IterateFstreamAndFindUsername(std::fstream * saveFile, std::string nameToSearch)
 {
 	using namespace std;

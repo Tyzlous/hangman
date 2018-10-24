@@ -289,6 +289,7 @@ void Options::ButtonFunctions(std::string parameter)
 	}
 	else if (create.compare(parameter) == 0)
 	{
+		gamestate->playerData->ClearOldData();
 		gamestate->playerData->SetUsername(textBox->GetConfirmedString());
 		gamestate->playerData->SaveData();
 		createButton->disable();
