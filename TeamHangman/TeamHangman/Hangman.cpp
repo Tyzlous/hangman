@@ -34,6 +34,7 @@ Hangman::~Hangman()
 void Hangman::Start()
 {
 	typedef Gamestate::State state;
+	sf::Clock gameClock;
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -86,6 +87,7 @@ void Hangman::Start()
 			if (!soundManager->isGameMusicPlaying)
 			{
 				soundManager->StartGameMusic();
+				gameClock.restart();
 			}
 			game->Update();
 			game->Draw();
@@ -98,6 +100,7 @@ void Hangman::Start()
 				}
 				game->ResetGame();
 			}
+			gamestate->playerData->UpdateTimePlayed(gameClock.restart());
 		}
 		if (gamestate->currentState == state::EndGame)
 		{
