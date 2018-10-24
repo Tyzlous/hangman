@@ -16,7 +16,7 @@ public:
 		Game,
 		MainMenu,
 		Options,
-		Victory,
+		EndGame,
 		Quit
 	};
 	State currentState;

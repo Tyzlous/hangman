@@ -4,7 +4,9 @@
 
 Victory::Victory()
 {
-	InitializeState();
+	window = HWindow::GetWindow();
+	gamestate = Gamestate::Get();
+	InitializeText();
 	InitializeButtons();
 	playMusic = true;
 }
@@ -12,7 +14,7 @@ Victory::Victory()
 
 Victory::~Victory()
 {
-	delete winText;
+	delete EndText;
 	for (int i = 0; i < buttons.size(); i++)
 	{
 		delete buttons[i];
@@ -38,7 +40,7 @@ void Victory::Draw()
 	{
 		buttons[i]->draw();
 	}
-	winText->Draw();
+	EndText->Draw();
 }
 
 void Victory::SetSoundManager(HangmanSoundManager * soundManager)
@@ -52,15 +54,30 @@ void Victory::UpdateLanguage()
 	{
 		buttons[i]->UpdateChosenLanguage();
 	}
-	winText->UpdateChosenLanguage();
+	EndText->UpdateChosenLanguage();
 }
 
-void Victory::InitializeState()
+void Victory::InitializeText()
 {
-	window = HWindow::GetWindow();
-	gamestate = Gamestate::Get();
-	winText = new LocalizedLabel(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.15f), "KEY_YOU_WIN", 60, sf::Color::Green, true);
-	winText->OriginMiddle();
+	EndText = new LocalizedLabel(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.15f), "KEY_YOU_WIN", 60, sf::Color::Green, true);
+	EndText->OriginMiddle();
+}
+
+void Victory::UpdateText(bool GameWasWon)
+{
+	std::string Key;
+	if (GameWasWon)
+	{
+		Key = "KEY_YOU_WIN";
+		EndText->SetColor(sf::Color::Green);
+	}
+	else
+	{
+		Key = "KEY_YOU_LOSE";
+		EndText->SetColor(sf::Color::Red);
+	}
+	EndText->SetString(gamestate->GetLocalizedString(Key));
+	EndText->OriginMiddle();
 }
 
 void Victory::InitializeButtons()

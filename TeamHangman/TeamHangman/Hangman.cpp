@@ -14,10 +14,10 @@ Hangman::Hangman()
 	options = new Options();
 	soundManager = new HangmanSoundManager();
 	game = new Game();
-	victory = new Victory();
+	EndState = new Victory();
 	options->SetSoundManager(soundManager);
 	game->SetSoundManager(soundManager);
-	victory->SetSoundManager(soundManager);
+	EndState->SetSoundManager(soundManager);
 	options->BindCallback(std::bind(&Hangman::UpdateLanguage, this));
 }
 
@@ -26,7 +26,7 @@ Hangman::~Hangman()
 	delete mainMenu;
 	delete game;
 	delete soundManager;
-	delete victory;
+	delete EndState;
 	delete options;
 
 }
@@ -91,13 +91,18 @@ void Hangman::Start()
 			game->Draw();
 			if (gamestate->currentState != state::Game)
 			{
+				if (gamestate->currentState == state::EndGame)
+				{
+					EndState->UpdateText(game->GameWasWon());
+					gamestate->playerData->GameEnded(game->GameWasWon());
+				}
 				game->ResetGame();
 			}
 		}
-		if (gamestate->currentState == state::Victory)
+		if (gamestate->currentState == state::EndGame)
 		{
-			victory->Update();
-			victory->Draw();
+			EndState->Update();
+			EndState->Draw();
 		}
 		if (gamestate->currentState == state::Quit)
 		{
@@ -110,7 +115,7 @@ void Hangman::Start()
 
 void Hangman::UpdateLanguage()
 {
-	victory->UpdateLanguage();
+	EndState->UpdateLanguage();
 	game->UpdateChosenLanguage();
 	mainMenu->UpdateLanguage();
 	options->UpdateChosenLanguage();

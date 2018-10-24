@@ -23,7 +23,7 @@ private:
 	Options* options;
 	GameData* playerData;
 	HangmanSoundManager* soundManager;
-	Victory* victory;
+	Victory* EndState;
 	void UpdateLanguage();
 };
 

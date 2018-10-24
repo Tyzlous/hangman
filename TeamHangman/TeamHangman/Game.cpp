@@ -130,10 +130,10 @@ void Game::LettersVectorInit()
 	}
 }
 
-void Game::Win()
+void Game::EndGame()
 {
 	typedef Gamestate::State state;
-	gamestate->currentState = state::Victory;
+	gamestate->currentState = state::EndGame;
 }
 
 void Game::Update()
@@ -193,6 +193,7 @@ void Game::ResetGame()
 		gameButtons[i]->enable();
 	}
 	correctLetters = 0;
+	wrongGuesses = 0;
 }
 
 std::string Game::GetLocalizedString(std::string key)
@@ -242,13 +243,14 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 	}
 		if (guessIsCorrect)
 		{
-			if (soundManager != nullptr && correctLetters == gameLetters.size()) Win();
+			if (correctLetters == gameLetters.size()) EndGame();
 			else if (soundManager != nullptr) soundManager->PlayButtonPositive();
 		}
 		else
 		{
+			wrongGuesses++;
+			if (wrongGuesses == 8) EndGame();
 			if (soundManager != nullptr) soundManager->PlayButtonNegative();
-
 		}
 		gamestate->playerData->AddGuess(guessIsCorrect);
 }
@@ -256,4 +258,16 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 void Game::SetSoundManager(HangmanSoundManager * soundManager)
 {
 	this->soundManager = soundManager;
+}
+
+bool Game::GameWasWon()
+{
+	if (wrongGuesses == 8)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

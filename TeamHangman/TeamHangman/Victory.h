@@ -12,15 +12,16 @@ public:
 	void Draw();
 	void SetSoundManager(HangmanSoundManager* soundManager);
 	void UpdateLanguage();
+	void UpdateText(bool GameWasWon);
 private:
-	void InitializeState();
+	void InitializeText();
 	void InitializeButtons();
 	void ChangeGamestate(std::string parameter);
 	HangmanSoundManager* soundManager;
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	std::vector<CallbackButton*> buttons;
-	LocalizedLabel* winText;
+	LocalizedLabel* EndText;
 	bool playMusic;
 };
 

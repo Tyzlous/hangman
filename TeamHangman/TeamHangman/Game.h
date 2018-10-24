@@ -19,6 +19,7 @@ public:
 	std::string GetRandomLine();
 	void print(std::string string);
 	void SetSoundManager(HangmanSoundManager* soundManager);
+	bool GameWasWon();
 
 private:
 	sf::RenderWindow* window;
@@ -29,11 +30,12 @@ private:
 	std::vector<GameLetter*> gameLetters;
 	HangmanSoundManager* soundManager;
 	int correctLetters = 0;
+	unsigned int wrongGuesses = 0;
 	void OnLetterPressed(std::string letter, CallbackButton* buttonPressed);
 	void InitializeState();
 	void KeyboardInit();
 	void WordVectorInit();
 	void LettersVectorInit();
-	void Win();
+	void EndGame();
 };
 
