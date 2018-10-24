@@ -6,7 +6,7 @@ Gamestate::Gamestate()
 {
 	currentState = State::MainMenu;
 	currentLanguage = Languages::English;
-	playerData = new GameData("Plebian");
+	playerData = new GameData();
 }
 
 

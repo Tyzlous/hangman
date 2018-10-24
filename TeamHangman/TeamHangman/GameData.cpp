@@ -4,7 +4,7 @@
 
 GameData::GameData()
 {
-	username = "Name";
+	username = "";
 	totalGuesses = 0;
 	totalCorrectGuesses = 0;
 	gamesPlayed = 0;
