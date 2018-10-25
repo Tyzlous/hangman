@@ -26,9 +26,10 @@ Game::~Game()
 	{
 		delete hangmanTextures[i];
 	}
+	delete hangManRect;
 	delete backgroundTexture;
-	delete titleTexture;
 	delete backgroundImage;
+	delete titleTexture;
 	delete titleImage;
 }
 
@@ -182,8 +183,9 @@ void Game::InitializeTextures()
 		hangmanTexture->loadFromFile(PICTURE_PATH + std::to_string(1 + i) + ".png");
 		hangmanTextures.push_back(hangmanTexture);
 	}
-	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.5f));
+	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.4f, window->getSize().y * 0.4f));
 	hangManRect->setTexture(hangmanTextures[0]);
+	hangManRect->setPosition(window->getSize().x - hangManRect->getLocalBounds().width, 0.0f);
 }
 
 void Game::Update()
@@ -211,6 +213,7 @@ void Game::Draw()
 	{
 		gameLetters[i]->Draw();
 	}
+	window->draw(*hangManRect);
 }
 
 void Game::UpdateChosenLanguage()
@@ -303,6 +306,10 @@ void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 			wrongGuesses++;
 			if (wrongGuesses == 8) EndGame();
 			if (soundManager != nullptr) soundManager->PlayButtonNegative();
+			if (wrongGuesses < 8)
+			{
+				hangManRect->setTexture(hangmanTextures[wrongGuesses]);	
+			}
 		}
 		gamestate->playerData->AddGuess(guessIsCorrect);
 }
