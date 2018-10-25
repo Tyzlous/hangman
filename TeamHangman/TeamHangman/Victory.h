@@ -23,5 +23,12 @@ private:
 	std::vector<CallbackButton*> buttons;
 	LocalizedLabel* EndText;
 	bool playMusic;
+	void InitializeBackground();
+	sf::Texture* backgroundTexture;
+	sf::RectangleShape* backgroundImage;
+	sf::Texture* titleTexture;
+	sf::RectangleShape* titleImage;
+	const std::string BACKGROUND_IMAGE_PATH = "resources/mainMenuBackground.png";
+	const std::string TITLE_IMAGE_PATH = "resources/title.png";
 };
 

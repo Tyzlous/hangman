@@ -6,6 +6,7 @@ Victory::Victory()
 {
 	window = HWindow::GetWindow();
 	gamestate = Gamestate::Get();
+	InitializeBackground();
 	InitializeText();
 	InitializeButtons();
 	playMusic = true;
@@ -19,10 +20,16 @@ Victory::~Victory()
 	{
 		delete buttons[i];
 	}	
+	delete backgroundTexture;
+	delete titleTexture;
+	delete backgroundImage;
+	delete titleImage;
 }
 
 void Victory::Update()
 {
+	window->draw(*backgroundImage);
+	window->draw(*titleImage);
 	if (playMusic)
 	{
 		if (soundManager != nullptr) soundManager->PlayVictory();
@@ -59,7 +66,7 @@ void Victory::UpdateLanguage()
 
 void Victory::InitializeText()
 {
-	EndText = new LocalizedLabel(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.15f), "KEY_YOU_WIN", 60, sf::Color::Green, true);
+	EndText = new LocalizedLabel(sf::Vector2f(window->getSize().x * 0.5f, window->getSize().y * 0.20f), "KEY_YOU_WIN", 60, sf::Color::Green, true);
 	EndText->OriginMiddle();
 }
 
@@ -109,5 +116,37 @@ void Victory::ChangeGamestate(std::string parameter)
 	else if (quit.compare(parameter) == 0)
 	{
 		gamestate->currentState = state::Quit;
+	}
+}
+
+void Victory::InitializeBackground()
+{
+	backgroundTexture = new sf::Texture();
+	if (!backgroundTexture->loadFromFile(BACKGROUND_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu background image png\n";
+	}
+	else
+	{
+		backgroundTexture->setSmooth(true);
+		backgroundImage = new sf::RectangleShape();
+		backgroundImage->setTexture(backgroundTexture, true);
+		backgroundImage->setSize(sf::Vector2f(window->getSize()));
+	}
+
+	titleTexture = new sf::Texture();
+	if (!titleTexture->loadFromFile(TITLE_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu title image png\n";
+	}
+	else
+	{
+		titleTexture->setSmooth(true);
+		titleImage = new sf::RectangleShape();
+		titleImage->setTexture(titleTexture, true);
+		titleImage->setSize(sf::Vector2f(350, 100));
+
+		float centeredXPosition = (window->getSize().x / 2) - (titleImage->getSize().x / 2);
+		titleImage->setPosition(centeredXPosition, 10);
 	}
 }
