@@ -10,6 +10,7 @@ Game::Game()
 	WordVectorInit();
 	LettersVectorInit();
 	soundManager = nullptr;
+	startupComplete = true;
 }
 
 Game::~Game()
@@ -183,7 +184,7 @@ void Game::InitializeTextures()
 		hangmanTexture->loadFromFile(PICTURE_PATH + std::to_string(1 + i) + ".png");
 		hangmanTextures.push_back(hangmanTexture);
 	}
-	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.4f, window->getSize().y * 0.4f));
+	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.38f, window->getSize().y * 0.45f));
 	hangManRect->setTexture(hangmanTextures[0]);
 	hangManRect->setPosition(window->getSize().x - hangManRect->getLocalBounds().width, 0.0f);
 }
@@ -235,7 +236,10 @@ void Game::UpdateChosenLanguage()
 			break;
 		}
 	}
-	ResetGame();
+	if (startupComplete)
+	{
+		ResetGame();
+	}
 }
 
 void Game::ResetGame()
@@ -249,6 +253,7 @@ void Game::ResetGame()
 	}
 	correctLetters = 0;
 	wrongGuesses = 0;
+	hangManRect->setTexture(hangmanTextures[wrongGuesses]);
 }
 
 std::string Game::GetLocalizedString(std::string key)

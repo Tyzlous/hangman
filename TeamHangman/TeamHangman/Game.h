@@ -47,5 +47,6 @@ private:
 	void LettersVectorInit();
 	void EndGame();
 	void InitializeTextures();
+	bool startupComplete = false;
 };
 
