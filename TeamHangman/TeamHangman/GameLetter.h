@@ -10,12 +10,11 @@ public:
 	void Draw();
 	bool CompareToMyLetter(std::string letter);
 	void OriginMiddle();
-	bool beenFound();
 private:
 	sf::RenderWindow* window;
 	Label* label;
 	sf::RectangleShape* bottomLine;
-	bool isFoundBefore = false;
 	std::string myLetter;
+	bool isFoundBefore = false;
 };
 

@@ -2,7 +2,7 @@
 
 
 
-CallbackButton::CallbackButton(std::function<void(std::string)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized)
+CallbackButton::CallbackButton(std::function<void(std::string, CallbackButton*)> callback, std::string callbackString, std::string buttonText, sf::Vector2f position, bool isLocalized)
 {
 	window = HWindow::GetWindow();
 	callbackParameter = callbackString;
@@ -74,20 +74,41 @@ void CallbackButton::update()
 
 void CallbackButton::draw()
 {
-	if (backgroundImage != nullptr)
+	if (enabled)
 	{
-		window->draw(*backgroundImage);
+		if (backgroundImage != nullptr)
+		{
+			window->draw(*backgroundImage);
+		}
+		label->Draw();
 	}
-	label->Draw();
 }
 
 void CallbackButton::activate()
 {
-	callback(callbackParameter);
+	if (enabled)
+	{
+		callback(callbackParameter, this);
+	}
+}
+void CallbackButton::disable()
+{
+	enabled = false;
+}
+void CallbackButton::enable()
+{
+	enabled = true;
 }
 void CallbackButton::UpdateChosenLanguage()
 {
 	label->UpdateChosenLanguage();
+	if (texture != nullptr)
+	{
+	backgroundImage->setSize(sf::Vector2f(label->GetGlobalBounds().width * 1.1f, label->GetGlobalBounds().height * 1.2f));
+	backgroundImage->setOrigin(label->GetOrigin());
+	backgroundImage->setPosition(label->GetPosition());
+	OriginMiddle();
+	}
 }
 void CallbackButton::OriginMiddle()
 {

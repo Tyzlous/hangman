@@ -13,7 +13,9 @@ public:
 private:
 	dictionary* pickedLanguage = nullptr;
 	Gamestate* gamestate = nullptr;
+	std::string key;
 
+	bool isLocalized = false;
 	bool isInitialized = false;
 	std::string GetLocalizedString(std::string key);
 	void Initialize();

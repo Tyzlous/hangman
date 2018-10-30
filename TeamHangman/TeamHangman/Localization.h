@@ -9,6 +9,5 @@ public:
 
 	static dictionary english;
 	static dictionary swedish;
-
 };
 

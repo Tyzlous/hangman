@@ -5,6 +5,7 @@ HWindow* HWindow::Instance = nullptr;
 HWindow::HWindow()
 {
 	window = new sf::RenderWindow(sf::VideoMode(1280, 720), "HangMan", sf::Style::Titlebar | sf::Style::Close);
+	window->setVerticalSyncEnabled(true);
 }
 
 

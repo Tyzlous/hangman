@@ -10,13 +10,14 @@ LocalizedLabel::LocalizedLabel(sf::Vector2f position, std::string key, int textS
 	Initialize();
 	if (isLocalized)
 	{
+		this->isLocalized = true;
+		this->key = key;
 		this->text->setString(GetLocalizedString(key));
 	}
 }
 
 LocalizedLabel::~LocalizedLabel()
 {
-
 }
 
 std::string LocalizedLabel::GetLocalizedString(std::string key)
@@ -54,6 +55,11 @@ void LocalizedLabel::UpdateChosenLanguage()
 			std::cout << "Could not find desired language, defaulting to english.\n";
 			break;
 		}
+	}
+	if (isLocalized)
+	{
+		text->setString(GetLocalizedString(key));
+		OriginMiddle();
 	}
 }
 

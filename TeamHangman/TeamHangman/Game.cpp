@@ -5,10 +5,12 @@
 Game::Game()
 {
 	InitializeState();
+	InitializeTextures();
 	KeyboardInit();
 	WordVectorInit();
 	LettersVectorInit();
 	soundManager = nullptr;
+	startupComplete = true;
 }
 
 Game::~Game()
@@ -21,6 +23,15 @@ Game::~Game()
 	{	
 		delete gameLetters[i];
 	}
+	for (int i = 0; i < hangmanTextures.size(); i++)
+	{
+		delete hangmanTextures[i];
+	}
+	delete hangManRect;
+	delete backgroundTexture;
+	delete backgroundImage;
+	delete titleTexture;
+	delete titleImage;
 }
 
 void Game::InitializeState()
@@ -32,6 +43,11 @@ void Game::InitializeState()
 
 void Game::KeyboardInit()
 {
+	for (int i = 0; i < gameButtons.size(); i++)
+	{
+		delete gameButtons[i];
+	}
+	gameButtons.clear();
 	using namespace std::placeholders;
 	std::string alphabet = GetLocalizedString("KEY_ALPHABET");
 	std::string letter;
@@ -52,13 +68,14 @@ void Game::KeyboardInit()
 				rowStartX = 0.1f;
 			}
 		}
-		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
+		gameButtons.push_back(new CallbackButton(std::bind(&Game::OnLetterPressed, this, _1, _2), letter, letter, sf::Vector2f(window->getSize().x * rowStartX, window->getSize().y * rowStartY), false));
 		rowStartX += letterDist;
 	}
 }
 
 void Game::WordVectorInit()
 {
+	words.clear();
 	std::string baseFilePath = "resources/words";
 	std::string language = GetLocalizedString("KEY_ABBREVIATION");
 	std::string fileType = ".txt";
@@ -83,6 +100,11 @@ void Game::WordVectorInit()
 
 void Game::LettersVectorInit()
 {
+	for (int i = 0; i < gameLetters.size(); i++)
+	{
+		delete gameLetters[i];
+	}
+	gameLetters.clear();
 	std::string word = GetRandomLine();
 	std::cout << word << std::endl;
 	std::string letter;
@@ -93,30 +115,78 @@ void Game::LettersVectorInit()
 	{
 		firstLetterPos = 0.3f;
 		lastLetterPos = 0.7f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
 	}
-	else if (word.size() >= 30)
-	{
-		firstLetterPos = 0.05f;
-		lastLetterPos = 0.95f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
-	}
-	else
+	else if (word.size() <= 30)
 	{
 		firstLetterPos = 0.1f;
 		lastLetterPos = 0.9f - firstLetterPos;
-		letterSpacing = window->getSize().x * lastLetterPos / word.size();
 	}
-	for (int i = 0; i < word.size(); i++)	
+	else
 	{
-		letter = word.at(i);
-		gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * firstLetterPos + (letterSpacing * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+		firstLetterPos = 0.05f;
+		lastLetterPos = 0.95f - firstLetterPos;
 	}
-	
+	letterSpacing = window->getSize().x * lastLetterPos / word.size();
+	if (gameLetters.empty()) 
+	{
+		for (int i = 0; i < word.size(); i++)
+		{
+			letter = word.at(i);
+			gameLetters.push_back(new GameLetter(sf::Vector2f(window->getSize().x * firstLetterPos + (letterSpacing * i), window->getSize().y * 0.5f), letter, 40, sf::Color::Magenta));
+		}
+	}
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
 		gameLetters[i]->OriginMiddle();
 	}
+}
+
+void Game::EndGame()
+{
+	typedef Gamestate::State state;
+	gamestate->currentState = state::EndGame;
+}
+
+void Game::InitializeTextures()
+{
+	backgroundTexture = new sf::Texture();
+	if (!backgroundTexture->loadFromFile(BACKGROUND_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu background image png\n";
+	}
+	else
+	{
+		backgroundTexture->setSmooth(true);
+		backgroundImage = new sf::RectangleShape();
+		backgroundImage->setTexture(backgroundTexture, true);
+		backgroundImage->setSize(sf::Vector2f(window->getSize()));
+	}
+
+	titleTexture = new sf::Texture();
+	if (!titleTexture->loadFromFile(TITLE_IMAGE_PATH))
+	{
+		std::cout << "cannot find MainMenu title image png\n";
+	}
+	else
+	{
+		titleTexture->setSmooth(true);
+		titleImage = new sf::RectangleShape();
+		titleImage->setTexture(titleTexture, true);
+		titleImage->setSize(sf::Vector2f(350, 100));
+
+		float centeredXPosition = (window->getSize().x / 2) - (titleImage->getSize().x / 2);
+		titleImage->setPosition(centeredXPosition, 10);
+	}
+	sf::Texture* hangmanTexture;
+	for (int i = 0; i < 8; i++)
+	{
+		hangmanTexture = new sf::Texture();
+		hangmanTexture->loadFromFile(PICTURE_PATH + std::to_string(1 + i) + ".png");
+		hangmanTextures.push_back(hangmanTexture);
+	}
+	hangManRect = new sf::RectangleShape(sf::Vector2f(window->getSize().x * 0.38f, window->getSize().y * 0.45f));
+	hangManRect->setTexture(hangmanTextures[0]);
+	hangManRect->setPosition(window->getSize().x - hangManRect->getLocalBounds().width, 0.0f);
 }
 
 void Game::Update()
@@ -134,6 +204,8 @@ void Game::Update()
 
 void Game::Draw()
 {
+	window->draw(*backgroundImage);
+	window->draw(*titleImage);
 	for (int i = 0; i < gameButtons.size(); i++)
 	{
 		gameButtons[i]->draw();
@@ -142,6 +214,7 @@ void Game::Draw()
 	{
 		gameLetters[i]->Draw();
 	}
+	window->draw(*hangManRect);
 }
 
 void Game::UpdateChosenLanguage()
@@ -163,6 +236,24 @@ void Game::UpdateChosenLanguage()
 			break;
 		}
 	}
+	if (startupComplete)
+	{
+		ResetGame();
+	}
+}
+
+void Game::ResetGame()
+{
+	KeyboardInit();
+	WordVectorInit();
+	LettersVectorInit();
+	for (int i = 0; i < gameButtons.size(); i++)
+	{
+		gameButtons[i]->enable();
+	}
+	correctLetters = 0;
+	wrongGuesses = 0;
+	hangManRect->setTexture(hangmanTextures[wrongGuesses]);
 }
 
 std::string Game::GetLocalizedString(std::string key)
@@ -197,26 +288,50 @@ void Game::print(std::string string)
 	std::cout << string << std::endl;
 }
 
-void Game::OnLetterPressed(std::string letter)
+void Game::OnLetterPressed(std::string letter, CallbackButton* buttonPressed)
 {
-	int correctLetters = 0;
-	std::cout << letter << std::endl;
+	bool guessIsCorrect = false;
+	buttonPressed->disable();
+	print(letter);
 	for (int i = 0; i < gameLetters.size(); i++)
 	{
-		if (gameLetters[i]->CompareToMyLetter(letter) == true)
+		if (gameLetters[i]->CompareToMyLetter(letter))
 		{
+			guessIsCorrect = true;
 			correctLetters++;
 		}
 	}
-	// if (correctLetters == 0) {failedGuess();}
-	
-	if (soundManager != nullptr)
-	{
-		soundManager->PlayButtonPositive();
-	}
+		if (guessIsCorrect)
+		{
+			if (correctLetters == gameLetters.size()) EndGame();
+			else if (soundManager != nullptr) soundManager->PlayButtonPositive();
+		}
+		else
+		{
+			wrongGuesses++;
+			if (wrongGuesses == 8) EndGame();
+			if (soundManager != nullptr) soundManager->PlayButtonNegative();
+			if (wrongGuesses < 8)
+			{
+				hangManRect->setTexture(hangmanTextures[wrongGuesses]);	
+			}
+		}
+		gamestate->playerData->AddGuess(guessIsCorrect);
 }
 
 void Game::SetSoundManager(HangmanSoundManager * soundManager)
 {
 	this->soundManager = soundManager;
+}
+
+bool Game::GameWasWon()
+{
+	if (wrongGuesses == 8)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

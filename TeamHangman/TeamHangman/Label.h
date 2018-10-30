@@ -22,7 +22,9 @@ public:
 	void OriginMiddle();
 	void SetOrigin(sf::Vector2f modifier);
 	sf::Vector2f GetOrigin();
-
+	float GetLetterSpacing();
+	float GetLineSpacing();
+	void SetString(std::string newString);
 protected:
 	sf::RenderWindow* window = nullptr;
 	sf::Text* text = nullptr;

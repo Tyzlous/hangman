@@ -14,10 +14,12 @@ public:
 	void fuckOff(std::string parameter);
 	void InitializeButtons();
 	void ChangeGamestate(std::string parameter);
+	void UpdateLanguage();
 private:
 	sf::RenderWindow* window;
 	Gamestate* gamestate;
 	
+	std::vector<CallbackButton*> callbackButtonAddresses;
 	CallbackButton* topButton;
 	CallbackButton* middleButton;
 	CallbackButton* bottomButton;
